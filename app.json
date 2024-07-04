@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/list/list",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/createMatch/createMatch"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar":{
+    "list":[
+      {
+        "pagePath":"pages/index/index",
+        "text":"首页",
+        "iconPath":"/image/shouye.png",
+        "selectedIconPath": "/image/shouye-active.png"
+      },
+      {
+        "pagePath":"pages/list/list",
+        "text":"管理"
+      },
+      {
+        "pagePath":"pages/logs/logs",
+        "text":"比赛"
+      },
+      {
+        "pagePath":"pages/createMatch/createMatch",
+        "text":"我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

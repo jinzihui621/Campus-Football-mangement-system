@@ -1,9 +1,10 @@
 {
-  "pages": [
+  "pages": [ 
     "pages/list/list",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/createMatch/createMatch"
+    "pages/createMatch/createMatch",
+    "pages/scoreAndCardsInput/scoreAndCardsInput"
   ],
   "window": {
     "navigationBarTextStyle": "black",

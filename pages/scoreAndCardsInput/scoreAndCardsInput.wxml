@@ -1,0 +1,38 @@
+<!--pages/scoreAndCardsInput/scoreAndCardsInput.wxml-->
+<view class="container">
+  <view class='subTitle' >
+    <view class='matchName'><text>{{match}}</text></view>
+    <view><image src="/image/envelop.png" mode="aspectFit"></image></view>
+  </view>
+  <view class="divLine"></view>
+  <view class='scoreShow'>
+    <view class="placeHolder"></view>
+    <view class="circleA">{{teamA}}</view>
+    <view>{{scoreA}}:{{scoreB}}</view>
+    <view class="circleB">{{teamB}}</view>
+    <view class="placeHolder"></view>
+  </view>
+  <view class="divLine"></view>
+  <view>
+    <scroll-view class='player-list' scroll-y>
+      <view class="flex-container">
+        <view class="placeHolder"></view>
+        <view class="content">
+          <view wx:for="{{players}}" class="players">
+            <view class="tapeIn">
+              <view class="placeHolder"></view>
+              <view wx:if="{{item.teamID===teamAid}}" class="circleA"><text class="playerCode">{{item.playerID}}</text></view>
+              <view wx:if="{{item.teamID===teamBid}}" class="circleB"><text class="playerCode">{{item.playerID}}</text></view>
+              <button class="goal"><text>进球</text></button>
+              <button class="yellowCard"><text>黄牌</text></button>
+              <button class="redCard"><text>红牌</text></button>
+              <view class="placeHolder"></view>
+            </view>
+            <view wx:if="{{index < players.length - 1}}" class="divLine"></view>
+          </view>
+        </view>
+        <view class="placeHolder"></view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

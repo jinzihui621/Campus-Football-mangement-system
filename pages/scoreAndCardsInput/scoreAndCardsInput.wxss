@@ -1,0 +1,130 @@
+/* pages/scoreAndCardsInput/scoreAndCardsInput.wxss */
+.container{
+  width: 750rpx;
+  padding: 0rpx;
+  display: flex;
+  flex-direction: column;
+}
+.subTitle{
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+}
+.subTitle view:nth-child(1){
+  width:550rpx;
+  text-align:center;
+}
+.subTitle view:nth-child(2){
+  width: 200rpx;
+}
+.matchName text{
+  font-size:20pt;
+}
+image{
+  width: 100rpx;
+  height: 100rpx;
+}
+/*分割线样式*/
+.divLine{
+  background: grey;
+  width: 90%;
+  height: 3rpx;
+ }
+ .scoreShow {  
+  width: 750rpx; /* 根据屏幕宽度设置或调整为所需大小 */  
+  height: 200rpx; /* 容器高度 */  
+  display: flex; /* 使用Flexbox布局 */  
+  justify-content: space-around; /* 子元素在主轴上均匀分布 */  
+  align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
+  flex-direction: row; /* 明确设置Flex方向为行（默认） */  
+}  
+.placeHolder{
+  width: 20rpx;
+}
+  
+.circleA{  
+  width: 200rpx; /* 圆的直径 */  
+  height: 200rpx; /* 圆的直径 */  
+  background-color: #00CAFF; /* 圆的背景颜色 */  
+  border-radius: 50%; /* 将正方形变成圆 */  
+  display: flex; /* 如果你想在圆内居中显示文本 */  
+  justify-content: center; /* 水平居中文本 */  
+  align-items: center; /* 垂直居中文本 */  
+  color:black; /* 文本颜色 */  
+}  
+  
+.scoreShow > view:nth-child(3) {  
+  /* 分数显示的样式 */  
+  width: 250rpx; /* 根据需要调整宽度 */  
+  height: 100rpx; /* 继承自 .scoreShow，但这里明确设置也是好的 */  
+  display: flex; /* 如果你想要在这个 view 内进行更复杂的布局 */  
+  justify-content: center; /* 水平居中文本 */  
+  font-size: 40pt;
+  align-items: center; /* 垂直居中文本（如果内容是多行的，则可能需要调整） */  
+}  
+  
+.circleB{  
+  width: 200rpx; /* 圆的直径 */  
+  height: 200rpx; /* 圆的直径 */  
+  background-color: #FC6363; /* 圆的背景颜色 */  
+  border-radius: 50%; /* 将正方形变成圆 */  
+  display: flex; /* 如果你想在圆内居中显示文本 */  
+  justify-content: center; /* 水平居中文本 */  
+  align-items: center; /* 垂直居中文本 */  
+  color:black; /* 文本颜色 */  
+}
+.player-list{
+  width: 750rpx;
+  height: 900rpx;
+  display: flex;
+}
+.flex-container {  
+  display: flex;  
+  flex-direction: column;
+  flex-wrap: wrap; /* 如果需要换行 */  
+}  
+.content {  
+  flex-grow: 1; /* 允许内容部分占据剩余空间 */  
+  display: flex; /* 如果需要，可以在内容内部也使用 Flex 布局 */  
+  flex-direction: column; /* 垂直排列球员 */ 
+}
+.playerCode {
+  font-size: 25pt;
+}
+.players{
+  display: flex; /* 使用Flexbox布局 */  
+  justify-content: space-around; /* 子元素在主轴上均匀分布 */  
+  align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
+  flex-direction: column;
+}
+.tapeIn{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+button.goal{
+  width: 150rpx; /* 设置按钮的宽度 */  
+  height: 200rpx; /* 设置按钮的高度 */  
+  line-height: 200rpx;
+  text-align: center; /* 设置文字水平居中 */
+  background-color: green;
+  padding: 0rpx;
+}
+button.yellowCard{
+  width: 150rpx; /* 设置按钮的宽度 */  
+  height: 200rpx; /* 设置按钮的高度 */  
+  line-height: 200rpx;
+  text-align: center; /* 设置文字水平居中 */
+  background-color: yellow;
+  padding: 0rpx;
+}
+button.redCard{
+  width: 150rpx; /* 设置按钮的宽度 */  
+  height: 200rpx; /* 设置按钮的高度 */  
+  line-height: 200rpx;
+  text-align: center; /* 设置文字水平居中 */
+  background-color: red;
+  padding: 0rpx;
+}

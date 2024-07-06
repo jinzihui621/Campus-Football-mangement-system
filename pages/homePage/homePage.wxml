@@ -1,2 +1,34 @@
 <!--pages/homePage/homePage.wxml-->
-<text>pages/homePage/homePage.wxml</text>
+<swiper class="swiper-container">
+	<swiper-item><image src='/image/shouye.png' /></swiper-item>
+	<swiper-item><image src='/image/envelop.png' /></swiper-item>
+</swiper>
+
+<!-- 比赛信息部分 -->
+<!-- <view class="matches-container">
+  <view class="match">
+    <text>7月3日 12:00 场地</text>
+    <text>队伍A 3 : 1 队伍B</text>
+  </view>
+  <view class="match">
+    <text>7月5日 12:00 场地</text>
+    <text>队伍A vs 队伍B</text>
+  </view>
+</view> -->
+
+<!-- 比赛信息部分 -->
+<scroll-view class="matches-container" scroll-y="true">
+  <block wx:if="{{matches.length === 0}}">
+    <view class="no-matches">
+      <text>目前没有比赛信息</text>
+    </view>
+  </block>
+  <block wx:else>
+    <block wx:for="{{matches}}" wx:key="id">
+      <view class="match">
+        <text>{{item.date}} {{item.time}} {{item.location}}</text>
+        <text>{{item.teamA}} {{item.scoreA}} : {{item.scoreB}}</text>
+      </view>
+    </block>
+  </block>
+</scroll-view>

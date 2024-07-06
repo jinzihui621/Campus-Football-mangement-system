@@ -1,11 +1,11 @@
 {
   "pages": [ 
+		"pages/homePage/homePage",
     "pages/list/list",
     "pages/index/index",
     "pages/logs/logs",
     "pages/createMatch/createMatch",
-		"pages/scoreAndCardsInput/scoreAndCardsInput",
-		"pages/homePage/homePage"
+		"pages/scoreAndCardsInput/scoreAndCardsInput"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -15,7 +15,7 @@
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/index/index",
+        "pagePath":"pages/homePage/homePage",
         "text":"首页",
         "iconPath":"/image/shouye.png",
         "selectedIconPath": "/image/shouye-active.png"

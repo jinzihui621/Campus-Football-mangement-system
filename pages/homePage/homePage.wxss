@@ -1,1 +1,27 @@
-/* pages/homePage/homePage.wxss */
+.swiper-container {
+	height: 50vh;
+	width: 100vw;
+}
+
+.matches-container {
+	height: 50vh;
+	width: 100vw;
+	overflow: hidden;
+}
+
+.match {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.no-matches {
+	border: 3rpx solid red;
+  height: 100%;
+	display: flex;
+	flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+

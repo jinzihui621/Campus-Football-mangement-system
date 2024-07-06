@@ -1,7 +1,7 @@
 <!--pages/list/list.wxml--> 
 <!-- 使用 class 名称来添加样式 --> 
 <navigator url="/pages/createMatch/createMatch" open-type="navigate" class="centered-button">
-  <image src="/image/jiahao.png" style="width: 20px; height: 20px; margin-right: 5px;" />
+  <image src="/image/eventOrganizerManagement/jiahao.png" style="width: 20px; height: 20px; margin-right: 5px;" />
   创建赛事
 </navigator>
 
@@ -12,29 +12,29 @@
       <text class="text-box"> 工超</text>
       <view class="icon-row">
         <view class="icon-item">
-          <image src="/image/qiudui.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
           <text>球队</text>
         </view>
         <view class="icon-item">
-          <image src="/image/saicheng.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
           <text>赛程</text>
         </view>
         <view class="icon-item">
-          <image src="/image/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
           <text>管理员</text>
         </view>
       </view>
       <view class="icon-row">
         <view class="icon-item">
-          <image src="/image/caipan.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
           <text>裁判</text>
         </view>
         <view class="icon-item">
-          <image src="/image/saishiguanli.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
           <text>管赛事</text>
         </view>
         <view class="icon-item">
-          <image src="/image/shujudaochu.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
           <text>导数据</text>
         </view>
       </view>
@@ -44,29 +44,29 @@
       <text class="text-box"> 工甲</text>
       <view class="icon-row">
         <view class="icon-item">
-          <image src="/image/qiudui.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
           <text>球队</text>
         </view>
         <view class="icon-item">
-          <image src="/image/saicheng.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
           <text>赛程</text>
         </view>
         <view class="icon-item">
-          <image src="/image/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
           <text>管理员</text>
         </view>
       </view>
       <view class="icon-row">
         <view class="icon-item">
-          <image src="/image/caipan.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
           <text>裁判</text>
         </view>
         <view class="icon-item">
-          <image src="/image/saishiguanli.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
           <text>管赛事</text>
         </view>
         <view class="icon-item">
-          <image src="/image/shujudaochu.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
           <text>导数据</text>
         </view>
       </view>
@@ -75,29 +75,29 @@
       <text class="text-box"> 工大杯</text>
       <view class="icon-row">
         <view class="icon-item">
-          <image src="/image/qiudui.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
           <text>球队</text>
         </view>
         <view class="icon-item">
-          <image src="/image/saicheng.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
           <text>赛程</text>
         </view>
         <view class="icon-item">
-          <image src="/image/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
           <text>管理员</text>
         </view>
       </view>
       <view class="icon-row">
         <view class="icon-item">
-          <image src="/image/caipan.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
           <text>裁判</text>
         </view>
         <view class="icon-item">
-          <image src="/image/saishiguanli.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
           <text>管赛事</text>
         </view>
         <view class="icon-item">
-          <image src="/image/shujudaochu.png" class="icon" />
+          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
           <text>导数据</text>
         </view>
       </view>

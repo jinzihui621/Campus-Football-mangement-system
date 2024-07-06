@@ -16,6 +16,6 @@ App({
   globalData: {
 		userInfo: '',
 		userRole: 'player',
-		loginFlag: 0
+		loginFlag: 1
   }
 })

@@ -1,7 +1,7 @@
 <!--pages/homePage/homePage.wxml-->
 <swiper class="swiper-container">
-	<swiper-item><image src='/image/shouye.png' /></swiper-item>
-	<swiper-item><image src='/image/envelop.png' /></swiper-item>
+	<swiper-item><image src='/image/tabBar/shouye.png' /></swiper-item>
+	<swiper-item><image src='/image/tabBar/envelop.png' /></swiper-item>
 </swiper>
 
 <!-- 比赛信息部分 -->

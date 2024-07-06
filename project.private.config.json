@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/matchDetail/matchDetail",
+          "pathName": "pages/matchDetail/matchDetail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/scoreAndCardsInput/scoreAndCardsInput",
           "pathName": "pages/scoreAndCardsInput/scoreAndCardsInput",
           "query": "",

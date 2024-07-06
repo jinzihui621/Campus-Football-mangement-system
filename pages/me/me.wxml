@@ -6,7 +6,7 @@
 </view>
 
 <view class="buttons-container">
-  <view class="button">
+  <view class="button" bind:tap="navigateToMessages">
     <image src="/image/page_me/message.png" mode="aspectFill"></image>
     <text>消息</text>
   </view>

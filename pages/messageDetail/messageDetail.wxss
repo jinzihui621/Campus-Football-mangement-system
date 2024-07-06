@@ -1,0 +1,33 @@
+.container {
+  padding: 20rpx;
+}
+
+.message-title {
+  font-weight: bold;
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+}
+
+.message-content {
+  font-size: 28rpx;
+  margin-bottom: 40rpx;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirm-button {
+  background-color: #00c800;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 5rpx;
+}
+
+.reject-button {
+  background-color: #ccc;
+  color: white;
+  padding: 10rpx 20rpx;
+  border-radius: 5rpx;
+}

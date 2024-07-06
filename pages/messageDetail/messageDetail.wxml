@@ -1,0 +1,9 @@
+<view class="container">
+  <text class="message-title">{{message.title}}</text>
+  <text class="message-content">{{message.content}}</text>
+
+  <view class="button-container">
+    <button class="confirm-button" bindtap="confirmAction">确认</button>
+    <button class="reject-button" bindtap="rejectAction">拒绝</button>
+  </view>
+</view>

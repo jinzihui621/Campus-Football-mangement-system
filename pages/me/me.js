@@ -22,6 +22,12 @@ Page({
 
 	},
 	
+	navigateToMessages: function() {
+    wx.navigateTo({
+      url: '/pages/messageList/messageList'
+    });
+  },
+
   navigateToChooseAccount: function() {
     wx.navigateTo({
       url: '/pages/chooseAccount/chooseAccount'

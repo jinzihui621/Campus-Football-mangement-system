@@ -7,7 +7,9 @@
     "pages/logs/logs",
     "pages/createMatch/createMatch",
 		"pages/scoreAndCardsInput/scoreAndCardsInput",
-		"pages/me/me"
+		"pages/me/me",
+		"pages/messageList/messageList",
+		"pages/messageDetail/messageDetail"
   ],
   "window": {
     "navigationBarTextStyle": "black",

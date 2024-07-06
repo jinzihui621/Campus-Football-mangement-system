@@ -1,51 +1,80 @@
-/* pages/scoreAndCardsInput/scoreAndCardsInput.wxss */
-.container{
-  width: 750rpx;
-  padding: 0rpx;
+.container {
+  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
-.subTitle{
-  width: 750rpx;
-  height: 100rpx;
+ 
+.title {
+  width: 100%;
+  height: 88rpx;
+  background: white;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
-.subTitle view:nth-child(1){
-  width:550rpx;
-  text-align:center;
+ 
+.title-sel {
+  color: #24272c;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.subTitle view:nth-child(2){
-  width: 200rpx;
+ 
+.title-sel  .line-style{
+  background: #fff;
+  height: 6rpx;
+  width: 40rpx;
+  position: relative;
+  margin-top: 10rpx;
 }
-.matchName text{
-  font-size:20pt;
+ 
+.title-sel-selected{
+  color: #0BD520;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-image{
-  width: 100rpx;
-  height: 100rpx;
+.title-sel-selected .line-style{
+  background: #0BD520;
+  height: 6rpx;
+  width: 90rpx;
+  position: relative;
+  margin-top: 10rpx;
 }
-/*分割线样式*/
-.divLine{
-  background: grey;
-  width: 90%;
-  height: 3rpx;
- }
- .scoreShow {  
-  width: 750rpx; /* 根据屏幕宽度设置或调整为所需大小 */  
-  height: 200rpx; /* 容器高度 */  
-  display: flex; /* 使用Flexbox布局 */  
-  justify-content: space-around; /* 子元素在主轴上均匀分布 */  
-  align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
-  flex-direction: row; /* 明确设置Flex方向为行（默认） */  
-}  
-.placeHolder{
-  width: 20rpx;
+ 
+.swiper {
+  width: 100%;
+  height: 800rpx;
+  flex: 1;
+  overflow: scroll;
+  margin: 0 auto;
 }
-  
+.record-item {
+  margin-top: 10rpx;
+  background-color: white;
+  padding-bottom: 5rpx;
+  padding-top: 5rpx;
+  font-size: 30rpx;
+}
+ 
+/* .name{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #eee;
+  padding: 2vh;
+  border-radius: 10rpx
+} */
+.input{
+  width: 100%;
+  height: 800rpx;
+}
 .circleA{  
-  width: 200rpx; /* 圆的直径 */  
-  height: 200rpx; /* 圆的直径 */  
+  width: 150rpx; /* 圆的直径 */  
+  height: 150rpx; /* 圆的直径 */  
   background-color: #00CAFF; /* 圆的背景颜色 */  
   border-radius: 50%; /* 将正方形变成圆 */  
   display: flex; /* 如果你想在圆内居中显示文本 */  
@@ -53,20 +82,18 @@ image{
   align-items: center; /* 垂直居中文本 */  
   color:black; /* 文本颜色 */  
 }  
-  
-.scoreShow > view:nth-child(3) {  
-  /* 分数显示的样式 */  
-  width: 250rpx; /* 根据需要调整宽度 */  
-  height: 100rpx; /* 继承自 .scoreShow，但这里明确设置也是好的 */  
-  display: flex; /* 如果你想要在这个 view 内进行更复杂的布局 */  
-  justify-content: center; /* 水平居中文本 */  
-  font-size: 40pt;
-  align-items: center; /* 垂直居中文本（如果内容是多行的，则可能需要调整） */  
+.scoreShow {  
+  width: 750rpx; /* 根据屏幕宽度设置或调整为所需大小 */  
+  height: 200rpx; /* 容器高度 */  
+  display: flex; /* 使用Flexbox布局 */  
+  justify-content: space-around; /* 子元素在主轴上均匀分布 */  
+  align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
+  flex-direction: row; /* 明确设置Flex方向为行（默认） */  
 }  
-  
+
 .circleB{  
-  width: 200rpx; /* 圆的直径 */  
-  height: 200rpx; /* 圆的直径 */  
+  width: 150rpx; /* 圆的直径 */  
+  height: 150rpx; /* 圆的直径 */  
   background-color: #FC6363; /* 圆的背景颜色 */  
   border-radius: 50%; /* 将正方形变成圆 */  
   display: flex; /* 如果你想在圆内居中显示文本 */  
@@ -74,67 +101,100 @@ image{
   align-items: center; /* 垂直居中文本 */  
   color:black; /* 文本颜色 */  
 }
-.player-list{
-  width: 750rpx;
-  height: 1000rpx;
+.raceInfo{
   display: flex;
-}
-.flex-container {  
-  display: flex;  
   flex-direction: column;
-  flex-wrap: wrap; /* 如果需要换行 */  
-}  
-.content {  
-  flex-grow: 1; /* 允许内容部分占据剩余空间 */  
-  display: flex; /* 如果需要，可以在内容内部也使用 Flex 布局 */  
-  flex-direction: column; /* 垂直排列球员 */ 
-}
-.playerCode {
-  font-size: 25pt;
-  font-weight: bold;
-}
-.players{
-  display: flex; /* 使用Flexbox布局 */  
-  justify-content: space-around; /* 子元素在主轴上均匀分布 */  
-  align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
-  flex-direction: column;
-}
-.tapeIn{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 15pt;
 }
-button.goal{
-  width: 150rpx; /* 设置按钮的宽度 */  
-  height: 200rpx; /* 设置按钮的高度 */  
-  line-height: 200rpx;
-  text-align: center; /* 设置文字水平居中 */
-  background-color: green;
-  color: white;
-  padding: 0rpx;
-}
-button.yellowCard{
-  width: 150rpx; /* 设置按钮的宽度 */  
-  height: 200rpx; /* 设置按钮的高度 */  
-  line-height: 200rpx;
-  text-align: center; /* 设置文字水平居中 */
-  background-color: yellow;
-  color: black;
-  font-size: 20pt;
-  padding: 0rpx;
-}
-button.redCard{
-  width: 150rpx; /* 设置按钮的宽度 */  
-  height: 200rpx; /* 设置按钮的高度 */  
-  line-height: 200rpx;
-  text-align: center; /* 设置文字水平居中 */
-  background-color: red;
-  color: black;
-  font-size: 20pt;
-  padding: 0rpx;
-}
+
 .teamName{
   font-size: 15pt;
+}
+.scores{
+  font-size: 25pt;
   font-weight: bolder;
+}
+.tableBar{
+  width: 750rpx;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.tableBar >view{
+  width: 180rpx;
+  height: 80rpx;
+  border: 1rpx solid grey;
+  background-color: #DDE6FE;
+  font-size: 15pt;
+  font-weight:bold;
+  line-height: 80rpx;
+  text-align: center;
+  align-items: center;
+}
+.player{
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.player view{
+  width: 180rpx;
+  height: 100rpx;
+  border: 1rpx solid grey;
+  font-size: 15pt;
+  font-weight:bold;
+  line-height: 80rpx;
+  text-align: center;
+  align-items: center;
+}
+.goal{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.yellowCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.redCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.item-value{
+  width:60rpx;
+  height: 100rpx;
+}
+.add{
+  width: 60rpx;
+  height: 90rpx;
+}
+.minus{
+  width:60rpx;
+  height: 90rpx;
+}
+button.start{
+  width: 750rpx;
+  height: 80rpx;
+}
+button.end{
+  width: 750rpx;
+  height: 80rpx;
+}
+.goal button{
+  color: #24272c;
+}
+.yellowCard button{
+  background-color: #FFED00;
+  color: #24272c;
+}
+.redCard button{
+  background-color: #FF0000;
+  color: #24272c;
 }

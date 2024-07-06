@@ -2,7 +2,7 @@
   "pages": [ 
 		"pages/homePage/homePage",
 		"pages/chooseAccount/chooseAccount",
-    "pages/list/list",
+    "pages/eventOrganizerManagement/eventOrganizerManagement",
     "pages/index/index",
     "pages/logs/logs",
     "pages/createMatch/createMatch",
@@ -15,7 +15,7 @@
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Weixin",
-    "navigationBarBackgroundColor": "#ffffff"
+    "navigationBarBackgroundColor": "#34CE45"
   },
   "tabBar":{
     "list":[
@@ -26,16 +26,22 @@
         "selectedIconPath": "/image/shouye-active.png"
       },
       {
-        "pagePath":"pages/list/list",
-        "text":"管理"
+        "pagePath":"pages/eventOrganizerManagement/eventOrganizerManagement",
+        "text":"管理",
+        "iconPath":"/image/guanli.png",
+        "selectedIconPath": "/image/guanli-2.png"
       },
       {
         "pagePath":"pages/logs/logs",
-        "text":"比赛"
+        "text":"比赛",
+        "iconPath":"/image/bisai.png",
+        "selectedIconPath": "/image/bisai-2.png"
       },
       {
         "pagePath":"pages/me/me",
-        "text":"我的"
+        "text":"我的",
+        "iconPath":"/image/wode.png",
+        "selectedIconPath": "/image/wode-2.png"
       }
     ]
   },

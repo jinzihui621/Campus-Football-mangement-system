@@ -5,80 +5,142 @@ Page({
    * 页面的初始数据
    */
   data: {
-     match:'xx杯xxx场比赛',
-     scoreA: 0,
-     scoreB: 0,
-     teamA:'队伍A',
-     teamB:'队伍B',
-     teamAid:1,
-     teamBid:2,
-     players:[
-       {teamID:1,playerID:1,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:2,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:3,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:4,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:5,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:6,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:7,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:8,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:9,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:10,score:0,yellowCard:0,redCard:0},
-       {teamID:1,playerID:11,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:1,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:2,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:3,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:4,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:5,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:6,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:7,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:8,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:9,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:10,score:0,yellowCard:0,redCard:0},
-       {teamID:2,playerID:11,score:0,yellowCard:0,redCard:0}
-     ]
+    currentIndex: 0,
+    teamA:'队伍A',
+    teamB:'队伍B',
+    scoreA:0,
+    scoreB:0,
+    matchTime:'07-07 00:00',
+    match:'xx杯',
+    race:'xx-xx',
+    turn:1,
+    teamAid:1,
+    teamBid:2,
+    playerA:[
+      {teamID:1,playerCode:1,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:2,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:3,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:4,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:5,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:6,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:7,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:8,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:9,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:10,score:0,yellowCard:0,redCard:0},
+      {teamID:1,playerCode:11,score:0,yellowCard:0,redCard:0}
+    ],
+    playerB:[
+      {teamID:2,playerCode:1,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:2,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:3,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:4,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:5,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:6,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:7,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:8,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:9,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:10,score:0,yellowCard:0,redCard:0},
+      {teamID:2,playerCode:11,score:0,yellowCard:0,redCard:0}
+    ],
   },
-  /*点击进球时的函数*/
-  btnGoalTape(e){
-    let playerId=e.currentTarget.dataset.playerid;
-    let teamId=e.currentTarget.dataset.teamid;
-    // 遍历players数组，找到对应的球员并更新其score  
-    let updatedPlayers = this.data.players.map(player => {  
-      if (player.playerID === parseInt(playerId)&&player.teamID===parseInt(teamId)) {
-        player.score += 1;  
+ 
+  //swiper切换时会调用
+  pagechange: function (e) {
+    if ("touch" === e.detail.source) {
+      let currentPageIndex = this.data.currentIndex
+      currentPageIndex = (currentPageIndex + 1) % 2
+      this.setData({
+        currentIndex: currentPageIndex
+      })
+    }
+  },
+  //用户点击tab时调用
+  titleClick: function (e) {
+    let currentPageIndex =
+      this.setData({
+        //拿到当前索引并动态改变
+        currentIndex: e.currentTarget.dataset.idx
+      })
+  },
+  btnGoalMinus: function(e) {  
+    const { playercode: playerCode, teamid: teamID } = e.currentTarget.dataset;  
+    const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
+    const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
+    if (index !== -1) {  
+      const newPlayers = [...players];  
+      if (newPlayers[index].score > 0) { // 避免得分为负  
+        newPlayers[index].score--;  
       }  
-      return player;  
-    });  
-    this.setData({  
-      players: updatedPlayers  
-    });
+      this.setData({  
+        [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
+      });  
+    }
+    this.updateTeamScore()  
+  },  
+  btnGoalAdd: function(e) {  
+    const { playercode: playerCode, teamid: teamID } = e.currentTarget.dataset;  
+    const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
+    const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
+    if (index !== -1) {  
+      const newPlayers = [...players];  
+      newPlayers[index].score++;
+      this.setData({  
+        [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
+      });  
+    }
     this.updateTeamScore()  
   },
-  /*点击黄牌时的函数*/
-  btnYellowTape(e){
-    let playerId=e.currentTarget.dataset.playerid;
-    let updatedPlayers = this.data.players.map(player => {  
-      if (player.playerID === parseInt(playerId)) {
-        player.yellowCard += 1;  
-      }  
-      return player;  
-    });  
-    this.setData({  
-      players: updatedPlayers  
-    });
+  /*点击黄牌+时的函数*/
+  btnYellowAdd(e){
+    const { playercode: playerCode, teamid: teamID } = e.currentTarget.dataset;  
+    const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
+    const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
+    if (index !== -1) {  
+      const newPlayers = [...players];  
+      newPlayers[index].yellowCard++;  
+      this.setData({  
+        [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
+      });  
+    }  
   },
-  /*点击红牌时的函数*/
-  btnRedTape(e){
-    console.log(e)
-    let playerId=e.currentTarget.dataset.playerid;
-    let updatedPlayers = this.data.players.map(player => {  
-      if (player.playerID === parseInt(playerId)) {
-        player.redCard += 1;  
-      }  
-      return player;  
-    });  
-    this.setData({  
-      players: updatedPlayers  
-    });
+  /*点击黄牌-时的函数*/
+  btnYellowMinus(e){
+    const { playercode: playerCode, teamid: teamID } = e.currentTarget.dataset;  
+    const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
+    const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
+    if (index !== -1 && players[index].yellowCard > 0) { // 确保黄牌数量大于0  
+      const newPlayers = [...players];  
+      newPlayers[index].yellowCard--;  
+      this.setData({  
+        [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
+      });  
+    }
+  },
+  /*点击红牌+时的函数*/
+  btnRedAdd(e){
+    const { playercode: playerCode, teamid: teamID } = e.currentTarget.dataset;  
+    const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
+    const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
+    if (index !== -1) {  
+      const newPlayers = [...players];  
+      newPlayers[index].redCard++;  
+      this.setData({  
+        [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
+      });  
+    }
+  },
+  /*点击红牌-时的函数*/
+  btnRedMinus(e){
+    const { playercode: playerCode, teamid: teamID } = e.currentTarget.dataset;  
+    const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
+    const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
+    if (index !== -1 && players[index].redCard > 0) { // 确保黄牌数量大于0  
+      const newPlayers = [...players];  
+      newPlayers[index].redCard--;  
+      this.setData({  
+        [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
+      });  
+    }
   },
   /*更新总比分*/
   updateTeamScore:function(){
@@ -86,13 +148,12 @@ Page({
       team1: 0, // 队伍A的比分  
       team2: 0  // 队伍B的比分  
     }; 
-    this.data.players.forEach(player => {  
-      if (player.teamID === this.data.teamAid) {  
-        scores.team1 += player.score;  
-      } else if (player.teamID === this.data.teamBid) {  
-        scores.team2 += player.score;  
-      }  
+    this.data.playerA.forEach(player => {  
+      scores.team1 += player.score;  
     });  
+    this.data.playerB.forEach(player => {  
+      scores.team2 += player.score;  
+  }); 
     this.setData({
       scoreA:scores.team1,
       scoreB:scores.team2

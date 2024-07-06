@@ -14,6 +14,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+		userInfo: 'player',
+		userRole: 'player'
   }
 })

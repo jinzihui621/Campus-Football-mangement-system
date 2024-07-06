@@ -1,0 +1,11 @@
+<!--pages/chooseAccount/chooseAccount.wxml-->
+<view class="container">
+  <block wx:for="{{accounts}}" wx:key="index">
+    <view class="account-item" bindtap="onAccountClick" data-role="{{item.role}}">
+      <image class="account-image" src="{{item.imgSrc}}" mode="aspectFit"></image>
+      <text class="account-text">{{item.text}}</text>
+    </view>
+    <view class="divider"></view>
+  </block>
+</view>
+

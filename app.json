@@ -1,10 +1,15 @@
 {
   "pages": [ 
+		"pages/homePage/homePage",
+		"pages/chooseAccount/chooseAccount",
     "pages/list/list",
     "pages/index/index",
     "pages/logs/logs",
     "pages/createMatch/createMatch",
-    "pages/scoreAndCardsInput/scoreAndCardsInput"
+		"pages/scoreAndCardsInput/scoreAndCardsInput",
+		"pages/me/me",
+		"pages/messageList/messageList",
+		"pages/messageDetail/messageDetail"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -14,7 +19,7 @@
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/index/index",
+        "pagePath":"pages/homePage/homePage",
         "text":"首页",
         "iconPath":"/image/shouye.png",
         "selectedIconPath": "/image/shouye-active.png"
@@ -28,7 +33,7 @@
         "text":"比赛"
       },
       {
-        "pagePath":"pages/createMatch/createMatch",
+        "pagePath":"pages/me/me",
         "text":"我的"
       }
     ]

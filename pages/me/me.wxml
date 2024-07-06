@@ -2,7 +2,7 @@
 <view class="user-info">
   <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
   <text class="nickname">{{userInfo.nickName}}</text>
-  <text class="role">{{userInfo.role}}</text>
+  <text class="role">{{userRole}}</text>
 </view>
 
 <view class="buttons-container">

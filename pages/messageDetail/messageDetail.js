@@ -26,17 +26,23 @@ Page({
     // 确认操作逻辑
     wx.showToast({
       title: '已确认',
-      icon: 'success'
+			icon: 'success',
+			duration: 1000
     });
-    wx.navigateBack();
+    setTimeout(() => {
+			wx.navigateBack();
+		}, 1000);
   },
 
   rejectAction: function() {
     // 拒绝操作逻辑
     wx.showToast({
       title: '已拒绝',
-      icon: 'none'
+			icon: 'none',
+			duration: 1000
     });
-    wx.navigateBack();
+    setTimeout(() => {
+			wx.navigateBack();
+		}, 1000);
   }
 });

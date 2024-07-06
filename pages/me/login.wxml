@@ -2,7 +2,6 @@
   <image class="logo" src="{{logoSrc}}" mode="aspectFit"></image>
 
   <view class="button-container">
-    <button class="login-button" bindtap="navigateToLogin">登 录</button>
-    <button class="register-button" bindtap="navigateToRegister">注 册</button>
+    <button class="login-button" bindtap="navigateToRegister">登 录</button>
   </view>
 </view>

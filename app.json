@@ -11,7 +11,8 @@
     "pages/me/login",
 		"pages/messageList/messageList",
     "pages/messageDetail/messageDetail",
-    "pages/matchDetail/matchDetail"
+    "pages/matchDetail/matchDetail",
+    "pages/matchDetail1/matchDetail1"
   ],
   "window": {
     "navigationBarTextStyle": "white",

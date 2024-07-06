@@ -1,0 +1,33 @@
+<!--pages/me/me.wxml-->
+<view class="user-info">
+  <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+  <text class="nickname">{{userInfo.nickName}}</text>
+  <text class="role">{{userInfo.role}}</text>
+</view>
+
+<view class="buttons-container">
+  <view class="button">
+    <image src="/image/page_me/message.png" mode="aspectFill"></image>
+    <text>消息</text>
+  </view>
+  <view class="button">
+    <image src="/image/page_me/edit.png" mode="aspectFill"></image>
+    <text>编辑</text>
+  </view>
+  <view class="button">
+    <image src="/image/page_me/team.png" mode="aspectFill"></image>
+    <text>球队</text>
+  </view>
+  <view class="button">
+    <image src="/image/page_me/data.png" mode="aspectFill"></image>
+    <text>数据</text>
+  </view>
+  <view class="button">
+    <image src="/image/page_me/feedback.png" mode="aspectFill"></image>
+    <text>反馈</text>
+  </view>
+  <view class="button">
+    <image src="/image/page_me/switch_account.png" mode="aspectFill"></image>
+    <text>切换账号</text>
+  </view>
+</view>

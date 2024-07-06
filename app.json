@@ -5,7 +5,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/createMatch/createMatch",
-		"pages/scoreAndCardsInput/scoreAndCardsInput"
+		"pages/scoreAndCardsInput/scoreAndCardsInput",
+		"pages/me/me"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -29,7 +30,7 @@
         "text":"比赛"
       },
       {
-        "pagePath":"pages/createMatch/createMatch",
+        "pagePath":"pages/me/me",
         "text":"我的"
       }
     ]

@@ -23,15 +23,6 @@
 
 .login-button {
   width: 80%;
-  background-color: #888;
-  color: white;
-  padding: 20rpx;
-  border-radius: 10rpx;
-  margin-bottom: 50rpx;
-}
-
-.register-button {
-  width: 80%;
   background-color: #0AD41F;
   color: white;
   padding: 20rpx;

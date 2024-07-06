@@ -14,7 +14,8 @@ App({
     })
   },
   globalData: {
-		userInfo: 'player',
-		userRole: 'player'
+		userInfo: '',
+		userRole: 'player',
+		loginFlag: 0
   }
 })

@@ -10,16 +10,19 @@ Page({
   },
 
   onLoad: function() {
-		this.getUserInfo();
+		const loginFlag = app.globalData.loginFlag
+		if (loginFlag === 0) {
+			let targetUrl = '/pages/me/login';
+			wx.redirectTo({
+				url: targetUrl
+			});
+		}
+		
 		this.setData({ userRole: app.globalData.userRole })
   },
 
 	onShow: function() {
 		this.setData({ userRole: app.globalData.userRole })
-	},
-
-  getUserInfo: function() {
-
 	},
 	
 	navigateToMessages: function() {

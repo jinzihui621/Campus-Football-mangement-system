@@ -1,0 +1,8 @@
+<view class="container">
+  <image class="logo" src="{{logoSrc}}" mode="aspectFit"></image>
+
+  <view class="button-container">
+    <button class="login-button" bindtap="navigateToLogin">登 录</button>
+    <button class="register-button" bindtap="navigateToRegister">注 册</button>
+  </view>
+</view>

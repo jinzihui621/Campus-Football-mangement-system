@@ -76,7 +76,7 @@ image{
 }
 .player-list{
   width: 750rpx;
-  height: 900rpx;
+  height: 1000rpx;
   display: flex;
 }
 .flex-container {  
@@ -91,6 +91,7 @@ image{
 }
 .playerCode {
   font-size: 25pt;
+  font-weight: bold;
 }
 .players{
   display: flex; /* 使用Flexbox布局 */  
@@ -110,6 +111,7 @@ button.goal{
   line-height: 200rpx;
   text-align: center; /* 设置文字水平居中 */
   background-color: green;
+  color: white;
   padding: 0rpx;
 }
 button.yellowCard{
@@ -118,6 +120,8 @@ button.yellowCard{
   line-height: 200rpx;
   text-align: center; /* 设置文字水平居中 */
   background-color: yellow;
+  color: black;
+  font-size: 20pt;
   padding: 0rpx;
 }
 button.redCard{
@@ -126,5 +130,11 @@ button.redCard{
   line-height: 200rpx;
   text-align: center; /* 设置文字水平居中 */
   background-color: red;
+  color: black;
+  font-size: 20pt;
   padding: 0rpx;
+}
+.teamName{
+  font-size: 15pt;
+  font-weight: bolder;
 }

@@ -7,9 +7,9 @@
   <view class="divLine"></view>
   <view class='scoreShow'>
     <view class="placeHolder"></view>
-    <view class="circleA">{{teamA}}</view>
+    <view class="circleA"><text class="teamName">{{teamA}}</text></view>
     <view>{{scoreA}}:{{scoreB}}</view>
-    <view class="circleB">{{teamB}}</view>
+    <view class="circleB"><text class="teamName">{{teamB}}</text></view>
     <view class="placeHolder"></view>
   </view>
   <view class="divLine"></view>
@@ -23,9 +23,9 @@
               <view class="placeHolder"></view>
               <view wx:if="{{item.teamID===teamAid}}" class="circleA"><text class="playerCode">{{item.playerID}}</text></view>
               <view wx:if="{{item.teamID===teamBid}}" class="circleB"><text class="playerCode">{{item.playerID}}</text></view>
-              <button class="goal"><text>进球</text></button>
-              <button class="yellowCard"><text>黄牌</text></button>
-              <button class="redCard"><text>红牌</text></button>
+              <button class="goal" type="primary" data-playerid="{{item.playerID}}" data-teamid="{{item.teamID}}" bind:tap="btnGoalTape"><text>进球</text></button>
+              <button class="yellowCard" type="primary" data-playerid="{{item.playerID}}" data-teamid="{{item.teamID}}" bind:tap="btnYellowTape"><text>{{item.yellowCard}}</text></button>
+              <button class="redCard" type="primary" data-playerid="{{item.playerID}}" data-teamid="{{item.teamID}}" bind:tap="btnRedTape"><text>{{item.redCard}}</text></button>
               <view class="placeHolder"></view>
             </view>
             <view wx:if="{{index < players.length - 1}}" class="divLine"></view>

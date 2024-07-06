@@ -13,9 +13,9 @@
 		"pages/messageDetail/messageDetail"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarBackgroundColor": "#34CE45"
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "工大足球",
+    "navigationBarBackgroundColor": "#0AD41F"
   },
   "tabBar":{
     "list":[

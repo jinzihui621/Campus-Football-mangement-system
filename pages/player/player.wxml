@@ -4,9 +4,12 @@
     <view class = "headline1">
       公告消息
     </view>
-    <view class = "content">
-      {{message}}
-    </view>
+    <scroll-view class = "content" scroll-y>
+      <view class = "messageInfo" wx:for="{{messageList}}" we:key="index">
+        <view>{{item.time}}</view>
+        <view>{{item.content}}</view>
+      </view>
+    </scroll-view>
   </view>
   <view class = "schedule">
     <image class = "schedulePattern" src="/image/schedule.png" />
@@ -19,8 +22,13 @@
     </view>
     <scroll-view class = "gameContainer" type = "list"  scroll-y>
       <view class="game">
-        <view class="gameInfo" wx:for="{{team}}" wx:key = "index">
-          <view>{{item.team1}}</view>VS<view>{{item.team2}}</view>
+        <view class="gameInfo" wx:for="{{team}}" wx:key = "index" bindtap = "handleRegister" data-info1 = "{{item.team1}}" data-info2 = "{{item.team2}}" data-info3 = "{{item.time}}" data-info4 = "{{item.place}}">
+          <view class = "timeAndPlace">
+            <view>{{item.time}}</view><view>{{item.place}}</view>
+          </view>
+          <view class = "teamInfo"> 
+            <view>{{item.team1}}</view>VS<view>{{item.team2}}</view>
+          </view>
         </view>
       </view>
     </scroll-view>

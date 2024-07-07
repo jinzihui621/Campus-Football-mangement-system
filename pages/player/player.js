@@ -5,20 +5,59 @@ Page({
    * 页面的初始数据
    */
   data: {
-    message:"232424243242",
+    messageList: [
+      {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"},
+      {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"},
+      {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"},
+      {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"},
+      {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"},
+      {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"}
+    ],
+    team1:"",
+    team2:"",
+    place:"",
+    time:"",
+
     team: [
-      {team1:"信息",team2:"土木"},
-      {team1:"信息",team2:"土木"},
-      {team1:"信息",team2:"土木"},
-      {team1:"信息",team2:"土木"},
-      {team1:"信息",team2:"土木"},
-      {team1:"信息",team2:"土木"},
-      {team1:"信息",team2:"土木"},
-      {team1:"信息",team2:"土木"},
-      {team1:"信息",team2:"土木"},
-      
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
+      {team1:"经管",team2:"理学",time:"2024/7/7",place:"北操"},
+      {team1:"都柏林",team2:"艺设",time:"2024/7/7",place:"北操"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
     ]
 
+  },
+
+  handleRegister(e){
+    wx.showModal({
+      title: '确认',
+      content: '请确认是否报名本场比赛',
+      success: (res) => {
+        if (res.confirm) {
+          this.setData({
+            place:e.currentTarget.dataset.info4,
+            team1:e.currentTarget.dataset.info1,
+            team2:e.currentTarget.dataset.info2,
+            time:e.currentTarget.dataset.info3,
+          });
+          wx.showToast({
+            title: '报名成功',
+            icon: 'success',
+            duration: 1000
+          });
+        } else if (res.cancel) {
+          wx.showToast({
+            title: '操作取消',
+            icon: 'none',
+            duration: 2000
+          });
+        }
+      }
+    });
   },
 
   /**

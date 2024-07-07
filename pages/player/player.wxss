@@ -10,6 +10,9 @@
 }
 
 .notification{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 88%;
   height: 25%;
   margin:30rpx;
@@ -20,6 +23,7 @@
 .headline1{
   display: flex;
   align-items: center;
+  width: 640rpx;
   height: 50rpx;
   padding: 15rpx;
   border-radius: 10rpx;
@@ -28,7 +32,19 @@
 }
 
 .content{
+  display: flex;
+  flex-direction: column;
+  padding: 15rpx;
+  width: 88%;
+  height: 244rpx;
   padding:15rpx;
+}
+
+.messageInfo{
+  padding:8rpx;
+  margin-bottom: 15rpx;
+  border-radius: 10rpx;
+  border: lightgreen solid 2rpx;
 }
 
 .schedule{
@@ -78,13 +94,31 @@
 
 }
 
+.timeAndPlace{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 60%;
+  padding:5rpx;
+  border-bottom: solid lightgreen 2rpx;
+}
+
 .gameInfo{
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 70%;
   justify-content: space-around;
   border: lightgray solid 2rpx;
+  border-radius: 10rpx;
   padding:15rpx;
   margin:20rpx;
   background-color: white;
+}
+
+.teamInfo{
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  padding:5rpx;
 }

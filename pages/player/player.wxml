@@ -1,0 +1,28 @@
+<!--pages/player/player.wxml-->
+<view class = "card">
+  <view class = "notification">
+    <view class = "headline1">
+      公告消息
+    </view>
+    <view class = "content">
+      {{message}}
+    </view>
+  </view>
+  <view class = "schedule">
+    <image class = "schedulePattern" src="/image/schedule.png" />
+    <text>个人赛程日历</text>
+  </view>
+
+  <view class = "register">
+    <view class = "headline2">
+      比赛报名
+    </view>
+    <scroll-view class = "gameContainer" type = "list"  scroll-y>
+      <view class="game">
+        <view class="gameInfo" wx:for="{{team}}" wx:key = "index">
+          <view>{{item.team1}}</view>VS<view>{{item.team2}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

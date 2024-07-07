@@ -1,5 +1,10 @@
 {
   "pages": [ 
+    "pages/notificationEidt/notificationEidt",
+    "pages/player/player",
+    "pages/addPlayer/addPlayer",
+    "pages/manager/manager",
+    "pages/deletePlayer/deletePlayer",
 		"pages/homePage/homePage",
 		"pages/chooseAccount/chooseAccount",
     "pages/eventOrganizerManagement/eventOrganizerManagement",
@@ -7,11 +12,13 @@
     "pages/logs/logs",
     "pages/createMatch/createMatch",
 		"pages/scoreAndCardsInput/scoreAndCardsInput",
-		"pages/me/me",	
-		"pages/me/login",
+    "pages/me/me",
+    "pages/me/login",
 		"pages/messageList/messageList",
-		"pages/messageDetail/messageDetail",
-		"pages/editProfile/editProfile"
+    "pages/messageDetail/messageDetail",
+		"pages/editProfile/editProfile",
+    "pages/matchDetail/matchDetail",
+    "pages/matchDetail1/matchDetail1"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -23,26 +30,26 @@
       {
         "pagePath":"pages/homePage/homePage",
         "text":"首页",
-        "iconPath":"/image/shouye.png",
-        "selectedIconPath": "/image/shouye-active.png"
+        "iconPath":"/image/tabBar/shouye.png",
+        "selectedIconPath": "/image/tabBar/shouye-active.png"
       },
       {
         "pagePath":"pages/eventOrganizerManagement/eventOrganizerManagement",
         "text":"管理",
-        "iconPath":"/image/guanli.png",
-        "selectedIconPath": "/image/guanli-2.png"
+        "iconPath":"/image/tabBar/guanli.png",
+        "selectedIconPath": "/image/tabBar/guanli-2.png"
       },
       {
         "pagePath":"pages/logs/logs",
         "text":"比赛",
-        "iconPath":"/image/bisai.png",
-        "selectedIconPath": "/image/bisai-2.png"
+        "iconPath":"/image/tabBar/bisai.png",
+        "selectedIconPath": "/image/tabBar/bisai-2.png"
       },
       {
         "pagePath":"pages/me/me",
         "text":"我的",
-        "iconPath":"/image/wode.png",
-        "selectedIconPath": "/image/wode-2.png"
+        "iconPath":"/image/tabBar/wode.png",
+        "selectedIconPath": "/image/tabBar/wode-2.png"
       }
     ]
   },

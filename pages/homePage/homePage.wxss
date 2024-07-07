@@ -1,12 +1,25 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
 .swiper-container {
-	height: 50vh;
-	width: 100vw;
+  flex: 3; /* 根据需求调整高度比例 */
+	width: 100%;
+}
+
+.swiper-image {
+  width: 100%;
+  height: 100%;
 }
 
 .matches-container {
-	height: 50vh;
-	width: 100vw;
-	overflow: hidden;
+  flex: 7; /* 根据需求调整高度比例 */
+  width: 100%;
+  overflow-y: auto;
 }
 
 .match {
@@ -16,12 +29,11 @@
 }
 
 .no-matches {
-	border: 3rpx solid red;
+  border: 3rpx solid red;
   height: 100%;
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #888;
 }
-

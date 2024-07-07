@@ -174,10 +174,12 @@
 .add{
   width: 60rpx;
   height: 90rpx;
+  text-align: center;
 }
 .minus{
   width:60rpx;
   height: 90rpx;
+  text-align: center;
 }
 button.start{
   width: 750rpx;

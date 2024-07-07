@@ -6,7 +6,7 @@
 .tabs, .sub-tabs, .player-tabs {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 0rpx;
+  margin: 0rpx;
 	width: 100%;
 }
 
@@ -24,25 +24,44 @@
   margin-bottom: 10rpx;
 }
 
-/* 确保边框和文字颜色变化 */
-.tab.active, .sub-tab.active, .player-tab.active {
-  border-bottom: 2rpx solid green;
-  color: green;
+.tab-sel {
+	color: #24272c;
+	margin-top: 8rpx;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ 
+.tab-sel  .line-style{
+  background: #fff;
+  height: 6rpx;
+  width: 40rpx;
+  position: relative;
+  margin-top: 10rpx;
 }
 
-/* 确保 tab, sub-tab 和 player-tab 元素的基本样式 */
-.tab, .sub-tab, .player-tab {
-  padding: 10rpx;
-  border-bottom: 2rpx solid transparent;
-  cursor: pointer;
-  color: #333333; /* 默认文字颜色 */
-  font-size: 32rpx; /* 字体大小 */
+.tab-sel-selected{
+	color: #0BD520;
+	margin-top: 8rpx;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.tab-sel-selected .line-style{
+  background: #0BD520;
+  height: 6rpx;
+  width: 90rpx;
+  position: relative;
+  margin-top: 10rpx;
+}
 
 .picker {
-  margin: 10rpx 0;
-  padding: 10rpx;
+	/*  margin: 10rpx 0; */
+	margin-left: 40rpx;
+  padding: 10rpx; 
   background-color: #f0f0f0;
   text-align: center;
   border-radius: 10rpx; 
@@ -50,10 +69,35 @@
   color: #333333; 
 }
 
+.player-container {
+  display: flex;
+}
+
+.player-tabs-vertical {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20rpx;
+}
+
+.player-table-container {
+	flex: 1;
+	width: 80vw;
+}
+
 .table {
-  width: 95vw;
+  width: 100%;
   border-collapse: collapse;
 	margin-top: 10rpx;
+}
+
+.score-table-container {
+  width: 100%; /* 设置score-table-container的宽度为100% */
+}
+
+.score-table {
+  width: 100%; /* 设置score-table的宽度为100% */
+  border-collapse: collapse;
+  margin-top: 10rpx;
 }
 
 .row {
@@ -66,7 +110,7 @@
   color: #333333; 
 }
 
-.row text {
+.score-table .row text {
   flex: 1;
   padding: 10rpx;
   border: 1rpx solid #ddd;
@@ -75,21 +119,36 @@
   color: #333333; 
 }
 
-.row text:nth-child(2) {
+.score-table .row text:nth-child(2) { /* 球队 */
   flex: 2; /* 宽度加倍 */
 }
-
-.row text:nth-child(3), /* 赛 */
-.row text:nth-child(4), /* 胜 */
-.row text:nth-child(5), /* 平 */
-.row text:nth-child(6) { /* 负 */
+.score-table .row text:nth-child(3), /* 赛 */
+.score-table .row text:nth-child(4), /* 胜 */
+.score-table .row text:nth-child(5), /* 平 */
+.score-table .row text:nth-child(6) { /* 负 */
   flex: 0.5; /* 宽度减半 */
 }
-
-.row text:nth-child(1),
-.row text:nth-child(8) { /* 名次 */
+.score-table .row text:nth-child(1),
+.score-table .row text:nth-child(8) { /* 名次 */
   flex: 0.7; /* 宽度减为0.7 */
 }
+
+.player-table .row text {
+  flex: 1;
+  padding: 10rpx;
+  border: 1rpx solid #ddd;
+  text-align: center;
+  font-size: 28rpx; 
+  color: #333333; 
+}
+
+/* .player-table .row text:nth-child(1){
+	flex: 0.2
+}
+.player-table .row text:nth-child(2),
+.player-table .row text:nth-child(3) {
+	flex: 0.2
+} */
 
 .row:nth-child(even) {
   background-color: #e8f5e9; /* 隔行变色 */

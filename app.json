@@ -1,12 +1,10 @@
 {
   "pages": [ 
-		"pages/homePage/homePage",
-		"pages/board/board",
-		"pages/notificationEidt/notificationEidt",
-    "pages/player/player",
-    "pages/manager/manager",
     "pages/homePage/homePage",
     "pages/notificationEdit/notificationEdit",
+    "pages/player/player",
+		"pages/board/board",
+    "pages/manager/manager",
     "pages/addPlayer/addPlayer",
     "pages/deletePlayer/deletePlayer",
 		"pages/chooseAccount/chooseAccount",
@@ -32,7 +30,7 @@
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/player/player",
+        "pagePath":"pages/homePage/homePage",
         "text":"首页",
         "iconPath":"/image/tabBar/shouye.png",
         "selectedIconPath": "/image/tabBar/shouye-active.png"

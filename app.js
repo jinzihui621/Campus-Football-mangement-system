@@ -19,7 +19,7 @@ App({
         avatarUrl: '/image/page_me/default_avatar.png', // 默认头像
         nickname: '爱踢球的工大人'
       },
-      userRole: 'player',
+      userRole: '球员',
       loginFlag: 1
     }
   },

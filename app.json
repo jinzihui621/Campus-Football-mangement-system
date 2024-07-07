@@ -1,6 +1,7 @@
 {
   "pages": [ 
 		"pages/homePage/homePage",
+		"pages/board/board",
 		"pages/notificationEidt/notificationEidt",
     "pages/player/player",
     "pages/addPlayer/addPlayer",
@@ -40,7 +41,7 @@
         "selectedIconPath": "/image/tabBar/guanli-2.png"
       },
       {
-        "pagePath":"pages/logs/logs",
+        "pagePath":"pages/board/board",
         "text":"比赛",
         "iconPath":"/image/tabBar/bisai.png",
         "selectedIconPath": "/image/tabBar/bisai-2.png"

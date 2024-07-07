@@ -1,0 +1,147 @@
+<!--pages/board/board.wxml-->
+<view class="container">
+  <!-- 顶部赛事选择标签页 -->
+  <view class="tabs">
+    <view class="tab" bindtap="selectEvent" data-event="super" wx:class="{{currentEvent === 'super' ? 'active' : ''}}">工超</view>
+    <view class="tab" bindtap="selectEvent" data-event="jia" wx:class="{{currentEvent === 'jia' ? 'active' : ''}}">工甲</view>
+    <view class="tab" bindtap="selectEvent" data-event="cup" wx:class="{{currentEvent === 'cup' ? 'active' : ''}}">工大杯</view>
+  </view>
+
+	<!-- Divider -->
+	<view class="divider"></view>
+
+	<view class="tabs-detail">
+		<!-- 年份选择下拉栏 -->
+		<picker mode="selector" range="{{years}}" bindchange="selectYear">
+			<view class="picker">
+				{{selectedYear}}
+			</view>
+		</picker>
+
+  	<!-- 积分榜和球员榜标签页 -->
+		<view class="sub-tabs">
+			<view class="sub-tab" bindtap="selectSubTab" data-tab="score" wx:class="{{currentSubTab === 'score' ? 'active' : ''}}">积分榜</view>
+			<view class="sub-tab" bindtap="selectSubTab" data-tab="player" wx:class="{{currentSubTab === 'player' ? 'active' : ''}}">球员榜</view>
+			<view class="sub-tab" bindtap="selectSubTab" data-tab="schedule" wx:class="{{currentSubTab === 'schedule' ? 'active' : ''}}">赛程</view>
+		</view>
+	</view>
+
+  <!-- 积分榜内容 -->
+  <view wx:if="{{currentSubTab === 'score'}}">
+    <view class="table">
+      <view class="row header">
+        <text>名次</text>
+        <text>球队</text>
+        <text>赛</text>
+        <text>胜</text>
+        <text>平</text>
+        <text>负</text>
+        <text>进/失</text>
+        <text>积分</text>
+      </view>
+      <block wx:for="{{scoreData}}" wx:key="index">
+        <view class="row">
+          <text>{{item.rank}}</text>
+          <text>{{item.team}}</text>
+          <text>{{item.played}}</text>
+          <text>{{item.won}}</text>
+          <text>{{item.drawn}}</text>
+          <text>{{item.lost}}</text>
+          <text>{{item.goalDifference}}</text>
+          <text>{{item.points}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 球员榜内容 -->
+  <view wx:if="{{currentSubTab === 'player'}}">
+    <view class="player-tabs">
+      <view class="player-tab" bindtap="selectPlayerTab" data-tab="goals" wx:class="{{currentPlayerTab === 'goals' ? 'active' : ''}}">进球榜</view>
+      <view class="player-tab" bindtap="selectPlayerTab" data-tab="assists" wx:class="{{currentPlayerTab === 'assists' ? 'active' : ''}}">助攻榜</view>
+      <view class="player-tab" bindtap="selectPlayerTab" data-tab="yellowCards" wx:class="{{currentPlayerTab === 'yellowCards' ? 'active' : ''}}">黄牌榜</view>
+      <view class="player-tab" bindtap="selectPlayerTab" data-tab="redCards" wx:class="{{currentPlayerTab === 'redCards' ? 'active' : ''}}">红牌榜</view>
+    </view>
+
+    <!-- 进球榜内容 -->
+    <view wx:if="{{currentPlayerTab === 'goals'}}">
+      <view class="table">
+        <view class="row header">
+          <text>名次</text>
+          <text>球员</text>
+          <text>球队</text>
+          <text>进球数</text>
+        </view>
+        <block wx:for="{{goalData}}" wx:key="index">
+          <view class="row">
+            <text>{{item.rank}}</text>
+            <text>{{item.player}}</text>
+            <text>{{item.team}}</text>
+            <text>{{item.goals}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 其他球员榜内容类似 -->
+    <!-- 助攻榜内容 -->
+    <view wx:if="{{currentPlayerTab === 'assists'}}">
+      <view class="table">
+        <view class="row header">
+          <text>名次</text>
+          <text>球员</text>
+          <text>球队</text>
+          <text>助攻数</text>
+        </view>
+        <block wx:for="{{assistData}}" wx:key="index">
+          <view class="row">
+            <text>{{item.rank}}</text>
+            <text>{{item.player}}</text>
+            <text>{{item.team}}</text>
+            <text>{{item.assists}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 黄牌榜内容 -->
+    <view wx:if="{{currentPlayerTab === 'yellowCards'}}">
+      <view class="table">
+        <view class="row header">
+          <text>名次</text>
+          <text>球员</text>
+          <text>球队</text>
+          <text>黄牌数</text>
+        </view>
+        <block wx:for="{{yellowCardData}}" wx:key="index">
+          <view class="row">
+            <text>{{item.rank}}</text>
+            <text>{{item.player}}</text>
+            <text>{{item.team}}</text>
+            <text>{{item.yellowCards}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 红牌榜内容 -->
+    <view wx:if="{{currentPlayerTab === 'redCards'}}">
+      <view class="table">
+        <view class="row header">
+          <text>名次</text>
+          <text>球员</text>
+          <text>球队</text>
+          <text>红牌数</text>
+        </view>
+        <block wx:for="{{redCardData}}" wx:key="index">
+          <view class="row">
+            <text>{{item.rank}}</text>
+            <text>{{item.player}}</text>
+            <text>{{item.team}}</text>
+            <text>{{item.redCards}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

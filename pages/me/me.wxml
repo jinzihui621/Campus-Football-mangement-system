@@ -1,7 +1,7 @@
 <!--pages/me/me.wxml-->
 <view class="user-info">
   <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
-  <text class="nickname">{{userInfo.nickName}}</text>
+  <text class="nickname">{{userInfo.nickname}}</text>
   <text class="role">{{userRole}}</text>
 </view>
 
@@ -10,7 +10,7 @@
     <image src="/image/page_me/message.png" mode="aspectFill"></image>
     <text>消息</text>
   </view>
-  <view class="button">
+  <view class="button" bind:tap="navigateToEditProfile">
     <image src="/image/page_me/edit.png" mode="aspectFill"></image>
     <text>编辑</text>
   </view>

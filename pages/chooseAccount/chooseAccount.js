@@ -6,22 +6,22 @@ Page({
       {
         imgSrc: '/image/choose_account/team_manager.png',
         text: '球队管理账号',
-        role: 'team_manager'
+        role: '球队管理'
       },
       {
         imgSrc: '/image/choose_account/player.png',
-        text: '球员账号',
-        role: 'player'
+        text: '比赛球员账号',
+        role: '球员'
       },
       {
         imgSrc: '/image/choose_account/referee.png',
         text: '比赛裁判账号',
-        role: 'referee'
+        role: '裁判'
       },
       {
         imgSrc: '/image/choose_account/manager.png',
         text: '赛事管理账号',
-        role: 'manager'
+        role: '赛事管理'
       }
     ]
   },

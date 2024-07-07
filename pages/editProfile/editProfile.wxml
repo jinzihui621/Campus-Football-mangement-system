@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="avatar-container" bindtap="chooseAvatar">
+    <image class="avatar" src="{{avatarUrl}}" mode="aspectFill"></image>
+    <text>点击更改头像</text>
+  </view>
+  
+  <view class="input-group">
+    <text class="label">姓名</text>
+    <input placeholder="请输入姓名" data-field="name" value="{{name}}" bindinput="onInputChange" />
+  </view>
+  
+  <view class="input-group">
+    <text class="label">昵称</text>
+    <input placeholder="请输入昵称" data-field="nickname" value="{{nickname}}" bindinput="onInputChange" />
+  </view>
+
+  <view class="input-group">
+    <text class="label">个性签名</text>
+    <input placeholder="请输入个性签名" data-field="signature" value="{{signature}}" bindinput="onInputChange" />
+  </view>
+
+  <view class="input-group">
+    <text class="label">学号</text>
+    <input placeholder="请输入学号" data-field="studentID" value="{{studentID}}" bindinput="onInputChange" />
+  </view>
+  
+  <view class="input-group">
+    <text class="label">联系方式</text>
+    <input placeholder="请输入联系方式" data-field="contact" value="{{contact}}" bindinput="onInputChange" />
+  </view>
+
+  <view class="input-group">
+    <text class="label">所属学院</text>
+    <input placeholder="请输入所属学院" data-field="college" value="{{college}}" bindinput="onInputChange" />
+  </view>
+
+  <view class="input-group">
+    <text class="label">所属专业</text>
+    <input placeholder="请输入所属专业" data-field="major" value="{{major}}" bindinput="onInputChange" />
+  </view>
+  
+  <button bindtap="saveProfile">保存</button>
+</view>

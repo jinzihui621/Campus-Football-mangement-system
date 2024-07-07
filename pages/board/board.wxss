@@ -1,0 +1,100 @@
+.container {
+  padding: 20rpx;
+  background-color: #ffffff; 
+}
+
+.tabs, .sub-tabs, .player-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0rpx;
+	width: 100%;
+}
+
+.divider {
+  width: 95%;
+  height: 2rpx;
+  background-color: #dddddd; 
+  margin: 15rpx auto; 
+}
+
+.tabs-detail {
+  display: flex;
+  justify-content: space-around; 
+  width: 100%;
+  margin-bottom: 10rpx;
+}
+
+/* 确保边框和文字颜色变化 */
+.tab.active, .sub-tab.active, .player-tab.active {
+  border-bottom: 2rpx solid green;
+  color: green;
+}
+
+/* 确保 tab, sub-tab 和 player-tab 元素的基本样式 */
+.tab, .sub-tab, .player-tab {
+  padding: 10rpx;
+  border-bottom: 2rpx solid transparent;
+  cursor: pointer;
+  color: #333333; /* 默认文字颜色 */
+  font-size: 32rpx; /* 字体大小 */
+}
+
+
+.picker {
+  margin: 10rpx 0;
+  padding: 10rpx;
+  background-color: #f0f0f0;
+  text-align: center;
+  border-radius: 10rpx; 
+  font-size: 28rpx; 
+  color: #333333; 
+}
+
+.table {
+  width: 95vw;
+  border-collapse: collapse;
+	margin-top: 10rpx;
+}
+
+.row {
+  display: flex;
+}
+
+.header {
+  font-weight: bold;
+  background-color: #f9f9f9; 
+  color: #333333; 
+}
+
+.row text {
+  flex: 1;
+  padding: 10rpx;
+  border: 1rpx solid #ddd;
+  text-align: center;
+  font-size: 28rpx; 
+  color: #333333; 
+}
+
+.row text:nth-child(2) {
+  flex: 2; /* 宽度加倍 */
+}
+
+.row text:nth-child(3), /* 赛 */
+.row text:nth-child(4), /* 胜 */
+.row text:nth-child(5), /* 平 */
+.row text:nth-child(6) { /* 负 */
+  flex: 0.5; /* 宽度减半 */
+}
+
+.row text:nth-child(1),
+.row text:nth-child(8) { /* 名次 */
+  flex: 0.7; /* 宽度减为0.7 */
+}
+
+.row:nth-child(even) {
+  background-color: #e8f5e9; /* 隔行变色 */
+}
+
+.row:nth-child(odd) {
+  background-color: #ffffff; /* 隔行变色 */
+}

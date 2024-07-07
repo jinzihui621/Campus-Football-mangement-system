@@ -2,11 +2,8 @@ const app = getApp()
 
 Page({
   data: {
-    userInfo: {
-      avatarUrl: '/image/page_me/default_avatar.png', // 默认头像
-      nickName: '用户昵称',
-      role: ''
-    }
+		userInfo: app.globalData.userInfo,
+		userRole: app.globalData.userRole
   },
 
   onLoad: function() {
@@ -18,11 +15,18 @@ Page({
 			});
 		}
 		
-		this.setData({ userRole: app.globalData.userRole })
+		this.setData({ 
+			userInfo: app.globalData.userInfo,
+			userRole: app.globalData.userRole
+		});
+
   },
 
 	onShow: function() {
-		this.setData({ userRole: app.globalData.userRole })
+		this.setData({ 
+			userInfo: app.globalData.userInfo,
+			userRole: app.globalData.userRole
+		});
 	},
 	
 	navigateToMessages: function() {
@@ -35,5 +39,11 @@ Page({
     wx.navigateTo({
       url: '/pages/chooseAccount/chooseAccount'
     });
-  }
+	},
+	
+	navigateToEditProfile: function() {
+    wx.navigateTo({
+      url: '/pages/editProfile/editProfile'
+    });
+	},
 });

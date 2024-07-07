@@ -1,0 +1,12 @@
+<view class="container">
+  <block wx:for="{{messages}}" wx:key="id">
+    <view class="message-item" bindtap="navigateToMessageDetail" data-id="{{item.id}}">
+      <view class="message-header">
+        <text class="message-title">{{item.title}}</text>
+        <text class="message-timestamp">{{item.timestamp}}</text>
+      </view>
+      <text class="message-content">{{item.content}}</text>
+    </view>
+    <view class="divider"></view>
+  </block>
+</view>

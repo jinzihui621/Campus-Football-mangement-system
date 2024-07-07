@@ -1,0 +1,28 @@
+.container {
+  padding: 0rpx;
+}
+
+.message-item {
+	width: 85%;
+  border-bottom: 1px solid #ddd;
+  padding: 20rpx 0;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.message-title {
+  font-weight: bold;
+}
+
+.message-timestamp {
+  color: #888;
+  font-size: 24rpx;
+}
+
+.message-content {
+  font-size: 28rpx;
+}

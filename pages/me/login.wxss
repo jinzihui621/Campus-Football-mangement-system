@@ -1,0 +1,30 @@
+/* pages/login/login.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  padding: 20rpx;
+}
+
+.logo {
+  width: 300rpx;
+  height: 300rpx;
+  margin-bottom: 80rpx;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.login-button {
+  width: 80%;
+  background-color: #0AD41F;
+  color: white;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}

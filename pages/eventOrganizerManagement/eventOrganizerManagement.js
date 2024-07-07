@@ -7,6 +7,13 @@ Page({
   data: {
 
   },
+
+  // 跳转到赛程页面的方法
+  navigateToSchedule: function() {
+    wx.navigateTo({
+      url: '/pages/soccerSchedule/soccerSchedule'  // 这里替换成实际的路径
+    });
+  },
  
   /**
    * 生命周期函数--监听页面加载

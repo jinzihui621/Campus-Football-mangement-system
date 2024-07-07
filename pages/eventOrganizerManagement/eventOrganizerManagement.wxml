@@ -15,7 +15,7 @@
           <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
           <text>球队</text>
         </view>
-        <view class="icon-item">
+        <view class="icon-item" bindtap="navigateToSchedule">
           <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
           <text>赛程</text>
         </view>

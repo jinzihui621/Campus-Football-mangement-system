@@ -4,9 +4,8 @@
 		"pages/board/board",
 		
 		"pages/match/match",
-		"pages/notificationEidt/notificationEidt",
+		"pages/notificationEdit/notificationEdit",
     "pages/player/player",
-		"pages/board/board",
     "pages/manager/manager",
     "pages/addPlayer/addPlayer",
     "pages/deletePlayer/deletePlayer",

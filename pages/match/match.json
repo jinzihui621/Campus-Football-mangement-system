@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "fui-pagination": "/components/fui-pagination/fui-pagination",
+    "table":"/components/table/table"
+  },
+  "navigationBarTitleText": "校园足球",
+  "disableScroll": true
+}

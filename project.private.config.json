@@ -15,8 +15,8 @@
           "scene": null
         },
         {
-          "name": "pages/player/player",
-          "pathName": "pages/player/player",
+          "name": "pages/match/match",
+          "pathName": "pages/match/match",
           "query": "",
           "launchMode": "default",
           "scene": null

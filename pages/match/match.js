@@ -30,7 +30,72 @@ Page({
       {date:"07-07 00:00",teamA:"type2",teamAScore:"-",teamBScore:'-',teamB:"name2"},
       {date:"07-07 00:00",teamA:"type3",teamAScore:"3",teamBScore:'1',teamB:"name3"},
       {date:"07-07 00:00",teamA:"type4",teamAScore:"2",teamBScore:'3',teamB:"name4"}
+		],
+		//积分榜
+		tableRankColumns: [
+      { title: "名次", key: "rank", width: "80rpx" },
+      { title: "球队", key: "team", width: "140rpx" },
+      { title: "赛", key: "gamePlayed", width: "80rpx" },
+      { title: "胜", key: "win", width: "80rpx" },
+      { title: "平", key: "draw", width: "80rpx" },
+      { title: "负", key: "lose", width: "80rpx" },
+      { title: "进/失", key: "gs_ga", width: "100rpx" },
+      { title: "积分", key: "points", width: "80rpx" }
     ],
+    listRank: [
+      { rank: "1", team: "计算机", gamePlayed: 8, win: 8, draw: 0, lose: 0, gs_ga: "35/2", points: 24 },
+      { rank: "2", team: "城建", gamePlayed: 8, win: 7, draw: 1, lose: 0, gs_ga: "15/10", points: 22 },
+      { rank: "3", team: "电子", gamePlayed: 8, win: 6, draw: 1, lose: 1, gs_ga: "20/5", points: 19 },
+      { rank: "4", team: "化工", gamePlayed: 8, win: 5, draw: 2, lose: 1, gs_ga: "18/8", points: 17 }
+    ],
+		//进球榜
+		tableGoalColumns: [
+      { title: "名次", key: "rank", width: "100rpx" },
+      { title: "球员", key: "player", width: "200rpx" },
+      { title: "球队", key: "team", width: "200rpx" },
+      { title: "进球数", key: "goals", width: "100rpx" }
+    ],
+    listGoal: [
+      { rank: "1", player: "Player1", team: "Team1", goals: "10" },
+      { rank: "2", player: "Player2", team: "Team2", goals: "8" },
+      { rank: "3", player: "Player3", team: "Team3", goals: "7" },
+      { rank: "4", player: "Player4", team: "Team4", goals: "6" }
+    ],
+    // 助攻榜
+    tableAssistColumns: [
+      { title: "名次", key: "rank", width: "100rpx", width: "100rpx" },
+      { title: "球员", key: "player", width: "200rpx" },
+      { title: "球队", key: "team", width: "200rpx" },
+      { title: "助攻数", key: "assists", width: "100rpx" }
+    ],
+    listAssist: [
+      { rank: "1", player: "Player1", team: "Team1", assists: "12" },
+      { rank: "2", player: "Player2", team: "Team2", assists: "9" },
+      { rank: "3", player: "Player3", team: "Team3", assists: "8" },
+      { rank: "4", player: "Player4", team: "Team4", assists: "7" }
+		],
+    // 黄牌榜
+    tableYellowCardColumns: [
+      { title: "名次", key: "rank", width: "100rpx" },
+      { title: "球员", key: "player", width: "200rpx" },
+      { title: "球队", key: "team", width: "200rpx" },
+      { title: "黄牌数", key: "yellowCards", width: "100rpx" }
+    ],
+    listYellowCard: [
+      { rank: "1", player: "Player1", team: "Team1", yellowCards: "5" },
+      { rank: "2", player: "Player2", team: "Team2", yellowCards: "4" },
+      { rank: "3", player: "Player3", team: "Team3", yellowCards: "3" },
+      { rank: "4", player: "Player4", team: "Team4", yellowCards: "2" }
+    ],
+    // 红牌榜
+    tableRedCardColumns: [
+      { title: "名次", key: "rank", width: "100rpx" },
+      { title: "球员", key: "player", width: "200rpx" },
+      { title: "球队", key: "team", width: "200rpx" },
+      { title: "红牌数", key: "redCards", width: "100rpx" }
+    ],
+		listRedCard: [],
+		
     "firstList": [{ name: 'w券1', money: '5.00' }, { name: 'w券2', money: '50.00'}],
     "secondList": [{ name: 'y券1', money: '10.00' }, { name: 'y券2', money: '20.00' }],
     "thirdList": [{ name: 'g券1', money: '30.00' }, { name: 'g券2', money: '40.00' }],

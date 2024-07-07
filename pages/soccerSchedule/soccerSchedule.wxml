@@ -95,11 +95,11 @@
     </swiper-item>
     <!--第三轮-->
     <swiper-item class='swiper'>
-      <view class='matchMessage'>
+      <view class='matchMessage' bindtap="navigateToInputMessage">
         <view class="raceInfo">
-          <view>07-07 12:00～13:00</view>
-          <view class="scores">信息A   vs   信息C</view>
-          <view >北工大北操场</view>
+          <view>{{matchInfo.day}} {{matchInfo.starttime}}～{{matchInfo.endtime}}</view>
+          <view class="scores">{{matchInfo.teamnameA}}   vs   {{matchInfo.teamnameB}}</view>
+          <view >{{matchInfo.place}}</view>
         </view>
       </view>
       <view class='matchMessage'>

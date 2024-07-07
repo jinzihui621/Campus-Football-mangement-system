@@ -2,6 +2,8 @@
   "pages": [ 
 		"pages/homePage/homePage",
 		"pages/board/board",
+		
+		"pages/match/match",
 		"pages/notificationEidt/notificationEidt",
     "pages/player/player",
     "pages/addPlayer/addPlayer",
@@ -21,9 +23,7 @@
     "pages/matchDetail/matchDetail",
     "pages/matchDetail1/matchDetail1",
     "pages/soccerSchedule/soccerSchedule",
-    "pages/editSchedule/editSchedule",
-    "pages/match/match"
-
+    "pages/editSchedule/editSchedule"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -45,7 +45,7 @@
         "selectedIconPath": "/image/tabBar/guanli-2.png"
       },
       {
-        "pagePath":"pages/board/board",
+        "pagePath":"pages/match/match",
         "text":"比赛",
         "iconPath":"/image/tabBar/bisai.png",
         "selectedIconPath": "/image/tabBar/bisai-2.png"

@@ -1,0 +1,15 @@
+<!--pages/list/list.wxml-->
+<!-- 使用 class 名称来添加样式 -->
+<navigator url="/pages/createMatch/createMatch" open-type="navigate" class="centered-button">创建赛事</navigator>
+<view class="custom-border-box">
+  <scroll-view scroll-y="true" class="scroll-view">
+    <!-- 模拟较长的内容 -->
+    <view class="scroll-item">内容 1</view>
+    <view class="scroll-item">内容 2</view>
+    <view class="scroll-item">内容 3</view>
+  </scroll-view>
+</view>
+
+
+
+

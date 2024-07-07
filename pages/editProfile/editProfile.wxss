@@ -1,0 +1,47 @@
+.container {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  margin-bottom: 10rpx;
+}
+
+.input-group {
+  width: 80%;
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 5rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+input {
+  padding: 20rpx;
+  border: 1px solid #ddd;
+  border-radius: 10rpx;
+}
+
+button {
+  width: 80%;
+  background-color: #00c800;
+  color: white;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}

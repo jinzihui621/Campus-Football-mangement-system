@@ -1,6 +1,11 @@
 {
   "pages": [ 
 		"pages/homePage/homePage",
+		"pages/notificationEidt/notificationEidt",
+    "pages/player/player",
+    "pages/addPlayer/addPlayer",
+    "pages/manager/manager",
+    "pages/deletePlayer/deletePlayer",
 		"pages/chooseAccount/chooseAccount",
     "pages/eventOrganizerManagement/eventOrganizerManagement",
     "pages/index/index",
@@ -11,6 +16,7 @@
     "pages/me/login",
 		"pages/messageList/messageList",
     "pages/messageDetail/messageDetail",
+		"pages/editProfile/editProfile",
     "pages/matchDetail/matchDetail",
     "pages/matchDetail1/matchDetail1",
     "pages/soccerSchedule/soccerSchedule"

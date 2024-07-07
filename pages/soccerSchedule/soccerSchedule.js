@@ -1,4 +1,5 @@
-// pages/soccerSchedule/soccerSchedule.js
+const app = getApp()
+
 Page({
 
   /**
@@ -6,8 +7,7 @@ Page({
    */
   data: {
     currentIndex: 0,
-    teamA:'队伍A',
-    teamB:'队伍B',
+    matchInfo: app.globalData.matchInfo,
 
   },
 
@@ -31,59 +31,22 @@ Page({
       })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  onLoad: function() {
+		this.setData({ 
+			matchInfo: app.globalData.matchInfo,
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  onShow: function() {
+		this.setData({ 
+      matchInfo: app.globalData.matchInfo,
+		});
+  },
+  
+  navigateToInputMessage: function() {
+    wx.navigateTo({
+      url: '/pages/editSchedule/editSchedule'  // 这里替换成实际的路径
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
 })

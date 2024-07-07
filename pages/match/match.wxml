@@ -1,0 +1,64 @@
+<!--pages/match/match.wxml-->
+<view class='match-container'>
+    <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"
+      scroll-top="{{scrollTop}}">
+      <!--Tab布局-->
+      <view class='title'>
+        <view wx:for="{{matches}}">
+          <view class="{{ index == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx="{{index}}">
+            <text>{{item.matchName}}</text>
+            <hr class="line-style"/>
+          </view>
+        </view>
+      </view>
+ 
+      <!--内容布局-->
+      <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+        <swiper-item class='swiper'>
+         <!--选择年份 积分榜 球员榜 赛程-->
+          <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"
+      scroll-top="{{scrollTop}}">
+            <!--tab栏-->
+            <view class='title'>
+              <picker mode="date" value="{{date}}" start="2015" end="2024" bindchange="bindDateChange" fields="year">
+                <view class="picker">
+                  筛选年份:{{date}}
+                </view>
+              </picker>
+              <view wx:for="{{listType}}" wx:key="index">
+                <view class="{{ index == currentListIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='listClick' data-idx="{{index}}">
+                  <text>{{item}}</text>
+                  <hr class="line-style"/>
+                </view>
+              </view>
+            </view>
+            <!--积分榜 球员榜 赛程内容-->
+            <swiper class='swiper' bindchange='listchange' current='{{currentListIndex}}'>
+              <swiper-item></swiper-item>
+              <swiper-item></swiper-item>
+              <swiper-item>
+                <fui-pagination total="{{50}}" pageType="{{2}}" prevText="上一轮" nextText="下一轮" bind:change="changeTurn"></fui-pagination>
+                <table class="matchRecords" dataList="{{list}}" columns="{{tableColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+              </swiper-item>
+            </swiper>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item class='swiper'>
+          <view wx:for="{{secondList}}" wx:for-item="item" class='record-item'>
+            <view class='name'>
+              <span>名称：{{item.name}}</span>
+              <span>面额：{{item.money}}</span>
+            </view>
+          </view>
+        </swiper-item>
+        <swiper-item class='swiper'>
+          <view wx:for="{{thirdList}}" wx:for-item="item" class='record-item'>
+           <view class='name'>
+              <span>名称：{{item.name}}</span>
+              <span>面额：{{item.money}}</span>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </scroll-view>
+</view>

@@ -30,6 +30,7 @@
     </view>
       <!--内容布局-->
       <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+        <!--第一轮-->
         <swiper-item class='swiper'>
           <scroll-view class="input" scroll-y>
             <view wx:for="{{playerA}}" wx:for-item="item">
@@ -56,6 +57,7 @@
             <button type="warn" class="end">结束比赛</button>
           </scroll-view>
         </swiper-item>
+        <!--第二轮-->
         <swiper-item class='swiper'>
           <scroll-view class="input" scroll-y>
             <view wx:for="{{playerB}}" wx:for-item="item">

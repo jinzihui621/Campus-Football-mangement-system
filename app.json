@@ -12,7 +12,8 @@
 		"pages/messageList/messageList",
     "pages/messageDetail/messageDetail",
     "pages/matchDetail/matchDetail",
-    "pages/matchDetail1/matchDetail1"
+    "pages/matchDetail1/matchDetail1",
+    "pages/soccerSchedule/soccerSchedule"
   ],
   "window": {
     "navigationBarTextStyle": "white",

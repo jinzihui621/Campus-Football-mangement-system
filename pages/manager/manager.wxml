@@ -3,8 +3,8 @@
 <view class="card">
   <!-- 第一排按钮 -->
   <view class = "buttonContainer1">
-    <view class = "imageButton">
-      <image src="/image/notification.png" mode="aspectFit"/>
+    <view class = "imageButton" >
+      <image src="/image/notification.png" mode="aspectFit" bindtap = "gotoNotification"/>
       <text>公告编辑</text>
     </view>
     <view class = "imageButton">

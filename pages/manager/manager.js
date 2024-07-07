@@ -40,6 +40,11 @@ Page({
     })
   },
 
+  gotoNotification(){
+    wx.navigateTo({
+      url: '/pages/notificationEdit/notificationEdit'
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载

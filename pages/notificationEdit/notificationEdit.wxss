@@ -1,0 +1,39 @@
+/* pages/notificationEidt/notificationEidt.wxss */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  height: 100vh;
+}
+
+.editSpace{
+  margin-top: 30rpx;
+  height: 40%;
+  width: 88%;
+  border-radius: 10rpx;
+  border: 2rpx lightgray solid;
+  display: flex;
+  padding: 15rpx;
+}
+
+.buttonContainer{
+  display: flex;
+  align-items: center;
+}
+
+.send{
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel{
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

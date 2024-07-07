@@ -4,10 +4,10 @@
 		"pages/board/board",
 		
 		"pages/match/match",
-		"pages/notificationEidt/notificationEidt",
+		"pages/notificationEdit/notificationEdit",
     "pages/player/player",
-    "pages/addPlayer/addPlayer",
     "pages/manager/manager",
+    "pages/addPlayer/addPlayer",
     "pages/deletePlayer/deletePlayer",
 		"pages/chooseAccount/chooseAccount",
     "pages/eventOrganizerManagement/eventOrganizerManagement",

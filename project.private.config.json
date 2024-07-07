@@ -8,6 +8,34 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/manager/manager",
+          "pathName": "pages/manager/manager",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/player/player",
+          "pathName": "pages/player/player",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/scoreAndCardsInput/scoreAndCardsInput",
+          "pathName": "pages/scoreAndCardsInput/scoreAndCardsInput",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/soccerSchedule/soccerSchedule",
+          "pathName": "pages/soccerSchedule/soccerSchedule",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/matchDetail1/matchDetail1",
           "pathName": "pages/matchDetail1/matchDetail1",
           "query": "",
@@ -17,13 +45,6 @@
         {
           "name": "pages/matchDetail/matchDetail",
           "pathName": "pages/matchDetail/matchDetail",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/scoreAndCardsInput/scoreAndCardsInput",
-          "pathName": "pages/scoreAndCardsInput/scoreAndCardsInput",
           "query": "",
           "launchMode": "default",
           "scene": null

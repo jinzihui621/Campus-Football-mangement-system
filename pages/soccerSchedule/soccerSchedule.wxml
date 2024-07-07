@@ -1,0 +1,282 @@
+<!--pages/soccerSchedule/soccerSchedule.wxml-->
+<view class="container">
+  <view class='title'>
+    <view class="{{0 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='0'>
+      <text>第一轮</text>
+      <hr class="line-style"/>
+    </view>
+    <view class="{{1 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='1'>
+      <text>第二轮</text>
+      <hr class="line-style"/>
+    </view>
+    <view class="{{2 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='2'>
+      <text>第三轮</text>
+      <hr class="line-style"/>
+    </view>
+    <view class="{{3 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='3'>
+      <text>第四轮</text>
+      <hr class="line-style"/>
+    </view>
+    <view class="{{4 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='4'>
+      <text>第五轮</text>
+      <hr class="line-style"/>
+    </view>
+    <view class="{{5 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='5'>
+      <text>第六轮</text>
+      <hr class="line-style"/>
+    </view>
+    <view class="{{6 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='6'>
+      <text>第七轮</text>
+      <hr class="line-style"/>
+    </view>
+  </view>
+  <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+    <!--第一轮-->
+    <swiper-item class='swiper'>
+      <view class='matchMessage'>
+        <view class="raceInfo">
+          <view>07-07 12:00～13:00</view>
+          <view class="scores">信息A   vs   信息C</view>
+          <view >北工大北操场</view>
+        </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 12:00～13:00</view>
+            <view class="scores">城建A   vs   环生C</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">都柏林   vs   电控</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">艺设   vs   软件</view>
+            <view >北工大北操场</view>
+          </view>
+      </view>
+    </swiper-item>
+    <!--第二轮-->
+    <swiper-item class='swiper'>
+      <view class='matchMessage'>
+        <view class="raceInfo">
+          <view>07-07 12:00～13:00</view>
+          <view class="scores">信息A   vs   信息C</view>
+          <view >北工大北操场</view>
+        </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 12:00～13:00</view>
+            <view class="scores">城建A   vs   环生C</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">都柏林   vs   电控</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">艺设   vs   软件</view>
+            <view >北工大北操场</view>
+          </view>
+      </view>
+    </swiper-item>
+    <!--第三轮-->
+    <swiper-item class='swiper'>
+      <view class='matchMessage'>
+        <view class="raceInfo">
+          <view>07-07 12:00～13:00</view>
+          <view class="scores">信息A   vs   信息C</view>
+          <view >北工大北操场</view>
+        </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 12:00～13:00</view>
+            <view class="scores">城建A   vs   环生C</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">都柏林   vs   电控</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">艺设   vs   软件</view>
+            <view >北工大北操场</view>
+          </view>
+      </view>
+    </swiper-item>
+    <!--第四轮-->
+    <swiper-item class='swiper'>
+      <view class='matchMessage'>
+        <view class="raceInfo">
+          <view>07-07 12:00～13:00</view>
+          <view class="scores">信息A   vs   信息C</view>
+          <view >北工大北操场</view>
+        </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 12:00～13:00</view>
+            <view class="scores">城建A   vs   环生C</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">都柏林   vs   电控</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">艺设   vs   软件</view>
+            <view >北工大北操场</view>
+          </view>
+      </view>
+    </swiper-item>
+    <!--第五轮-->
+    <swiper-item class='swiper'>
+      <view class='matchMessage'>
+        <view class="raceInfo">
+          <view>07-07 12:00～13:00</view>
+          <view class="scores">信息A   vs   信息C</view>
+          <view >北工大北操场</view>
+        </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 12:00～13:00</view>
+            <view class="scores">城建A   vs   环生C</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">都柏林   vs   电控</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">艺设   vs   软件</view>
+            <view >北工大北操场</view>
+          </view>
+      </view>
+    </swiper-item>
+    <!--第六轮-->
+    <swiper-item class='swiper'>
+      <view class='matchMessage'>
+        <view class="raceInfo">
+          <view>07-07 12:00～13:00</view>
+          <view class="scores">信息A   vs   信息C</view>
+          <view >北工大北操场</view>
+        </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 12:00～13:00</view>
+            <view class="scores">城建A   vs   环生C</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">都柏林   vs   电控</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">艺设   vs   软件</view>
+            <view >北工大北操场</view>
+          </view>
+      </view>
+    </swiper-item>
+    <!--第七轮-->
+    <swiper-item class='swiper'>
+      <view class='matchMessage'>
+        <view class="raceInfo">
+          <view>07-07 12:00～13:00</view>
+          <view class="scores">信息A   vs   信息C</view>
+          <view >北工大北操场</view>
+        </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 12:00～13:00</view>
+            <view class="scores">城建A   vs   环生C</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">都柏林   vs   电控</view>
+            <view >北工大南操场</view>
+          </view>
+      </view>
+      <view class='matchMessage'>
+          <view class="raceInfo">
+            <view>07-07 17:00～18:00</view>
+            <view class="scores">艺设   vs   软件</view>
+            <view >北工大北操场</view>
+          </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>
+<!-- <view class='matchMessage'>
+      <view class="raceInfo">
+        <view>07-07 12:00～13:00</view>
+        <view class="scores">信息A   vs   信息C</view>
+        <view >北工大北操场</view>
+      </view>
+  </view>
+  <view class='matchMessage'>
+      <view class="raceInfo">
+        <view>07-07 12:00～13:00</view>
+        <view class="scores">城建A   vs   环生C</view>
+        <view >北工大南操场</view>
+      </view>
+  </view>
+  <view class='matchMessage'>
+      <view class="raceInfo">
+        <view>07-07 17:00～18:00</view>
+        <view class="scores">都柏林   vs   电控</view>
+        <view >北工大南操场</view>
+      </view>
+  </view>
+  <view class='matchMessage'>
+      <view class="raceInfo">
+        <view>07-07 17:00～18:00</view>
+        <view class="scores">艺设   vs   软件</view>
+        <view >北工大北操场</view>
+      </view>
+  </view>
+</view>-->
+ 

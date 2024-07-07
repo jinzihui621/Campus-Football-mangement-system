@@ -1,11 +1,11 @@
 {
   "pages": [ 
-    "pages/notificationEidt/notificationEidt",
+		"pages/homePage/homePage",
+		"pages/notificationEidt/notificationEidt",
     "pages/player/player",
     "pages/addPlayer/addPlayer",
     "pages/manager/manager",
     "pages/deletePlayer/deletePlayer",
-		"pages/homePage/homePage",
 		"pages/chooseAccount/chooseAccount",
     "pages/eventOrganizerManagement/eventOrganizerManagement",
     "pages/index/index",

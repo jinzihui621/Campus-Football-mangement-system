@@ -1,5 +1,10 @@
 {
   "pages": [ 
+    "pages/notificationEidt/notificationEidt",
+    "pages/player/player",
+    "pages/addPlayer/addPlayer",
+    "pages/manager/manager",
+    "pages/deletePlayer/deletePlayer",
     "pages/list/list",
     "pages/index/index",
     "pages/logs/logs",
@@ -8,27 +13,17 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarBackgroundColor": "#ffffff"
+    "navigationBarTitleText": "校园足球",
+    "navigationBarBackgroundColor": "#34CE45"
   },
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/index/index",
-        "text":"首页",
-        "iconPath":"/image/shouye.png",
-        "selectedIconPath": "/image/shouye-active.png"
-      },
-      {
-        "pagePath":"pages/list/list",
-        "text":"管理"
-      },
-      {
-        "pagePath":"pages/logs/logs",
+        "pagePath":"pages/manager/manager",
         "text":"比赛"
       },
       {
-        "pagePath":"pages/createMatch/createMatch",
+        "pagePath":"pages/player/player",
         "text":"我的"
       }
     ]

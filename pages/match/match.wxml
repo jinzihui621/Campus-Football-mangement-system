@@ -16,8 +16,7 @@
       <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
         <swiper-item class='swiper'>
          <!--选择年份 积分榜 球员榜 赛程-->
-          <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"
-      scroll-top="{{scrollTop}}">
+          <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"scroll-top="{{scrollTop}}">
             <!--tab栏-->
             <view class='title'>
               <picker mode="date" value="{{date}}" start="2015" end="2024" bindchange="bindDateChange" fields="year">

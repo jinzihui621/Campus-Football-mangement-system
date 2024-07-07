@@ -18,17 +18,17 @@ Page({
     date:'2024',
     turn:1, //当前显示的赛程轮次
     tableColumns: [
-      {title: "日期",key: "date",}, 
+      {title: "日期",key: "date",width: "100rpx"}, 
       {title: "队伍A",key: "teamA",}, 
       {title: "A",key: "teamAScore",},
       {title:"B",key:"teamBScore"},
       {title:"队伍B",key:"teamB"}
     ],
     list:[
-      {date:1,teamA:"type1",teamAScore:"-",teamBScore:'-',teamB:"name1"},
-      {date:2,teamA:"type2",teamAScore:"-",teamBScore:'-',teamB:"name2"},
-      {date:3,teamA:"type3",teamAScore:"3",teamBScore:'1',teamB:"name3"},
-      {date:4,teamA:"type4",teamAScore:"2",teamBScore:'3',teamB:"name4"}
+      {date:"07-07 00:00",teamA:"type1",teamAScore:"-",teamBScore:'-',teamB:"name1"},
+      {date:"07-07 00:00",teamA:"type2",teamAScore:"-",teamBScore:'-',teamB:"name2"},
+      {date:"07-07 00:00",teamA:"type3",teamAScore:"3",teamBScore:'1',teamB:"name3"},
+      {date:"07-07 00:00",teamA:"type4",teamAScore:"2",teamBScore:'3',teamB:"name4"}
     ],
     "firstList": [{ name: 'w券1', money: '5.00' }, { name: 'w券2', money: '50.00'}],
     "secondList": [{ name: 'y券1', money: '10.00' }, { name: 'y券2', money: '20.00' }],

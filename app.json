@@ -10,7 +10,8 @@
 		"pages/me/me",	
 		"pages/me/login",
 		"pages/messageList/messageList",
-		"pages/messageDetail/messageDetail"
+		"pages/messageDetail/messageDetail",
+		"pages/editProfile/editProfile"
   ],
   "window": {
     "navigationBarTextStyle": "white",

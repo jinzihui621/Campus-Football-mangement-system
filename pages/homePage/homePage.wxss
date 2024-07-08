@@ -28,8 +28,33 @@
   padding: 10px;
 }
 
+.raceInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 8pt;
+}
+
+.matchMessage {  
+  width: 99%; /* 根据屏幕宽度设置或调整为所需大小 */  
+  height: 200rpx; /* 容器高度 */  
+  display: flex; /* 使用Flexbox布局 */  
+  justify-content: space-around; /* 子元素在主轴上均匀分布 */  
+  align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
+  flex-direction: row; /* 明确设置Flex方向为行（默认） */  
+  margin-top: 30rpx;
+  border: 2px solid #00dd00;
+}  
+
+.scores{
+  font-size: 25pt;
+  font-weight: bolder;
+}
+
 .no-matches {
-  border: 3rpx solid red;
+  border-top: 10rpx solid black;
   height: 100%;
   display: flex;
   flex-direction: column;

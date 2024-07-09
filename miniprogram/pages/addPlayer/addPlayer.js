@@ -17,25 +17,48 @@ Page({
       {name: "ks", score: 10}
     ],
     list2: [
-      {name: "gf", score: 10},
-      {name: "bn", score: 10},
-      {name: "el", score: 10},
-      {name: "pp", score: 10},
-      {name: "vv", score: 10},
-      {name: "qq", score: 10}
+      {name: "gf", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "gf", sno:"21041014",score: 10,red:4,yellow:3},
+      {name: "el", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "pp", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
+      {name: "qq", sno:"21041015",score: 10,red:4,yellow:3}
     ],
-    foundPlayer:null,
+    foundPlayer:"",
     //用于记录被搜索的球员是否在球员数据库中
     found: false,
-    //用于判断是否点击了搜索按钮
-    focus: false
+    filteredResults: [],
+    selectedIndex: 0
   },
 
   inputChange: function(e) {
+    const inputValue = e.detail.value;
+    const searchValue = inputValue.toLowerCase();
+    if (!inputValue) {
+      this.setData({
+        inputValue: inputValue,
+        empty: true,
+        found: false,
+        filteredResults: [] // Clear results when input is empty
+      });
+      return;
+    }
+    const filteredResults = this.data.list2.filter(item => item.name.toLowerCase().includes(searchValue));
     this.setData({
-      inputValue: e.detail.value,
-      empty: !e.detail.value,
-      found:false,
+      inputValue: inputValue,
+      empty: false,
+      found: false,
+      filteredResults: filteredResults,
+      foundPlayer:filteredResults[0]
     });
   },
 
@@ -60,47 +83,49 @@ Page({
     }
   },
 
+  selectPlayer: function (e) {
+    const index = e.currentTarget.dataset.index;
+    const player = this.data.filteredResults[index];
+    if (player) {
+      this.setData({
+        foundPlayer: player,
+        found: true,
+        selectedIndex: index, // 更新选中的索引
+      });
+    }
+  },
+
   clearSearch: function() {
     this.setData({
       inputValue: '',
       empty: true,
       foundPlayer: null,
-      found: false
+      found: false,
+      filteredResults: []
     });
   },
 
-  confirmDelete: function() {
-    if (!this.data.foundPlayer) return;
-    const that = this;
-    wx.showModal({
-      title: '确认删除',
-      content: '确定要删除这位球员吗？',
-      success (res) {
-        if (res.confirm) {
-          that.deletePlayer();
-        }
-      }
-    });
-  },
-
+ 
   addPlayer: function() {
-    const index = this.data.list2.findIndex(item => item === this.data.foundPlayer);
-    if (index !== -1) {
-      const newPlayer = this.data.list2[index];
-      this.data.list.push(newPlayer);
-      this.setData({
-        list: this.data.list,
-        list2:this.data.list2,
-        foundPlayer: null,
-        found: false,
-        inputValue: ''
-      });
+    //在这里写添加成员的逻辑
+    //foundPlayer这个变量为被添加的球员，定义在了data中
+    //现在只需要判断一下foundPlayer是不是为空就可以了，不为空就进行数据库的添加操作
+    //后端逻辑：如果foundPlayer已经在本队了则返回0，如果foundPlayer不在本队则返回1
+    if(this.data.foundPlayer!=""){
       wx.showToast({
         title: '添加成功',
         icon: 'success',
         duration: 2000
       });
     }
+    else{
+      wx.showToast({
+        title: '请输入想要添加的球员',
+        icon:"none",
+        duration: 2000
+      });
+    }
+    
   },
 
   /**

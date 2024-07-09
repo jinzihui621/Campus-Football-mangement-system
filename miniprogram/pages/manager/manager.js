@@ -34,7 +34,7 @@ Page({
 
   toDelete(e){
     this.setData({
-      deleteFlag: true
+      deleteFlag: !this.data.deleteFlag
 
     })
   },
@@ -51,6 +51,9 @@ Page({
           this.setData({
             "player.name":name,
             "player.tno" :tno
+          })
+          wx.showToast({
+            title: '删除成功',
           })
           // 用户点击了确定，执行删除操作
           // 这里添加你的删除逻辑

@@ -2,7 +2,7 @@
   "pages": [ 
     "pages/manager/manager",
     "pages/player/player",
-		"pages/homePage/homePage",
+    "pages/homePage/homePage",
 		"pages/board/board",
 		"pages/match/match",
 		"pages/notificationEdit/notificationEdit",

@@ -57,7 +57,8 @@ Page({
       inputValue: inputValue,
       empty: false,
       found: false,
-      filteredResults: filteredResults
+      filteredResults: filteredResults,
+      foundPlayer:filteredResults[0]
     });
   },
 
@@ -99,31 +100,32 @@ Page({
       inputValue: '',
       empty: true,
       foundPlayer: null,
-      found: false
+      found: false,
+      filteredResults: []
     });
   },
 
  
   addPlayer: function() {
-    console.log(this.data.foundPlayer);
-    const index = this.data.list2.findIndex(item => item === this.data.foundPlayer);
-    console.log(index);
-    if (index !== -1) {
-      const newPlayer = this.data.list2[index];
-      this.data.list.push(newPlayer);
-      this.setData({
-        list: this.data.list,
-        list2:this.data.list2,
-        foundPlayer: null,
-        found: false,
-        inputValue: ''
-      });
+    //在这里写添加成员的逻辑
+    //foundPlayer这个变量为被添加的球员，定义在了data中
+    //现在只需要判断一下foundPlayer是不是为空就可以了，不为空就进行数据库的添加操作
+    //后端逻辑：如果foundPlayer已经在本队了则返回0，如果foundPlayer不在本队则返回1
+    if(this.data.foundPlayer!=""){
       wx.showToast({
         title: '添加成功',
         icon: 'success',
         duration: 2000
       });
     }
+    else{
+      wx.showToast({
+        title: '请输入想要添加的球员',
+        icon:"none",
+        duration: 2000
+      });
+    }
+    
   },
 
   /**

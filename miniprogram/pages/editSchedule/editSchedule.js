@@ -8,6 +8,7 @@ Page({
   data: {
     day: " ",
     round: " ",
+    matchNumber: " ",
     starttime: " ",
     teamnameA: " ",
     teamnameB: " ",
@@ -23,7 +24,7 @@ Page({
     });
   },
 
-  saveProfile: function() {
+  saveSchedule: function() {
     // 保存用户信息到全局数据或数据库
 		app.globalData.matchInfo = this.data;
     wx.showToast({
@@ -38,15 +39,16 @@ Page({
 
   onLoad: function() {
     // 可以从全局数据或数据库加载用户信息
-    const matchInfo = app.globalData.matchInfo || {};
     this.setData({
-      day: matchInfo.day || '',
-      round: matchInfo.endtime || '',
-      starttime: matchInfo.starttime || '',
-      teamnameA: matchInfo.teamnameA || '',
-      teamnameB: matchInfo.teamnameB || '',
-      place: matchInfo.place || '',
+      day: '',
+      round: '',
+      matchNumber: '',
+      starttime: '',
+      teamnameA:  '',
+      teamnameB: '',
+      place: '',
     });
-  },
+  }
+
 
 })

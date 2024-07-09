@@ -31,7 +31,28 @@
     </view>
   </view>
   <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
-    <!--第一轮-->
+    <!--循环处理每个轮次-->
+    <swiper-item class='swiper' wx:for="{{[0, 1, 2, 3, 4, 5, 6]}}" wx:key="index" wx:for-item="swiperIndex">
+      <view class='matchMessage' wx:for="{{match}}" wx:if="{{item.round === '第' + (swiperIndex + 1) + '轮'}}">
+        <view class="raceInfo">
+          <view>{{item.day}} {{item.starttime}}</view>
+          <view class="scores">{{item.teamnameA}}   vs   {{item.teamnameB}}</view>
+          <view>{{item.place}}</view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>
+  <!--  <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+    <swiper-item class='swiper'>
+      <view class='matchMessage' wx:for="{{match}}" wx:key="index">
+        <view class="raceInfo">
+          <view>{{item.day}} {{item.starttime}}</view>
+          <view class="scores">{{item.teamnameA}}   vs   {{item.teamnameB}}</view>
+          <view >{{item.place}}</view>
+        </view>
+      </view>
+    </swiper-item>
     <swiper-item class='swiper'>
       <view class='matchMessage'>
         <view class="raceInfo">
@@ -62,38 +83,6 @@
           </view>
       </view>
     </swiper-item>
-    <!--第二轮-->
-    <swiper-item class='swiper'>
-      <view class='matchMessage'>
-        <view class="raceInfo">
-          <view>07-07 12:00～13:00</view>
-          <view class="scores">信息A   vs   信息C</view>
-          <view >北工大北操场</view>
-        </view>
-      </view>
-      <view class='matchMessage'>
-          <view class="raceInfo">
-            <view>07-07 12:00～13:00</view>
-            <view class="scores">城建A   vs   环生C</view>
-            <view >北工大南操场</view>
-          </view>
-      </view>
-      <view class='matchMessage'>
-          <view class="raceInfo">
-            <view>07-07 17:00～18:00</view>
-            <view class="scores">都柏林   vs   电控</view>
-            <view >北工大南操场</view>
-          </view>
-      </view>
-      <view class='matchMessage'>
-          <view class="raceInfo">
-            <view>07-07 17:00～18:00</view>
-            <view class="scores">艺设   vs   软件</view>
-            <view >北工大北操场</view>
-          </view>
-      </view>
-    </swiper-item>
-    <!--第三轮-->
     <swiper-item class='swiper'>
       <view class='matchMessage' bindtap="navigateToInputMessage">
         <view class="raceInfo">
@@ -124,7 +113,6 @@
           </view>
       </view>
     </swiper-item>
-    <!--第四轮-->
     <swiper-item class='swiper'>
       <view class='matchMessage'>
         <view class="raceInfo">
@@ -155,7 +143,6 @@
           </view>
       </view>
     </swiper-item>
-    <!--第五轮-->
     <swiper-item class='swiper'>
       <view class='matchMessage'>
         <view class="raceInfo">
@@ -186,7 +173,6 @@
           </view>
       </view>
     </swiper-item>
-    <!--第六轮-->
     <swiper-item class='swiper'>
       <view class='matchMessage'>
         <view class="raceInfo">
@@ -217,7 +203,6 @@
           </view>
       </view>
     </swiper-item>
-    <!--第七轮-->
     <swiper-item class='swiper'>
       <view class='matchMessage'>
         <view class="raceInfo">
@@ -249,34 +234,5 @@
       </view>
     </swiper-item>
   </swiper>
-</view>
-<!-- <view class='matchMessage'>
-      <view class="raceInfo">
-        <view>07-07 12:00～13:00</view>
-        <view class="scores">信息A   vs   信息C</view>
-        <view >北工大北操场</view>
-      </view>
-  </view>
-  <view class='matchMessage'>
-      <view class="raceInfo">
-        <view>07-07 12:00～13:00</view>
-        <view class="scores">城建A   vs   环生C</view>
-        <view >北工大南操场</view>
-      </view>
-  </view>
-  <view class='matchMessage'>
-      <view class="raceInfo">
-        <view>07-07 17:00～18:00</view>
-        <view class="scores">都柏林   vs   电控</view>
-        <view >北工大南操场</view>
-      </view>
-  </view>
-  <view class='matchMessage'>
-      <view class="raceInfo">
-        <view>07-07 17:00～18:00</view>
-        <view class="scores">艺设   vs   软件</view>
-        <view >北工大北操场</view>
-      </view>
-  </view>
 </view>-->
- 
+  

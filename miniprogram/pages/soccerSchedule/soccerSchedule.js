@@ -8,6 +8,10 @@ Page({
   data: {
     currentIndex: 0,
     matchInfo: app.globalData.matchInfo,
+    match: [{day: "08-08", round: "第1轮", matchNumber: "第四场",starttime:"12:00", teamnameA: "信息A", teamnameB: "信息B", place: "北工大北操场"},
+    {day: "08-08", round: "第1轮", matchNumber: "第二场", starttime:"12:00", teamnameA: "城建A", teamnameB: "艺设B", place: "北工大南操场"},
+    {day: "08-08", round: "第2轮", matchNumber: "第二场", starttime:"17:00", teamnameA: "软件A", teamnameB: "都柏林", place: "北工大北操场"},
+    {day: "08-08", round: "第5轮", matchNumber: "第一场", starttime:"17:00", teamnameA: "数理", teamnameB: "经管", place: "北工大南操场"}]
 
   },
 

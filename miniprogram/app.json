@@ -1,12 +1,11 @@
 {
   "pages": [ 
+    "pages/manager/manager",
+    "pages/player/player",
 		"pages/homePage/homePage",
 		"pages/board/board",
-		
 		"pages/match/match",
 		"pages/notificationEdit/notificationEdit",
-    "pages/player/player",
-    "pages/manager/manager",
     "pages/addPlayer/addPlayer",
     "pages/deletePlayer/deletePlayer",
 		"pages/chooseAccount/chooseAccount",
@@ -58,6 +57,7 @@
       }
     ]
   },
+  "cloud": true,
   "style": "v2",
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",

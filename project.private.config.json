@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/manager/manager",
+          "pathName": "pages/manager/manager",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/editSchedule/editSchedule",
           "pathName": "pages/editSchedule/editSchedule",
           "query": "",

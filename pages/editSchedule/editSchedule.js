@@ -7,8 +7,8 @@ Page({
    */
   data: {
     day: " ",
+    round: " ",
     starttime: " ",
-    endtime: " ",
     teamnameA: " ",
     teamnameB: " ",
     place: " "
@@ -41,8 +41,8 @@ Page({
     const matchInfo = app.globalData.matchInfo || {};
     this.setData({
       day: matchInfo.day || '',
+      round: matchInfo.endtime || '',
       starttime: matchInfo.starttime || '',
-      endtime: matchInfo.endtime || '',
       teamnameA: matchInfo.teamnameA || '',
       teamnameB: matchInfo.teamnameB || '',
       place: matchInfo.place || '',

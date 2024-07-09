@@ -60,8 +60,8 @@ page {
 
 .PlusAndMinus{
   display: flex;
-  margin-left:220rpx;
-  width:300rpx; 
+  margin-left:170rpx;
+  width:330rpx; 
   justify-content: space-around;
 }
 
@@ -140,7 +140,7 @@ page {
 .playerInfo{
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 90%;
   justify-content: space-around;
   border-bottom: 2rpx solid lightgreen;
   padding: 20rpx;

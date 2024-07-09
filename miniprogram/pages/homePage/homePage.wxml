@@ -1,7 +1,7 @@
 <view class="page-container">
   <!-- 轮播图部分 -->
   <swiper class="swiper-container">
-    <swiper-item><image src='/image/tabBar/shouye.png' mode="aspectFit" class="swiper-image" /></swiper-item>
+    <swiper-item><image src='/image/logo.png' mode="aspectFit" class="swiper-image" /></swiper-item>
     <swiper-item><image src='/image/tabBar/envelop.png' mode="aspectFit" class="swiper-image" /></swiper-item>
   </swiper>
 
@@ -13,12 +13,17 @@
       </view>
     </block>
     <block wx:else>
-      <block wx:for="{{matches}}" wx:key="id">
-        <view class="match">
+      <view wx:for="{{matches}}" wx:key="id" class="matchMessage">
+        <!-- <view class="match">
           <text>{{item.date}} {{item.time}} {{item.location}}</text>
           <text>{{item.teamA}} {{item.scoreA}} : {{item.scoreB}}</text>
+        </view> -->
+				<view class="raceInfo">
+          <view>{{item.day}} {{item.starttime}}～{{item.endtime}}</view>
+          <view class="scores">{{item.teamnameA}}   vs   {{item.teamnameB}}</view>
+          <view >{{item.place}}</view>
         </view>
-      </block>
+      </view>
     </block>
   </scroll-view>
 </view>

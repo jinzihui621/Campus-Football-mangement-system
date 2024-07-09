@@ -1,7 +1,40 @@
 // pages/homePage/homePage.js
 Page({
   data: {
-		matches: []  // 存储比赛信息
+		matches: [
+      {
+        day: "2023-07-07",
+        starttime: "15:00",
+        endtime: "17:00",
+        teamnameA: "Team A",
+        teamnameB: "Team B",
+        place: "Stadium 1"
+      },
+      {
+        day: "2023-07-08",
+        starttime: "16:00",
+        endtime: "18:00",
+        teamnameA: "Team C",
+        teamnameB: "Team D",
+        place: "Stadium 2"
+      },
+      {
+        day: "2023-07-09",
+        starttime: "17:00",
+        endtime: "19:00",
+        teamnameA: "Team E",
+        teamnameB: "Team F",
+        place: "Stadium 3"
+      },
+      {
+        day: "2023-07-10",
+        starttime: "18:00",
+        endtime: "20:00",
+        teamnameA: "Team G",
+        teamnameB: "Team H",
+        place: "Stadium 4"
+      }
+    ]  // 存储比赛信息
 		// 需要的信息示例如下：
 		// "id": 1,   -->比赛id
 		// "date": "2024-07-03",

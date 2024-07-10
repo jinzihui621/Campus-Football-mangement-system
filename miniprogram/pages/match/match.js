@@ -1,6 +1,5 @@
 // pages/match/match.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -138,6 +137,15 @@ Page({
   /*表格组件请求加载表格*/
   getListLoading: function(e){
     return true;
+  },
+  /*积分榜表格组件请求加载*/
+  getRankListLoading: function(e){
+
+    return true;
+  },
+  //加载积分榜数据
+  loadRank_db: function(){
+
   },
   /*筛选日期 */
   bindDateChange: function (e) {

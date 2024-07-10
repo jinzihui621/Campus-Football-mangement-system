@@ -1,8 +1,8 @@
 {
   "pages": [ 
+    "pages/homePage/homePage",
     "pages/manager/manager",
     "pages/player/player",
-    "pages/homePage/homePage",
 		"pages/board/board",
 		"pages/match/match",
 		"pages/notificationEdit/notificationEdit",

@@ -2,45 +2,33 @@
 Page({
   data: {
 		matches: [
-      {
-        day: "07-07",
+			{
+        day: "2024-07-11",
         starttime: "15:00",
         teamnameA: "信息A",
-        teamnameB: "信息B",
+        teamnameB: "城建A",
         place: "北操"
-      },
-      {
-        day: "07-08",
-        starttime: "16:00",
-        teamnameA: "数理A",
-        teamnameB: "经管B",
-        place: "南操"
-      },
-      {
-        day: "07-09",
-        starttime: "17:00",
-        teamnameA: "城建A",
-        teamnameB: "艺设A",
+			},
+			{
+        day: "2024-07-11",
+        starttime: "15:00",
+        teamnameA: "机电",
+        teamnameB: "计算机",
         place: "北操"
-      },
-      {
-        day: "07-10",
-        starttime: "18:00",
-        teamnameA: "软件A",
-        teamnameB: "电控B",
-        place: "南操"
-      }
-    ]  // 存储比赛信息
+			}
+		]  
+		// 存储比赛信息
 		// 需要的信息示例如下：
 		// "id": 1,   -->比赛id
-		// "date": "2024-07-03",
-		// "time": "12:00",
-		// "game_running_flag": "1"   -->比赛是否在进行
-		// "location": "北操",
+		// "day": "2024-07-03",
+		// "starttime": "12:00",
+		// "place": "北操",
 		// "teamA": "信息A",
 		// "teamB": "信息B",
 		// "scoreA": 3,
-		// "scoreB": 1
+		// "scoreB": 1,
+		// "game_running_flag": 1   -->比赛是否在进行
+		// "game_finished_flag": 1  -->比赛是否已经结束
   },
 
   goToMatchDetail(event) {

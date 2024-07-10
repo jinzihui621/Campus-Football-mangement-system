@@ -22,7 +22,8 @@
     "pages/matchDetail/matchDetail",
     "pages/matchDetail1/matchDetail1",
     "pages/soccerSchedule/soccerSchedule",
-    "pages/editSchedule/editSchedule"
+    "pages/editSchedule/editSchedule",
+    "pages/delMatch/delMatch"
   ],
   "window": {
     "navigationBarTextStyle": "white",

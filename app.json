@@ -1,12 +1,13 @@
 {
   "pages": [ 
+		
 		"pages/homePage/homePage",
+		"pages/manager/manager",
 		"pages/board/board",
 		
 		"pages/match/match",
 		"pages/notificationEdit/notificationEdit",
     "pages/player/player",
-    "pages/manager/manager",
     "pages/addPlayer/addPlayer",
     "pages/deletePlayer/deletePlayer",
 		"pages/chooseAccount/chooseAccount",

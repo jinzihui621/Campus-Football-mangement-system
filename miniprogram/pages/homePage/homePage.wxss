@@ -82,6 +82,14 @@
   color: #888;
 }
 
+.location-running {
+  color: #00dd00;
+}
+
+.score-running {
+  color: #00dd00;
+}
+
 .no-matches {
   border-top: 10rpx solid black;
   height: 100%;

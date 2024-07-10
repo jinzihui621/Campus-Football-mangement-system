@@ -14,26 +14,26 @@
   </swiper>
 
   <!-- 比赛信息部分 -->
-  <scroll-view class="matches-container" scroll-y="true">
+  <scroll-view class="matches-container" scroll-y="true" scroll-into-view="{{toView}}">
     <block wx:if="{{matches.length === 0}}">
       <view class="no-matches">
         <text>目前没有比赛信息</text>
       </view>
     </block>
     <block wx:else>
-      <view wx:for="{{matches}}" wx:key="id" class="matchMessage" bindtap="goToMatchDetail" data-day="{{item.day}}" data-starttime="{{item.starttime}}" data-teamnameA="{{item.teamnameA}}" data-teamnameB="{{item.teamnameB}}" data-place="{{item.place}}">
+      <view wx:for="{{matches}}" wx:key="id" class="matchMessage" id="match-{{item.id}}" bindtap="goToMatchDetail" data-id="{{item.id}}">
         <view class="raceInfo">
           <view class="date-time">{{item.day}} {{item.starttime}}</view>
           <view class="teams">
             <view class="team-name-container">
-              <text class="team-name">{{item.teamnameA}}</text>
+              <text class="team-name">{{item.teamA}}</text>
             </view>
-            <text class="vs">VS</text>
+            <text class="{{item.game_running_flag ? 'vs score-running' : 'vs'}}">{{item.game_finished_flag || item.game_running_flag ? item.scoreA + ' : ' + item.scoreB : 'VS'}}</text>
             <view class="team-name-container">
-              <text class="team-name">{{item.teamnameB}}</text>
+              <text class="team-name">{{item.teamB}}</text>
             </view>
           </view>
-          <view class="location">{{item.place}}</view>
+          <view class="{{item.game_running_flag ? 'location location-running' : 'location'}}">{{item.place}}</view>
         </view>
       </view>
     </block>

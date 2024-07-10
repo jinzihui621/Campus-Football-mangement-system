@@ -8,6 +8,27 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/player/player",
+          "pathName": "pages/player/player",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/test/test",
+          "pathName": "pages/test/test",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/manager/manager",
+          "pathName": "pages/manager/manager",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/editSchedule/editSchedule",
           "pathName": "pages/editSchedule/editSchedule",
           "query": "",

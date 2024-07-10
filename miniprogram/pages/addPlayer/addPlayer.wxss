@@ -1,0 +1,80 @@
+/* pages/deletePlayer/deletePlayer.wxss */
+
+page {
+  background-color: #f8f8f8; /* 背景颜色 */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.search{
+  display: flex;
+  align-items: center;
+  border-radius: 15rpx;
+  border: 2rpx solid lightgray;
+  margin-top: 30rpx;
+}
+
+.searchInput{
+  width: 500rpx;
+  height: 70rpx;
+}
+
+.imagePattern{
+  margin-top: 3rpx;
+  margin-left: 5rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.searchResults{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 700rpx;
+  padding: 15rpx;
+  border-radius: 30rpx;
+  background-color: rgb(154, 230, 154);
+  margin-top: 30rpx;
+}
+
+.playerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  color:black;
+  font-size: 15px;
+  margin-bottom: 10px;
+  border-radius: 10rpx;
+  border: 2rpx black solid;
+}
+
+
+
+.nameAndSno{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.infoItem{
+  padding: 10rpx;
+}
+
+.addButton {
+  margin-top: 50rpx;
+  width: 100%; /* 按钮宽度填满容器 */
+  background-color:rgb(55, 139, 55);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+}

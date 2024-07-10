@@ -1,0 +1,53 @@
+<!--pages/list/list.wxml-->
+
+<view class="card">
+  <!-- 第一排按钮 -->
+  <view class = "buttonContainer1">
+    <view class = "imageButton" >
+      <image src="/image/notification.png" mode="aspectFit" bindtap = "gotoNotification"/>
+      <text>公告编辑</text>
+    </view>
+    <view class = "imageButton">
+      <image class = "boardPattern" src="/image/board.png" />
+      <text>战术板</text>
+    </view>
+  </view>
+  <!-- 第二排按钮 -->
+  <view class = "buttonContainer2">
+    <view class = "imageButton">
+      <image  src="/image/edit.png" mode="aspectFit"/>
+      <text>信息完善</text>
+    </view>
+    <view class = "imageButton">
+      <image class = "appealPattern" src="/image/appeal.png" />
+      <text>申诉通道</text>
+    </view>
+  </view>
+  
+  <view class = "manageMember">
+    <!-- 更新球员组件 -->
+    <view class = "updateMember">
+      <view>
+        <text>球队成员</text>
+      </view>
+      <view class = "PlusAndMinus">
+        <view class = "invitation" bindtap = "toPlus">邀请球员</view>
+        <view class = "delete" bindtap = "toDelete">删除球员</view>
+      </view>
+    </view>
+    
+    <view class = "teamMemberContainer">
+      <scroll-view class = "teamMember" type = "list" scroll-y enable-flex>
+        <view class = "playerInfo" wx:for="{{member}}" wx:key="index">
+          <view>{{item.name}}</view><view>球员号:{{item.tno}}</view>
+          <view>进球:{{item.score}}</view><view>红牌:{{item.red}}</view>
+          <view>黄牌:{{item.yellow}}</view>
+          <image wx:if="{{deleteFlag}}"src="/image/minus.png" class = "operationPattern" bindtap = "deletePlayer" data-info1 = "{{item.name}}" data-info2 = "{{item.tno}}"/>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+ 
+
+

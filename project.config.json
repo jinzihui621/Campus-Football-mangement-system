@@ -25,6 +25,9 @@
     "tabSize": 2
   },
   "appid": "wxb488ca86deb6c95e",
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
   "simulatorPluginLibVersion": {},
-  "projectname": "%E6%A0%A1%E5%9B%AD%E8%B6%B3%E7%90%83%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"
+  "projectname": "%E6%A0%A1%E5%9B%AD%E8%B6%B3%E7%90%83%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F",
+  "srcMiniprogramRoot": "miniprogram/"
 }

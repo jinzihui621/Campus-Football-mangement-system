@@ -1,0 +1,32 @@
+<!--pages/addPlayer/addPlayer.wxml-->
+
+<view class = "card">
+  <!-- 一般情况下的搜索框显示 -->
+  <view  class='search'>
+    <image class = " imagePattern " src = '/image/search.png' bindtap = "searchAction"></image>
+    <input class = searchInput type = 'text' value = "{{inputValue}}" placeholder = '搜索球员' placeholder-class = "center" confirm-type = 'search' bindconfirm="searchProcess" bindinput="inputChange"></input>
+    <image hidden="{{empty}}" class="imagePattern" src="/image/cancel.png" bindtap="clearSearch"/>
+  </view>
+
+ <!-- 实时搜索结果显示 -->
+ <scroll-view class="searchResults" scroll-y="true" enableFlex = "true">
+    <view class="playerInfo" wx:for="{{filteredResults}}" wx:key="index"  bindtap="selectPlayer" data-player="{{item}}" data-index = "{{index}}"style="background-color: {{selectedIndex === index ? '#aaf' : '#fff'}};">
+      <view class = "nameAndSno">
+        <text class="infoItem">姓名:{{item.name}}</text>
+        <text class="infoItem">学号:{{item.sno}}</text>
+      </view>
+      <view class = "nameAndSno">
+        <text class="infoItem">得分:{{item.score}}</text>
+        <text class="infoItem">红牌:{{item.red}}</text>
+        <text class="infoItem">黄牌:{{item.yellow}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <button class = "addButton" bindtap="addPlayer">添加球员</button>
+</view>
+
+
+
+
+

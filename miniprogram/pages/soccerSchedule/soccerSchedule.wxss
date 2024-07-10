@@ -1,0 +1,106 @@
+.container {
+  height: 528px;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0; /* 确保没有内边距 */
+  margin: 0; /* 确保没有外边距 */
+}
+
+.title {
+  width: 100%;
+  height: 88rpx;
+  margin: 0 0px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid #000000;
+}
+
+.title-sel {
+  color: #24272c;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ 
+.title-sel  .line-style{
+  background: #fff;
+  height: 6rpx;
+  width: 40rpx;
+  position: relative;
+  margin-top: 10rpx;
+}
+
+.title-sel-selected{
+  color: #0BD520;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title-sel-selected .line-style{
+  background: #0BD520;
+  height: 6rpx;
+  width: 90rpx;
+  position: relative;
+  margin-top: 10rpx;
+}
+
+.matchMessage {  
+  width: 100%; /* 根据屏幕宽度设置或调整为所需大小 */  
+  height: 200rpx; /* 容器高度 */  
+  display: flex; /* 使用Flexbox布局 */  
+  justify-content: space-around; /* 子元素在主轴上均匀分布 */  
+  align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
+  flex-direction: row; /* 明确设置Flex方向为行（默认） */  
+  margin-top: 30rpx;
+  border: 2px solid #00dd00;
+}  
+
+.raceInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 8pt;
+}
+
+.scores{
+  font-size: 25pt;
+  font-weight: bolder;
+}
+
+.swiper {
+  width: 100%;
+  height: 100rpx;
+  flex: 1;
+  overflow: scroll;
+  margin: 0 auto;
+}
+
+.container1 {
+  height: 40px;
+  width:100%;
+  display: flex;
+  padding: 0; /* 确保没有内边距 */
+  margin: 0; /* 确保没有外边距 */
+}
+
+.button1 {
+  margin: 10px;
+  padding: 0px 0px;
+  font-size: 16px;
+  background: #0BD520;
+}
+
+.button2 {
+  margin: 10px;
+  padding: 0px 0px;
+  font-size: 16px;
+  background: #FF0000;
+}

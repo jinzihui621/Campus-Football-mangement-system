@@ -24,12 +24,14 @@ App({
         nickname: '爱踢球的工大人'
       },
       userRole: '球员',
-      loginFlag: 1
+      loginFlag: 1,
+      currentPage: 'page4' // 默认页面
     }
   },
   globalData: {
 		userInfo: null,
 		userRole: null,
-		loginFlag: null
+    loginFlag: null,
+    currentPage: null // 默认页面
   }
 })

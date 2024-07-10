@@ -1,6 +1,14 @@
 <view class="page-container">
   <!-- 轮播图部分 -->
-  <swiper class="swiper-container">
+  <swiper 
+  class="swiper-container" 
+  indicator-dots="true" 
+  indicator-color= "#00dd00"
+  indicator-active-color="#000"
+	autoplay="true" 
+  interval="3000" 
+  duration="500"
+	>
     <swiper-item><image src='/image/logo.png' mode="aspectFit" class="swiper-image" /></swiper-item>
     <swiper-item><image src='/image/tabBar/envelop.png' mode="aspectFit" class="swiper-image" /></swiper-item>
   </swiper>

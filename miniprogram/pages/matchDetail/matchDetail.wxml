@@ -2,10 +2,10 @@
   <view class="info">
     <view class="team">
       <view class="team-logo"></view>
-      <view class="team-name">信息A</view>
+      <view class="team-name">{{teamnameA}}</view>
     </view>
     <view class="match-details">
-      <view class="date-time">7月3日 12:00 北操</view>
+      <view class="date-time">{{matchDay}} {{starttime}} {{place}}</view>
       <view class="score">
         <text class="team-a-score">3</text>
         <text class="colon">:</text>
@@ -15,7 +15,7 @@
     </view>
     <view class="team">
       <view class="team-logo"></view>
-      <view class="team-name">信息B</view>
+      <view class="team-name">{{teamnameB}}</view>
     </view>
   </view>
 </view>

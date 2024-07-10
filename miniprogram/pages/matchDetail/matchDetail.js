@@ -20,7 +20,12 @@ Page({
       { time: "63'", description: "崔朗清进球", team: "teamB" },
       { time: "64'", description: "徐鑫进球", team: "teamA" },
       { time: "64'", description: "章鸿亮进球", team: "teamB" }
-    ]
+    ],
+    matchDay: "",
+    starttime: "",
+    teamnameA: "",
+    teamnameB: "",
+    place: ""
 
   },
 
@@ -28,7 +33,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    const { day, starttime, teamnameA, teamnameB, place } = options;
+    this.setData({
+      matchDay: day,
+      starttime: starttime,
+      teamnameA: teamnameA,
+      teamnameB: teamnameB,
+      place: place
+    });
   },
 
   /**

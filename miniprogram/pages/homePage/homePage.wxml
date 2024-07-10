@@ -13,13 +13,13 @@
       </view>
     </block>
     <block wx:else>
-      <view wx:for="{{matches}}" wx:key="id" class="matchMessage">
+      <view wx:for="{{matches}}" wx:key="id" class="matchMessage" bindtap="goToMatchDetail"  data-day="{{item.day}}" data-starttime="{{item.starttime}}" data-teamnameA="{{item.teamnameA}}" data-teamnameB="{{item.teamnameB}}" data-place="{{item.place}}">
         <!-- <view class="match">
           <text>{{item.date}} {{item.time}} {{item.location}}</text>
           <text>{{item.teamA}} {{item.scoreA}} : {{item.scoreB}}</text>
         </view> -->
 				<view class="raceInfo">
-          <view>{{item.day}} {{item.starttime}}～{{item.endtime}}</view>
+          <view>{{item.day}} {{item.starttime}}</view>
           <view class="scores">{{item.teamnameA}}   vs   {{item.teamnameB}}</view>
           <view >{{item.place}}</view>
         </view>

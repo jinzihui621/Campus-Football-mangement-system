@@ -3,36 +3,32 @@ Page({
   data: {
 		matches: [
       {
-        day: "2023-07-07",
+        day: "07-07",
         starttime: "15:00",
-        endtime: "17:00",
-        teamnameA: "Team A",
-        teamnameB: "Team B",
-        place: "Stadium 1"
+        teamnameA: "信息A",
+        teamnameB: "信息B",
+        place: "北操"
       },
       {
-        day: "2023-07-08",
+        day: "07-08",
         starttime: "16:00",
-        endtime: "18:00",
-        teamnameA: "Team C",
-        teamnameB: "Team D",
-        place: "Stadium 2"
+        teamnameA: "数理A",
+        teamnameB: "经管B",
+        place: "南操"
       },
       {
-        day: "2023-07-09",
+        day: "07-09",
         starttime: "17:00",
-        endtime: "19:00",
-        teamnameA: "Team E",
-        teamnameB: "Team F",
-        place: "Stadium 3"
+        teamnameA: "城建A",
+        teamnameB: "艺设A",
+        place: "北操"
       },
       {
-        day: "2023-07-10",
+        day: "07-10",
         starttime: "18:00",
-        endtime: "20:00",
-        teamnameA: "Team G",
-        teamnameB: "Team H",
-        place: "Stadium 4"
+        teamnameA: "软件A",
+        teamnameB: "电控B",
+        place: "南操"
       }
     ]  // 存储比赛信息
 		// 需要的信息示例如下：
@@ -45,6 +41,13 @@ Page({
 		// "teamB": "信息B",
 		// "scoreA": 3,
 		// "scoreB": 1
+  },
+
+  goToMatchDetail(event) {
+    const { day, starttime, teamnamea, teamnameb, place } = event.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/pages/matchDetail/matchDetail?day=${day}&starttime=${starttime}&teamnameA=${teamnamea}&teamnameB=${teamnameb}&place=${place}`
+    });
   },
 
   onLoad(options) {

@@ -1,0 +1,554 @@
+/* eventOrganizerManagement-------------------------------------------------------- */
+.centered-button { 
+  display: block;         /* 使 navigator 像块级元素一样显示 */ 
+  margin: 10px auto;     /* 垂直方向不居中，水平方向居中，并给上下各100px的空间使其看起来居中 */ 
+  text-align: center;     /* 文本居中 */ 
+  background-color: white; /* 背景颜色 */ 
+  color: #34CE45;           /* 文字颜色 */ 
+  font-size: 16px;        /* 字体大小 */ 
+  width: 60%;             /* 按钮宽度为容器宽度的60% */ 
+} 
+
+.custom-border-box { 
+  width: 90%; /* 盒子宽度占页面宽的80% */ 
+  height: 390px; /* 盒子高度 */ 
+  margin: 10px auto; /* 上下间距20px, 水平居中 */ 
+  border: 2px solid #068E15; /* 边框宽度为2px，样式为实线，颜色为蓝色 */ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  background-color: #EFEFEF; 
+} 
+ 
+.scroll-view { 
+  width: 100%; /* scroll-view 宽度填满父容器 */ 
+  height: 100%; /* scroll-view 高度填满父容器 */ 
+  display: block; /* 确保滚动视图是块级元素 */ 
+} 
+ 
+.scroll-item { 
+  height: 150px; /* 每个滚动项目的高度 */ 
+  background-color: #f0f0f0; /* 背景颜色 */ 
+  margin: 5px 5px; /* 间距 */ 
+  text-align: center; /* 文本居中 */ 
+  line-height: 100px; /* 行高使文字垂直居中 */ 
+  color: #333; /* 文本颜色 */ 
+  border: 2px solid #000000;
+} 
+ 
+.text-box {
+  display: block; /* 将文本框设置为块级元素 */
+  width: 100%; /* 文本框宽度调整为80% */
+  margin: 0px auto; /* 文本框居中，并设置上下间距 */
+  padding: 2px; /* 内边距 */
+  background-color: #068E15; /* 文本框背景颜色 */
+  color: #ffffff; /* 文本框文本颜色为白色，确保在黑色背景上可见 */
+  line-height: 1.2; /* 设置行高，以控制文本高度 */
+  text-align: left; /* 文本左对齐 */
+}
+
+.icon-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  height: 60px;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+  height: 60px;
+  width: 60px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  position: absolute;
+}
+
+/* player-------------------------------------------------------- */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  height: 100vh;
+}
+
+.notification{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 88%;
+  height: 25%;
+  margin:30rpx;
+  border-radius: 10rpx;
+  border: 2rpx lightgray solid;
+}
+
+.headline1{
+  display: flex;
+  align-items: center;
+  width: 640rpx;
+  height: 50rpx;
+  padding: 15rpx;
+  border-radius: 10rpx;
+  border-bottom: 2rpx solid lightgray;
+  background-color: #068E15;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  padding: 15rpx;
+  width: 88%;
+  height: 244rpx;
+  padding:15rpx;
+}
+
+.messageInfo{
+  padding:8rpx;
+  margin-bottom: 15rpx;
+  border-radius: 10rpx;
+  border: lightgreen solid 2rpx;
+}
+
+.schedule{
+  display: flex;
+  align-items: center;
+  width: 60%;
+  height: 60rpx;
+  border-radius: 10rpx;
+  border: lightgray 2rpx solid;
+}
+
+.schedulePattern{
+  margin-left:25%;
+  height: 60rpx;
+  width: 60rpx;
+}
+
+.register{
+  width: 88%;
+  height: 60%;
+  margin-top: 30rpx;
+  border-radius: 10rpx;
+  border: lightgray 2rpx solid;
+  background-color:#068E15;
+}
+
+.headline2{
+  height: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: lightgray 2rpx solid;
+  padding: 15rpx;
+}
+
+.gameContainer{
+  height: 680rpx;
+  width: 100%;
+}
+
+.game{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 580rpx;
+
+}
+
+.timeAndPlace{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 60%;
+  padding:5rpx;
+  border-bottom: solid lightgreen 2rpx;
+}
+
+.gameInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  justify-content: space-around;
+  border: lightgray solid 2rpx;
+  border-radius: 10rpx;
+  padding:15rpx;
+  margin:20rpx;
+  background-color: white;
+}
+
+.teamInfo{
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  padding:5rpx;
+}
+
+
+/* manager-------------------------------------------------------- */
+/* 卡片样式 */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  height: 100vh;
+}
+
+/* 按钮样式 */
+.button {
+  background-color: #007AFF;
+  color: white;
+  border-radius: 20rpx;
+  text-align: center;
+}
+
+.btn-hover{
+  background-color: #005ecb;   
+}
+
+.buttonContainer1{
+  display: flex;
+  width: 650rpx;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 30rpx;
+}
+.buttonContainer2{
+  display: flex;
+  width: 650rpx;
+  justify-content: space-around;
+  margin-top: 25rpx;
+}
+
+.manageMember{
+  margin-top: 25rpx;
+  display: flex;
+  flex-direction: column;
+  height: 950rpx;
+  width: 90%;
+  border-radius: 10rpx;
+  border: 2rpx solid lightgray;
+  background-color: rgb(50, 150, 50);
+}
+.updateMember{
+  display: flex;
+  align-items: center;
+  height: 50rpx;
+  padding: 15rpx;
+  border-bottom: 2rpx solid lightgray;
+}
+
+.PlusAndMinus{
+  display: flex;
+  margin-left:170rpx;
+  width:330rpx; 
+  justify-content: space-around;
+}
+
+.invitation{
+  padding:5rpx;
+  border: black solid 2rpx;
+  border-radius: 10rpx;
+}
+
+.delete{
+  padding:5rpx;
+  border: black solid 2rpx;
+  border-radius: 10rpx;
+}
+
+
+.teamMemberContainer{
+  padding: 15rpx;
+}
+.teamMember{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 840rpx;
+  border-radius: 10rpx;
+  border: lightgrey solid 2rpx;
+  background-color: white;
+}
+/* 列表样式 */
+.list-item {
+  border-bottom: 1px solid #eee;
+  line-height: 60rpx;
+  font-size: 28rpx;
+}
+
+/* 输入框样式 */
+.input {
+  border: 1px solid #ccc;
+  border-radius: 5rpx;
+  padding: 10rpx;
+  background-color: #fff;
+}
+.imageButton {
+  display: flex;
+  height:120rpx;
+  width: 150rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+/*图片样式*/
+.operationPattern {
+  width: 30rpx;
+  height: 30rpx;
+}
+.boardPattern{
+  height: 90rpx;
+  width: 120rpx;
+  margin-top: 10rpx;
+}
+
+.appealPattern{
+  margin-top: 5rpx;
+  height: 70rpx;
+  width: 120rpx;
+}
+
+.smallButton {
+  background-color: white; /* 设置背景颜色为白色 */
+  border: none; /* 移除边框 */
+  outline: none; /* 移除轮廓 */
+  box-shadow: none; /* 移除阴影 */
+}
+
+.playerInfo{
+  display: flex;
+  align-items: center;
+  width: 90%;
+  justify-content: space-around;
+  border-bottom: 2rpx solid lightgreen;
+  padding: 20rpx;
+}
+
+.smallButton.wx-miniprogram-button-hover {
+  background-color: white; /* 禁用点击时的背景色变化 */
+}
+
+
+
+
+
+/* scoreAndCardslnput-------------------------------------------------------- */
+
+.show-container {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+ 
+.title {
+  width: 100%;
+  height: 88rpx;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+ 
+.title-sel {
+  color: #24272c;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ 
+.title-sel  .line-style{
+  background: #fff;
+  height: 6rpx;
+  width: 40rpx;
+  position: relative;
+  margin-top: 10rpx;
+}
+ 
+.title-sel-selected{
+  color: #0BD520;
+  font-size: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title-sel-selected .line-style{
+  background: #0BD520;
+  height: 6rpx;
+  width: 90rpx;
+  position: relative;
+  margin-top: 10rpx;
+}
+ 
+.swiper {
+  width: 100%;
+  height: 800rpx;
+  flex: 1;
+  overflow: scroll;
+  margin: 0 auto;
+}
+.record-item {
+  margin-top: 10rpx;
+  background-color: white;
+  padding-bottom: 5rpx;
+  padding-top: 5rpx;
+  font-size: 30rpx;
+}
+ 
+/* .name{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #eee;
+  padding: 2vh;
+  border-radius: 10rpx
+} */
+.input{
+  width: 100%;
+  height: 800rpx;
+}
+.circleA{  
+  width: 150rpx; /* 圆的直径 */  
+  height: 150rpx; /* 圆的直径 */  
+  background-color: #00CAFF; /* 圆的背景颜色 */  
+  border-radius: 50%; /* 将正方形变成圆 */  
+  display: flex; /* 如果你想在圆内居中显示文本 */  
+  justify-content: center; /* 水平居中文本 */  
+  align-items: center; /* 垂直居中文本 */  
+  color:black; /* 文本颜色 */  
+}  
+.scoreShow {  
+  width: 750rpx; /* 根据屏幕宽度设置或调整为所需大小 */  
+  height: 200rpx; /* 容器高度 */  
+  display: flex; /* 使用Flexbox布局 */  
+  justify-content: space-around; /* 子元素在主轴上均匀分布 */  
+  align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
+  flex-direction: row; /* 明确设置Flex方向为行（默认） */  
+}  
+
+.circleB{  
+  width: 150rpx; /* 圆的直径 */  
+  height: 150rpx; /* 圆的直径 */  
+  background-color: #FC6363; /* 圆的背景颜色 */  
+  border-radius: 50%; /* 将正方形变成圆 */  
+  display: flex; /* 如果你想在圆内居中显示文本 */  
+  justify-content: center; /* 水平居中文本 */  
+  align-items: center; /* 垂直居中文本 */  
+  color:black; /* 文本颜色 */  
+}
+.raceInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 15pt;
+}
+
+.teamName{
+  font-size: 15pt;
+}
+.scores{
+  font-size: 25pt;
+  font-weight: bolder;
+}
+.tableBar{
+  width: 750rpx;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.tableBar >view{
+  width: 180rpx;
+  height: 80rpx;
+  border: 1rpx solid grey;
+  background-color: #DDE6FE;
+  font-size: 15pt;
+  font-weight:bold;
+  line-height: 80rpx;
+  text-align: center;
+  align-items: center;
+}
+.player{
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.player view{
+  width: 180rpx;
+  height: 100rpx;
+  border: 1rpx solid grey;
+  font-size: 15pt;
+  font-weight:bold;
+  line-height: 80rpx;
+  text-align: center;
+  align-items: center;
+}
+.goal{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.yellowCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.redCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.item-value{
+  width:60rpx;
+  height: 100rpx;
+}
+.add{
+  width: 60rpx;
+  height: 90rpx;
+  text-align: center;
+}
+.minus{
+  width:60rpx;
+  height: 90rpx;
+  text-align: center;
+}
+button.start{
+  width: 750rpx;
+  height: 80rpx;
+}
+button.end{
+  width: 750rpx;
+  height: 80rpx;
+}
+.goal button{
+  color: #24272c;
+}
+.yellowCard button{
+  background-color: #FFED00;
+  color: #24272c;
+}
+.redCard button{
+  background-color: #FF0000;
+  color: #24272c;
+}

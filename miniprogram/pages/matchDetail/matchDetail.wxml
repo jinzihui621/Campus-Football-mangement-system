@@ -7,11 +7,11 @@
     <view class="match-details">
       <view class="date-time">{{matchDay}} {{starttime}} {{place}}</view>
       <view class="score">
-        <text class="team-a-score">3</text>
+        <text class="team-a-score">{{teamscoreA}}</text>
         <text class="colon">:</text>
-        <text class="team-b-score">1</text>
+        <text class="team-b-score">{{teamscoreB}}</text>
       </view>
-      <view class="round">工超第3轮</view>
+      <view class="round">工超第{{round}}轮</view>
     </view>
     <view class="team">
       <view class="team-logo"></view>

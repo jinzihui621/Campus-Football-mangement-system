@@ -1,0 +1,40 @@
+<view class="container">
+  <view class="header">
+    <view class="team">
+      <image class="team-logo" src="path/to/team-a-logo.png"></image>
+      <text class="team-name">阿根廷</text>
+    </view>
+    <view class="score-info">
+      <text class="date">07-10 08:00</text>
+      <text class="score">2 - 0</text>
+      <text class="tournament">美洲杯 半决赛</text>
+    </view>
+    <view class="team">
+      <image class="team-logo" src="path/to/team-b-logo.png"></image>
+      <text class="team-name">加拿大</text>
+    </view>
+  </view>
+
+  <view class="timeline">
+    <block wx:for="{{events}}" wx:key="time">
+      <view class="event" wx:if="{{item.team === 'teamA'}}">
+        <view class="details-left">
+          <text>{{item.description}}</text>
+        </view>
+        <view class="time-line">
+          <view class="circle"></view>
+        </view>
+        <view class="time">{{item.time}}</view>
+      </view>
+      <view class="event" wx:if="{{item.team === 'teamB'}}">
+        <view class="time">{{item.time}}</view>
+        <view class="time-line">
+          <view class="circle"></view>
+        </view>
+        <view class="details-right">
+          <text>{{item.description}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

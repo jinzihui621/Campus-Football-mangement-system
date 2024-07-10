@@ -1,0 +1,103 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20rpx 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-logo {
+  width: 60rpx;
+  height: 40rpx;
+}
+
+.team-name {
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.score-info {
+  text-align: center;
+}
+
+.date {
+  font-size: 22rpx;
+  color: #888;
+}
+
+.score {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin: 10rpx 0;
+}
+
+.tournament {
+  font-size: 22rpx;
+  color: #888;
+}
+
+.timeline {
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20rpx;
+  justify-content: space-between;
+}
+
+.time {
+  width: 60rpx;
+  font-size: 26rpx;
+  color: #00b43c;
+  font-weight: bold;
+  text-align: center;
+}
+
+.details-left, .details-right {
+  font-size: 26rpx;
+  width: 40%;
+}
+
+.details-left {
+  text-align: right;
+}
+
+.details-right {
+  text-align: left;
+}
+
+.time-line {
+  width: 2rpx;
+  background-color: #00b43c;
+  height: 60rpx;
+  position: relative;
+}
+
+.circle {
+  width: 10rpx;
+  height: 10rpx;
+  background-color: #00b43c;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: -4rpx;
+  transform: translateY(-50%);
+}

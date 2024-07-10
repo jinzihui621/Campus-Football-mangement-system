@@ -23,7 +23,8 @@
     "pages/matchDetail1/matchDetail1",
     "pages/soccerSchedule/soccerSchedule",
     "pages/editSchedule/editSchedule",
-    "pages/delMatch/delMatch"
+    "pages/delMatch/delMatch",
+    "pages/test/test"
   ],
   "window": {
     "navigationBarTextStyle": "white",

@@ -63,31 +63,55 @@
   margin-top: 10px;
   font-size: 24px;
 }
-/* 页面样式 */
-.container1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px;
-}
 
-.event-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 45%;
+
+.timeline {
+  margin-top: 5rpx;
+  height: 800rpx; /* 设置一个高度，以便于scroll-view显示滚动条 */
+  overflow: scroll;
+  border: 2px solid #000000;
 }
 
 .event {
-  margin: 5px 0;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10rpx;
 }
 
-.divider {
-  width: 5px;
-  background-color: black;
-  height: 360px;
-  margin: 0 10px;
+.time-right {
+  width: 380rpx;
+  font-size: 32rpx;
+  color: #00b43c;
+  font-weight: bold;
+  text-align: right;
+}
+
+.time-left{
+  width: 370rpx;
+  font-size: 32rpx;
+  color: #00b43c;
+  font-weight: bold;
+}
+
+.details-left {
+  margin-right: 20rpx;
+  font-size: 40rpx;
+  text-align: right;
+  flex-grow: 1;
 
 }
+
+.details-right {
+  margin-left: 20rpx;
+  font-size: 40rpx;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.time-line {
+  width: 2rpx;
+  height: 60rpx;
+  background-color: #00b43c;
+}
+

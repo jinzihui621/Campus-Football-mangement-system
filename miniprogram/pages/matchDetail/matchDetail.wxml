@@ -19,28 +19,21 @@
     </view>
   </view>
 </view>
-<view class="container1">
-  <view class="event-column">
-    <view class="event">
-      <text>35' 进球 金子辉</text>
-    </view>
-    <view class="event">
-      <text>45' 黄牌 金子辉</text>
-    </view>
-    <view class="event">
-      <text>55' 乌龙球 金子辉</text>
-    </view>
-  </view>
-  <view class="divider">1</view>
-  <view class="event-column">
-    <view class="event">
-      <text>35' 进球 金子辉</text>
-    </view>
-    <view class="event">
-      <text>45' 黄牌 金子辉</text>
-    </view>
-    <view class="event">
-      <text>55' 乌龙球 金子辉</text>
-    </view>
-  </view>
-</view>
+<scroll-view class="timeline" scroll-y="true">
+    <block wx:for="{{events}}" wx:key="time">
+      <view class="event" wx:if="{{item.team === 'teamA'}}">
+        <view class="details-left">
+          <text>{{item.description}}</text>
+        </view>
+        <view class="time-line"></view>
+        <view class="time-left">{{item.time}}</view>
+      </view>
+      <view class="event" wx:if="{{item.team === 'teamB'}}">
+        <view class="time-right">{{item.time}}</view>
+        <view class="time-line"></view>
+        <view class="details-right">
+          <text>{{item.description}}</text>
+        </view>
+      </view>
+    </block>
+</scroll-view>

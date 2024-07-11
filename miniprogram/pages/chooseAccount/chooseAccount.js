@@ -28,13 +28,29 @@ Page({
 
   onAccountClick: function(event) {
     const role = event.currentTarget.dataset.role;
+    const userPermissions = app.globalData.userPermissions;
 
-    // 更新全局 flag
-    app.globalData.userRole = role;
+    if (userPermissions.includes(role)) {
+      // 更新全局 userRole
+      app.globalData.userRole = role;
 
-    // 跳转到“我的”页面
-    wx.switchTab({
-      url: '/pages/me/me'
-    });
+      wx.showToast({
+        title: '跳转成功',
+        icon: 'success',
+        duration: 1000
+      });
+      // 跳转到“我的”页面
+			setTimeout(() => {
+				wx.switchTab({
+					url: '/pages/me/me'
+				});
+			}, 1000);
+    } else {
+      wx.showToast({
+        title: '没有权限',
+        icon: 'none',
+        duration: 1000
+      });
+    }
   }
 });

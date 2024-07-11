@@ -26,7 +26,7 @@ App({
   },
   globalData: {
 		userInfo: null,
-		userRole: null,
+		userRole: null,  // 可取值："球员", "裁判", "赛事组织", "球队管理"
     loginFlag: null,
     currentPage: null // 默认页面
   }

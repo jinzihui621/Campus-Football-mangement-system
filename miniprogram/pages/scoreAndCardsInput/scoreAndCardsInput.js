@@ -12,12 +12,12 @@ Page({
     scoreB:0,
     matchTime:'07-07 00:00',
     match:'xx杯',
-    race:'xx-xx',
+    race:"",
     turn:1,
     teamAid:1,
     teamBid:2,
     playerA:[
-      {teamID:1,playerCode:1,score:0,yellowCard:0,redCard:0},
+      {teamID:"id1",playerCode:1,score:0,yellowCard:0,redCard:0},
       {teamID:1,playerCode:2,score:0,yellowCard:0,redCard:0},
       {teamID:1,playerCode:3,score:0,yellowCard:0,redCard:0},
       {teamID:1,playerCode:4,score:0,yellowCard:0,redCard:0},
@@ -30,7 +30,7 @@ Page({
       {teamID:1,playerCode:11,score:0,yellowCard:0,redCard:0}
     ],
     playerB:[
-      {teamID:2,playerCode:1,score:0,yellowCard:0,redCard:0},
+      {teamID:"id2",playerCode:1,score:0,yellowCard:0,redCard:0},
       {teamID:2,playerCode:2,score:0,yellowCard:0,redCard:0},
       {teamID:2,playerCode:3,score:0,yellowCard:0,redCard:0},
       {teamID:2,playerCode:4,score:0,yellowCard:0,redCard:0},
@@ -68,9 +68,16 @@ Page({
     const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
     if (index !== -1) {  
       const newPlayers = [...players];  
-      if (newPlayers[index].score > 0) { // 避免得分为负  
+      if (newPlayers[index].score > 0) { // 避免得分为负
+        this.btnGoalMinus_DB(playerCode,teamID,this.data.race);
         newPlayers[index].score--;  
-      }  
+      }else{
+        wx.showToast({
+          title: '不能继续减少',
+          icon:'none',
+          duration:1000
+        })
+      }
       this.setData({  
         [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
       });  
@@ -82,7 +89,8 @@ Page({
     const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
     const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
     if (index !== -1) {  
-      const newPlayers = [...players];  
+      const newPlayers = [...players];
+      this.btnGoalAdd_DB(playerCode,teamID,this.data.race);
       newPlayers[index].score++;
       this.setData({  
         [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
@@ -96,8 +104,17 @@ Page({
     const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
     const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
     if (index !== -1) {  
-      const newPlayers = [...players];  
-      newPlayers[index].yellowCard++;  
+      const newPlayers = [...players];
+      if(players[index].yellowCard < 2){
+        this.btnYellowAdd_DB(playerCode,teamID)
+        newPlayers[index].yellowCard++;
+      }else{
+        wx.showToast({
+          title: '单个队员黄牌数达上限',
+          icon:"none",
+          duration:1000
+        })
+      }
       this.setData({  
         [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
       });  
@@ -109,11 +126,18 @@ Page({
     const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
     const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
     if (index !== -1 && players[index].yellowCard > 0) { // 确保黄牌数量大于0  
-      const newPlayers = [...players];  
+      const newPlayers = [...players];
+      this.btnYellowMinus_DB(playerCode,teamID)
       newPlayers[index].yellowCard--;  
       this.setData({  
         [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
       });  
+    }else if(players[index].yellowCard <= 0){
+      wx.showToast({
+        title: '不能继续减少',
+        icon:"none",
+        duration:1000
+      })
     }
   },
   /*点击红牌+时的函数*/
@@ -122,8 +146,18 @@ Page({
     const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
     const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
     if (index !== -1) {  
-      const newPlayers = [...players];  
-      newPlayers[index].redCard++;  
+      const newPlayers = [...players];
+      if(players[index].redCard < 1){
+        this.btnRedAdd_DB(playerCode,teamID)
+        newPlayers[index].redCard++;  
+      }
+      else{
+        wx.showToast({
+          title: '单个队员红牌数已达上限',
+          icon:'none',
+          duration:1000
+        })
+      }
       this.setData({  
         [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
       });  
@@ -135,11 +169,18 @@ Page({
     const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
     const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
     if (index !== -1 && players[index].redCard > 0) { // 确保黄牌数量大于0  
-      const newPlayers = [...players];  
+      const newPlayers = [...players];
+      this.btnRedMinus_DB(playerCode,teamID)
       newPlayers[index].redCard--;  
       this.setData({  
         [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
       });  
+    }else if(players[index].redCard <= 0){
+      wx.showToast({
+        title: '不能继续减少',
+        icon:"none",
+        duration:1000
+      })
     }
   },
   // 获取当前用户的 OpenID
@@ -165,11 +206,364 @@ Page({
       scoreB:scores.team2
     })
   },
+  //裁判员记录进球
+  btnGoalAdd_DB: function(player_num,team_id,match_id) {
+    //球员积分表指定球员加分
+    console.log(player_num)
+    console.log(team_id)
+    console.log(match_id)
+    db.collection('player_score_list').where({
+      player_num: player_num.toString(),
+      team_id: team_id
+    }).update({
+      data: {
+        score:db.command.inc(1)
+      },
+      success(res) {
+        console("player_score_list加分成功")
+      },
+      fail(err) {
+        console("player_score_list加分失败")
+      }
+    })
+    //进球球员球队
+    db.collection('team_match_participate').where({
+      match_id : match_id,
+      team_id : team_id
+    }).update({
+      data: {
+        goal:db.command.inc(1)
+      },
+      success(res) {
+        console("team_match_participate加分成功")
+      },
+      fail(err) {
+        console("team_match_participate加分失败")
+      }
+    })
+    //球队表进球数加一
+    db.collection('team').where({
+      team_id : team_id
+    }).update({
+      data: {
+        goal_num:db.command.inc(1)
+      },
+      success(res) {
+        console("team_match_participate加分成功")
+      },
+      fail(err) {
+        console("team_match_participate加分失败")
+      }
+    })
+    //matchInfo teamA加分
+    db.collection('matchInfo').where({
+      teamA_id : team_id
+    }).update({
+      data: {
+        scoreA:db.command.inc(1)
+        
+      },
+      success(res) {
+        console("matchInfo_teamB加分成功")
+      },
+      fail(err) {
+        console("matchInfo_teamB加分失败")
+      }
+    })
+    //matchInfo teamB加分
+    db.collection('matchInfo').where({
+      teamB_id : team_id
+    }).update({
+      data: {
+        scoreB:db.command.inc(1)
+      },
+      success(res) {
+        console("matchInfo_teamB加分成功")
+      },
+      fail(err) {
+        console("matchInfo_teamB加分失败")
+      }
+    })
+  },
+  //裁判员记录减分
+  btnGoalMinus_DB: function(player_num,team_id,match_id){
+    //球员积分表指定球员减
+    db.collection('player_score_list').where({
+      player_num: player_num.toString(),
+      team_id: team_id}).get({
+      success(res) {
+        const doc = res.data[0]
+        console.log(doc.score)
+        if (doc.score === 0){
+          wx.showToast({
+            title: 'score = 0',
+            icon: 'none'
+          });
+        }
+        else{
+          db.collection('player_score_list').where({
+            player_num: player_num.toString(),
+            team_id: team_id
+          }).update({
+            data: {
+              score:db.command.inc(-1)
+            },
+            success(res) {
+              console.log(res)
+              console.log("player_score_list减分成功")
+            },
+            fail(err) {
+              ///console.error("player_score_list减分失败")
+            }
+          })
+        }
+      }})
+    //进球球员球队
+    db.collection('team_match_participate').where({
+      team_id: team_id}).get({
+      success(res) {
+        const doc = res.data[0]
+        if (doc.score === 0){
+          wx.showToast({
+            title: 'score = 0',
+            icon: 'none'
+          });
+        }
+        else{
+          db.collection('team_match_participate').where({
+            match_id : match_id,
+            team_id : team_id
+          }).update({
+            data: {
+              goal:db.command.inc(-1)
+            },
+            success(res) {
+              console.log("team_match_participate减分成功")
+            },
+            fail(err) {
+              console.error("team_match_participate减分失败")
+            }
+          })
+        }
+      }})
+    //球队表进球数减一
+    db.collection('team').where({
+      team_id: team_id}).get({
+      success(res) {
+        const doc = res.data[0]
+        if (doc.score === 0){
+          wx.showToast({
+            title: 'score = 0',
+            icon: 'none'
+          });
+        }
+        else{
+          db.collection('team').where({
+            team_id : team_id
+          }).update({
+            data: {
+              goal_num:db.command.inc(-1)
+            },
+            success(res) {
+              console.log("team减分成功")
+            },
+            fail(err) {
+              console.error("team减分失败")
+            }
+          })
+        }
+      }})
+    //matchInfo teamA减分
+    db.collection('matchInfo').where({
+      teamA_id: team_id}).get({
+      success(res) {
+        const doc = res.data[0]
+        if (doc.score === 0){
+          wx.showToast({
+            title: 'score = 0',
+            icon: 'none'
+          });
+        }
+        else{
+          db.collection('matchInfo').where({
+            teamA_id : team_id
+          }).update({
+            data: {
+              scoreA:db.command.inc(-1)
+            },
+            success(res) {
+              console.log("matchInfo_teamA减分成功")
+            },
+            fail(err) {
+              //console.error("matchInfo_teamA减分失败")
+            }
+          })
+        }
+      }
+      })
+    //matchInfo teamB减分
+    db.collection('matchInfo').where({
+      teamB_id: team_id}).get({
+      success(res) {
+        const doc = res.data[0]
+        if (doc.score === 0){
+          wx.showToast({
+            title: 'score = 0',
+            icon: 'none'
+          });
+        }
+        else{
+          db.collection('matchInfo').where({
+            teamB_id : team_id
+          }).update({
+            data: {
+              scoreA:db.command.inc(-1)
+            },
+            success(res) {
+              console.log("matchInfo_teamB减分成功")
+            },
+            fail(err) {
+              console.error("matchInfo_teamB减分失败")
+            }
+          })
+        }
+      }
+      })
+  },
+  //红牌
+  btnRedAdd_DB: function(player_num,team_id) {
+    try{
+      //球员积分表指定球员增加红牌
+      db.collection('player_score_list').where({
+        player_num: player_num.toString(),
+        team_id: team_id
+      }).update({
+        data: {
+          red:db.command.inc(1)
+        },
+        success(res) {
+          console("判罚成功")
+        },
+        fail(err) {
+          console("判罚失败")
+        }
+      })
+    }catch (error) {
+      console.error('操作失败:', error);
+    }
+  },
+  //取消红牌
+  btnRedMinus_DB: function(player_num,team_id) {
+    try{
+      //球员积分表指定球员减少红牌
+      db.collection('player_score_list').where({
+        player_num: player_num.toString(),
+        team_id: team_id
+      }).update({
+        data: {
+          red:db.command.inc(-1)
+        },
+        success(res) {
+          console("判罚成功")
+        },
+        fail(err) {
+          console("判罚失败")
+        }
+      })
+    }catch (error) {
+      console.error('操作失败:', error);
+    }
+  },
+  //黄牌
+  btnYellowAdd_DB: function(player_num,team_id) {
+    try{
+      //球员积分表指定球员增加黄牌
+      db.collection('player_score_list').where({
+        player_num: player_num.toString(),
+          team_id: team_id
+      }).get({
+        success(res) {
+          const doc = res.data[0]
+          if (doc.yellow === 2 ){
+            wx.showToast({
+              title: 'yellow = 2',
+              icon: 'none'
+            });
+          }
+          else{
+            db.collection('player_score_list').where({
+              player_num: player_num.toString(),
+              team_id: team_id
+            }).update({
+              data: {
+                yellow:db.command.inc(1)
+              },
+              success(res) {
+                console("判罚成功")
+              },
+              fail(err) {
+                console("判罚失败")
+              }
+            })
+          }
+        }
+      })
+    }catch (error) {
+      console.error('操作失败:', error);
+    }
+  },
+  //取消黄牌
+  btnYellowMinus_DB: function(player_num,team_id) {
+    try{
+      //球员积分表指定球员增加黄牌
+      db.collection('player_score_list').where({
+        player_num: player_num.toString(),
+          team_id: team_id
+      }).get({
+        success(res) {
+          const doc = res.data[0]
+          if (doc.yellow === 0 ){
+            wx.showToast({
+              title: 'yellow = 0',
+              icon: 'none'
+            });
+          }
+          else{
+            db.collection('player_score_list').where({
+              player_num: player_num.toString(),
+              team_id: team_id
+            }).update({
+              data: {
+                yellow:db.command.inc(-1)
+              },
+              success(res) {
+                wx.showToast({
+                  title: '消罚成功',
+                  icon: 'none'
+                });
+                console("消罚成功")
+              },
+              fail(err) {
+                wx.showToast({
+                  title: '消罚失败',
+                  icon: 'none'
+                });
+                console("消罚失败")
+              }
+            })
+          }
+        }
+      })
+    }catch (error) {
+      console.error('操作失败:', error);
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    
+    this.getInfo();
   },
   
   /**
@@ -182,7 +576,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.getInfo();
   },
   // 获取OpenID并查询messageId和比赛信息
   getInfo: async function() {
@@ -216,7 +609,9 @@ Page({
             teamA: match.teamA,
             teamB: match.teamB,
             scoreA: match.scoreA,
-            scoreB: match.scoreB
+            scoreB: match.scoreB,
+            teamAid:match.teamA_id,
+            teamBid:match.teamB_id
           });
         } else {
           console.log('没有找到对应的比赛信息');

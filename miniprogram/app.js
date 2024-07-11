@@ -21,7 +21,7 @@ App({
       },
       userRole: '球员',
       loginFlag: 1,
-      currentPage: 'page4' // 默认页面
+      currentPage: 'page1' // 默认页面
     }
   },
   globalData: {

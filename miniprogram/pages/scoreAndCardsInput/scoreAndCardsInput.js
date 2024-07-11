@@ -1,4 +1,5 @@
 // pages/scoreAndCardsInput/scoreAndCardsInput.js
+const db = wx.cloud.database()
 Page({
   /**
    * 页面的初始数据
@@ -141,6 +142,12 @@ Page({
       });  
     }
   },
+  // 获取当前用户的 OpenID
+  getOpenId: function() {
+    return wx.cloud.callFunction({
+      name: 'getOpenid'
+    }).then(res => res.result.openid);
+  },
   /*更新总比分*/
   updateTeamScore:function(){
     let scores = {  
@@ -175,7 +182,51 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    this.getInfo();
+  },
+  // 获取OpenID并查询messageId和比赛信息
+  getInfo: async function() {
+    try {
+      // 获取当前用户的OpenID
+      const openid = await this.getOpenId();
+      console.log(openid)
+      // 查询符合条件的messageId
+      const _ = db.command;
+      const messageResult = await db.collection('judge').where({
+        finished: false,
+        judgeid: openid
+      }).get();
+      console.log(messageResult)
 
+      if (messageResult.data.length > 0) {
+        const messageId = messageResult.data[0].matchid;
+
+        // 根据messageId查询比赛信息
+        const matchResult = await db.collection("matchInfo").where({
+          raceId: messageId
+        }).get();
+
+        if (matchResult.data.length > 0) {
+          const match = matchResult.data[0];
+          this.setData({
+            match: match.event_name,
+            turn: match.turn,
+            race: match.match_id,
+            matchTime: match.matchTime.toLocaleDateString(),
+            teamA: match.teamA,
+            teamB: match.teamB,
+            scoreA: match.scoreA,
+            scoreB: match.scoreB
+          });
+        } else {
+          console.log('没有找到对应的比赛信息');
+        }
+      } else {
+        console.log('没有找到符合条件的信息');
+      }
+    } catch (error) {
+      console.error('查询失败:', error);
+    }
   },
 
   /**

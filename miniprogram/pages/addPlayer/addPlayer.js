@@ -48,6 +48,7 @@ Page({
         inputValue: inputValue,
         empty: true,
         found: false,
+        foundPlayer:null,
         filteredResults: [] // Clear results when input is empty
       });
       return;

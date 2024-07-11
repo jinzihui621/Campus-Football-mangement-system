@@ -18,6 +18,7 @@
   margin:30rpx;
   border-radius: 10rpx;
   border: 2rpx lightgray solid;
+  background-color: #ffffff;
 }
 
 .headline1{
@@ -28,16 +29,18 @@
   padding: 15rpx;
   border-radius: 10rpx;
   border-bottom: 2rpx solid lightgray;
-  background-color: #068E15;
+  background-color: lightgreen;
 }
 
 .content{
   display: flex;
   flex-direction: column;
   padding: 15rpx;
-  width: 88%;
-  height: 244rpx;
+  width: 90%;
+  height: 60%;
+  margin-top:15rpx;
   padding:15rpx;
+  border-radius: 10rpx;
 }
 
 .messageInfo{
@@ -54,6 +57,7 @@
   height: 60rpx;
   border-radius: 10rpx;
   border: lightgray 2rpx solid;
+  background-color: #ffffff;
 }
 
 .schedulePattern{
@@ -68,20 +72,20 @@
   margin-top: 30rpx;
   border-radius: 10rpx;
   border: lightgray 2rpx solid;
-  background-color:#068E15;
+  background-color:#ffffff;
 }
 
 .headline2{
-  height: 50rpx;
+  height: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border-bottom: lightgray 2rpx solid;
-  padding: 15rpx;
 }
 
 .gameContainer{
-  height: 680rpx;
+  height: 90%;
   width: 100%;
 }
 
@@ -90,8 +94,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 580rpx;
-
+  background-color: lightgreen;
 }
 
 .timeAndPlace{

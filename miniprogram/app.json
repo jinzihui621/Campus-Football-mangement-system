@@ -1,7 +1,7 @@
 {
   "pages": [ 
-    "pages/manager/manager",
     "pages/player/player",
+    "pages/manager/manager",
     "pages/homePage/homePage",
 		"pages/board/board",
 		"pages/match/match",

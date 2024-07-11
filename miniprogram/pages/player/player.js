@@ -13,21 +13,22 @@ Page({
       {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"},
       {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"}
     ],
+    matchId:"",
     team1:"",
     team2:"",
     place:"",
     time:"",
 
-    team: [
-      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
-      {team1:"经管",team2:"理学",time:"2024/7/7",place:"北操"},
-      {team1:"都柏林",team2:"艺设",time:"2024/7/7",place:"北操"},
-      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
-      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
-      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
-      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
-      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
-      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操"},
+    match: [
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操",matchId:"43234"},
+      {team1:"经管",team2:"理学",time:"2024/7/7",place:"北操",matchId:"43234"},
+      {team1:"都柏林",team2:"艺设",time:"2024/7/7",place:"北操",matchId:"43234"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操",matchId:"43234"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操",matchId:"43234"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操",matchId:"43234"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操",matchId:"43234"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操",matchId:"43234"},
+      {team1:"信息",team2:"土木",time:"2024/7/7",place:"北操",matchId:"43234"},
     ]
 
   },
@@ -43,6 +44,7 @@ Page({
             team1:e.currentTarget.dataset.info1,
             team2:e.currentTarget.dataset.info2,
             time:e.currentTarget.dataset.info3,
+            matchId:e.currentTarget.dataset.info5,
           });
           wx.showToast({
             title: '报名成功',

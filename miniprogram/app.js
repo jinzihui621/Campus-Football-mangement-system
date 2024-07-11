@@ -24,9 +24,8 @@ App({
         avatarUrl: '/image/page_me/default_avatar.png', // 默认头像
         nickname: '爱踢球的工大人'
       },
-      userRole: '球员',
+      userRole: '赛事管理',
       loginFlag: 1,
-      currentPage: 'page4', // 默认页面
       userPermissions: ['球员', '裁判'] // 假设用户拥有球员和裁判的权限
     }
   },

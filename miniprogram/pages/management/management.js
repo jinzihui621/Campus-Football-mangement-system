@@ -3,7 +3,7 @@ const app = getApp();
 
 Page({
   data: {
-    currentPage: '',
+    userRole: '',
     messageList: [
       {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"},
       {time:"2024/7/7",content:"今天中午有比赛，请大家积极报名"},
@@ -88,11 +88,16 @@ Page({
   },
   
   onLoad: function() {
-    const cp = app.globalData.currentPage
     this.setData({
-      currentPage: cp
+			userRole: app.globalData.userRole
     });
   },
+
+  onShow: function() {
+		this.setData({ 
+			userRole: app.globalData.userRole
+		});
+	},
 
   navigateToSchedule: function() {
     wx.navigateTo({

@@ -1,6 +1,6 @@
 <!-- eventOrganizerManagement--------------------------------------------------->
 <view>
-  <view wx:if="{{currentPage === 'page1'}}">
+  <view wx:if="{{userRole === '赛事管理'}}">
     <navigator url="/pages/createMatch/createMatch" open-type="navigate" class="centered-button">
       <image src="/image/eventOrganizerManagement/jiahao.png" style="width: 20px; height: 20px; margin-right: 5px;" />
       创建赛事
@@ -108,7 +108,7 @@
   </view>
 
 <!-- player--------------------------------------------------------->
-  <view wx:if="{{currentPage === 'page2'}}">
+  <view wx:if="{{userRole === '球员'}}">
     <view class = "card">
       <view class = "notification">
         <view class = "headline1">
@@ -147,7 +147,7 @@
   </view>
 
 <!-- manager--------------------------------------------------->
-  <view wx:if="{{currentPage === 'page3'}}">
+  <view wx:if="{{userRole === '球队管理'}}">
     <view class="card">
       <!-- 第一排按钮 -->
       <view class = "buttonContainer1">
@@ -200,7 +200,7 @@
 
 
 <!-- scoreAndCardslnput--------------------------------------------------->
-  <view wx:if="{{currentPage === 'page4'}}">
+  <view wx:if="{{userRole === '裁判'}}">
     <!--pages/scoreAndCardsInput/scoreAndCardsInput.wxml-->
     <view class='show-container'>
         <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"

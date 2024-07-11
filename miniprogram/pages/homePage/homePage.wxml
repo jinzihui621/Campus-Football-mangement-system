@@ -28,7 +28,7 @@
             <view class="team-name-container">
               <text class="team-name">{{item.teamA}}</text>
             </view>
-            <text class="{{item.game_running_flag ? 'vs score-running' : 'vs'}}">{{item.game_finished_flag || item.game_running_flag ? item.scoreA + ' : ' + item.scoreB : 'VS'}}</text>
+            <text class="{{item.game_running_flag ? 'vs score-running' : 'vs'}}">{{item.game_finished_flag || item.game_running_flag ? item.scoreA + ' - ' + item.scoreB : 'VS'}}</text>
             <view class="team-name-container">
               <text class="team-name">{{item.teamB}}</text>
             </view>

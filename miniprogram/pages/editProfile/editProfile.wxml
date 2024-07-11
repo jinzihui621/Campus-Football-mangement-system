@@ -5,13 +5,13 @@
   </view>
   
   <view class="input-group">
+    <text class="label">昵称<text class="required">*</text></text>
+    <input placeholder="请输入昵称" data-field="nickname" value="{{nickname}}" bindinput="onInputChange" />
+  </view>
+
+  <view class="input-group">
     <text class="label">姓名</text>
     <input placeholder="请输入姓名" data-field="name" value="{{name}}" bindinput="onInputChange" />
-  </view>
-  
-  <view class="input-group">
-    <text class="label">昵称</text>
-    <input placeholder="请输入昵称" data-field="nickname" value="{{nickname}}" bindinput="onInputChange" />
   </view>
 
   <view class="input-group">

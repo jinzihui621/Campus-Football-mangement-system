@@ -1,5 +1,5 @@
 <!--pages/player/player.wxml-->
-<view class = "card">
+<view class = "card" >
   <view class = "notification">
     <view class = "headline1">
       公告消息
@@ -21,8 +21,8 @@
       比赛报名
     </view>
     <scroll-view class = "gameContainer" type = "list"  scroll-y>
-      <view class="game">
-        <view class="gameInfo" wx:for="{{team}}" wx:key = "index" bindtap = "handleRegister" data-info1 = "{{item.team1}}" data-info2 = "{{item.team2}}" data-info3 = "{{item.time}}" data-info4 = "{{item.place}}">
+      <view class="game" >
+        <view class="gameInfo" wx:for="{{match}}" wx:key = "index" bindtap = "handleRegister" data-info1 = "{{item.team1}}" data-info2 = "{{item.team2}}" data-info3 = "{{item.time}}" data-info4 = "{{item.place}}" data-info5 = "{{item.matchId}}">
           <view class = "timeAndPlace">
             <view>{{item.time}}</view><view>{{item.place}}</view>
           </view>

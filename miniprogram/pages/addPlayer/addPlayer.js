@@ -16,7 +16,7 @@ Page({
       {name: "js", score: 10},
       {name: "ks", score: 10}
     ],
-    list2: [
+    searchedPlayer: [
       {name: "gf", sno:"21041015",score: 10,red:4,yellow:3},
       {name: "gf", sno:"21041014",score: 10,red:4,yellow:3},
       {name: "el", sno:"21041015",score: 10,red:4,yellow:3},
@@ -33,7 +33,7 @@ Page({
       {name: "vv", sno:"21041015",score: 10,red:4,yellow:3},
       {name: "qq", sno:"21041015",score: 10,red:4,yellow:3}
     ],
-    foundPlayer:"",
+    foundPlayer:null,
     //用于记录被搜索的球员是否在球员数据库中
     found: false,
     filteredResults: [],
@@ -48,11 +48,12 @@ Page({
         inputValue: inputValue,
         empty: true,
         found: false,
+        foundPlayer:null,
         filteredResults: [] // Clear results when input is empty
       });
       return;
     }
-    const filteredResults = this.data.list2.filter(item => item.name.toLowerCase().includes(searchValue));
+    const filteredResults = this.data.searchedPlayer.filter(item => item.name.toLowerCase().includes(searchValue));
     this.setData({
       inputValue: inputValue,
       empty: false,
@@ -63,23 +64,31 @@ Page({
   },
 
   searchAction: function() {
-    const searchValue = this.data.inputValue.toLowerCase();
-    const player = this.data.list2.find(item => item.name.toLowerCase() === searchValue);
-    if (player) {
-      this.setData({
-        foundPlayer: player,
-        found: true,
-      });
-    } else {
-      this.setData({
-        foundPlayer: null,
-        found: false,
-      });
+    if(this.valueInput!=null){
+      const searchValue = this.data.inputValue.toLowerCase();
+      const player = this.data.searchedPlayer.find(item => item.name.toLowerCase() === searchValue);
+      if (player) {
+        this.setData({
+          foundPlayer: player,
+          found: true,
+        });
+      } else {
+        this.setData({
+          foundPlayer: null,
+          found: false,
+        });
+        wx.showToast({
+          title: '未查询到该球员',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    }
+    else{
       wx.showToast({
-        title: '未查询到该球员',
-        icon: 'none',
-        duration: 2000
-      });
+        title: '请输入想要添加的球员',
+        icon:"none"
+      })
     }
   },
 
@@ -111,7 +120,7 @@ Page({
     //foundPlayer这个变量为被添加的球员，定义在了data中
     //现在只需要判断一下foundPlayer是不是为空就可以了，不为空就进行数据库的添加操作
     //后端逻辑：如果foundPlayer已经在本队了则返回0，如果foundPlayer不在本队则返回1
-    if(this.data.foundPlayer!=""){
+    if(this.data.foundPlayer!=null){
       wx.showToast({
         title: '添加成功',
         icon: 'success',

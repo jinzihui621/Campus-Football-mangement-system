@@ -37,7 +37,7 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 85%;
   height: 700rpx;
   padding: 15rpx;
   border-radius: 30rpx;
@@ -49,7 +49,7 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 90%;
   color:black;
   font-size: 15px;
   margin-bottom: 10px;
@@ -72,8 +72,6 @@ page {
 .addButton {
   margin-top: 50rpx;
   width: 100%; /* 按钮宽度填满容器 */
-  background-color:rgb(55, 139, 55);
-  color: white;
   border: none;
   padding: 10px;
   border-radius: 5px;

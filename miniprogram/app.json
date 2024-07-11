@@ -1,7 +1,8 @@
 {
-  "pages": [ 
+  "pages": [
     "pages/manager/manager",
-    "pages/player/player",
+    "pages/completeInfo/completeInfo",
+    "pages/player/player", 
     "pages/homePage/homePage",
 		"pages/board/board",
 		"pages/match/match",
@@ -23,9 +24,9 @@
     "pages/matchDetail1/matchDetail1",
     "pages/soccerSchedule/soccerSchedule",
     "pages/editSchedule/editSchedule",
-    "pages/delMatch/delMatch",
     "pages/management/management",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/delMatch/delMatch"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -41,7 +42,7 @@
         "selectedIconPath": "/image/tabBar/shouye-active.png"
       },
       {
-        "pagePath":"pages/management/management",
+        "pagePath":"pages/player/player",
         "text":"管理",
         "iconPath":"/image/tabBar/guanli.png",
         "selectedIconPath": "/image/tabBar/guanli-2.png"

@@ -48,16 +48,106 @@ Page({
     });
   },
 
+  validateInput: function() {
+    const { name, studentID, nickname, signature, contact, college, major } = this.data;
+
+    const namePattern = /^[\u4e00-\u9fa5a-zA-Z·]*$/; // 中文、英文字母和中间点
+    const nicknamePattern = /^[\u4e00-\u9fa5a-zA-Z@!（）&%]+$/; // 中文、英文字母和特殊符号
+    const contactPattern = /^[\d+]*$/; // 数字和加号
+    const chinesePattern = /^[\u4e00-\u9fa5]*$/; // 中文汉字
+
+    if (name && (name.length > 20 || !namePattern.test(name))) {
+      wx.showToast({
+        title: '姓名只能包含中文汉字、英文字母和中间点，且不超过20个字符',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
+    if (!nickname) {
+      wx.showToast({
+        title: '昵称不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
+    if (!nicknamePattern.test(nickname)) {
+      wx.showToast({
+        title: '昵称只能包含中文汉字、英文字母和@!（）&%',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
+    if (contact && !contactPattern.test(contact)) {
+      wx.showToast({
+        title: '联系方式只能包含数字和+',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
+    if (college && !chinesePattern.test(college)) {
+      wx.showToast({
+        title: '所属学院只能包含中文汉字',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
+    if (major && !chinesePattern.test(major)) {
+      wx.showToast({
+        title: '所属专业只能包含中文汉字',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
+    if (studentID && !/^\d*$/.test(studentID)) {
+      wx.showToast({
+        title: '学号必须为数字',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
+    return true;
+  },
+
   saveProfile: function() {
+    // 验证用户输入
+    if (!this.validateInput()) {
+      return;
+    }
+
     // 保存用户信息到全局数据或数据库
-		app.globalData.userInfo = this.data;
+    const sanitizedData = {
+      avatarUrl: this.data.avatarUrl,
+      name: this.data.name,
+      nickname: this.data.nickname,
+      signature: this.data.signature,
+      studentID: this.data.studentID,
+      contact: this.data.contact,
+      college: this.data.college,
+      major: this.data.major
+    };
+
+    app.globalData.userInfo = sanitizedData;
     wx.showToast({
       title: '保存成功',
-			icon: 'success',
-			duration: 1000
+      icon: 'success',
+      duration: 1000
     });
     setTimeout(() => {
-			wx.navigateBack();
-		}, 1000);
+      wx.navigateBack();
+    }, 1000);
   }
 });

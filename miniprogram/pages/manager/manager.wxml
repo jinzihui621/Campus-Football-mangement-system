@@ -39,9 +39,8 @@
     <view class = "teamMemberContainer">
       <scroll-view class = "teamMember" type = "list" scroll-y enable-flex>
         <view class = "playerInfo" wx:for="{{member}}" wx:key="index">
-          <view>{{item.name}}</view><view>球员号:{{item.tno}}</view>
-          <view>进球:{{item.score}}</view><view>红牌:{{item.red}}</view>
-          <view>黄牌:{{item.yellow}}</view>
+          <view>{{item.name}}</view><view>学号:{{item.sno}}</view>
+          <view>球员号:{{item.tno}}</view>
           <image wx:if="{{deleteFlag}}"src="/image/minus.png" class = "operationPattern" bindtap = "deletePlayer" data-info1 = "{{item.name}}" data-info2 = "{{item.tno}}"/>
         </view>
       </scroll-view>

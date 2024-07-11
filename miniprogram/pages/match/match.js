@@ -1,6 +1,6 @@
 // pages/match/match.js
+const db =wx.cloud.database()
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -43,10 +43,10 @@ Page({
       { title: "积分", key: "points", width: "80rpx" }
     ],
     listRank: [
-      { rank: "1", team: "计算机", gamePlayed: 8, win: 8, draw: 0, lose: 0, gs_ga: "35/2", points: 24 },
-      { rank: "2", team: "城建", gamePlayed: 8, win: 7, draw: 1, lose: 0, gs_ga: "15/10", points: 22 },
-      { rank: "3", team: "电子", gamePlayed: 8, win: 6, draw: 1, lose: 1, gs_ga: "20/5", points: 19 },
-      { rank: "4", team: "化工", gamePlayed: 8, win: 5, draw: 2, lose: 1, gs_ga: "18/8", points: 17 }
+      { rank: 1, team: "计算机", gamePlayed: 8, win: 8, draw: 0, lose: 0, gs_ga: "35/2", points: 24 },
+      { rank: 2, team: "城建", gamePlayed: 8, win: 7, draw: 1, lose: 0, gs_ga: "15/10", points: 22 },
+      { rank: 3, team: "电子", gamePlayed: 8, win: 6, draw: 1, lose: 1, gs_ga: "20/5", points: 19 },
+      { rank: 4, team: "化工", gamePlayed: 8, win: 5, draw: 2, lose: 1, gs_ga: "18/8", points: 17 }
     ],
 		//进球榜
 		tableGoalColumns: [
@@ -139,6 +139,104 @@ Page({
   getListLoading: function(e){
     return true;
   },
+  /*积分榜表格组件请求加载*/
+  getRankListLoading: function(e){
+    try{
+      this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    }catch(error){
+      wx.showToast({
+        title: '网络连接不良',
+        icon: 'fail',
+        duration: 2000
+      })
+      return false
+    }
+    return true
+  },
+  //加载积分榜数据
+  loadRank_db: function(date,matchName){
+    const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`).getTime(); // UTC时间，2024年第一天开始  
+    const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`).getTime() - 1; // UTC时间，下一年第一天开始的前一刻
+    db.collection("matchInfo").where({
+      matchTime:db.command.gte(startOfYear).and(db.command.lt(endOfYear)),
+      event_name: matchName
+    }).get({
+      success: res=>{
+        db.collection("team_match_participate").where({match_id:res.data.match_id}).get({
+          success:res=>{
+            db.collection("team").where({team_id:res.data.team_id}).orderBy("score","asc").get({
+              success:res=>{
+                let itemWithIndex = res.data.map((item, index) => ({  
+                  rank: index+1,  
+                  team: item.team_name,  
+                  gamePlayed: item.match_num,  
+                  win: item.vic_num,  
+                  draw: item.draw_num,  
+                  lose: item.lose_num,  
+                  gs_ga: `${item.goal_num}/${item.fumble_num}`, // 注意这里使用模板字符串而不是单引号内的字符串  
+                  points: item.score  
+                }));  
+                this.setData({
+                  listRank:itemWithIndex
+                })
+              }
+            })
+          }
+        })
+      }
+    })
+  },
+  /*加载球员进球榜数据*/
+  loadGoal_db: function(date,matchName){
+    let array=[]
+    const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`).getTime(); // UTC时间，2024年第一天开始  
+    const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`).getTime() - 1; // UTC时间，下一年第一天开始的前一刻
+    db.collection("matchInfo").where({
+      matchTime:db.command.gte(startOfYear).and(db.command.lt(endOfYear)),
+      event_name: matchName
+    }).get({
+      success:res=>{
+        db.collection("player_score_list").where({match_id:res.data.match_id}).orderBy("score","asc").get({
+          success: res=>{
+            array=res.date.map((item,index)=>({
+              rank:index+1,
+              player:this.getPlayerName(item.team_id,item.playerCode),
+              team:this.getTeamName(team_id),
+              goals:item.score
+            }))
+          }
+        })
+      }
+    })
+    this.setData({
+      listGoal:array
+    })
+  },
+  /* 根据队的id和队内号码获取队员名字*/
+  getPlayerName: function(team_id,playerCode){
+    db.collection("team_player").where({
+      team_id:team_id,
+      player_num:playerCode
+    }).get().then(res=>{return res.data.name})
+  },
+  /*根据球队id获取球队名字 */
+  getTeamName:function(team_id){
+    db.collection("team").where({team_id:team_id}).get().then(res=>{return res.data.team_name})
+  },
+  /* 球员进球榜表格组件请求加载*/
+  getGoalListLoading:function(e){
+    try{
+      this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    }catch(error){
+      wx.showToast({
+        title: '网络连接不良',
+        icon: 'error',
+        duration: 2000
+      })
+      return false
+    }
+    return true
+  },
   /*筛选日期 */
   bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -163,7 +261,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    let year=new Date().getFullYear()
+    this.setData({
+      date:year
+    })
+    this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
   },
 
   /**

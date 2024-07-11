@@ -19,7 +19,7 @@
           <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"scroll-top="{{scrollTop}}">
             <!--tab栏-->
             <view class='title'>
-              <picker mode="date" value="{{date}}" start="2015" end="2024" bindchange="bindDateChange" fields="year">
+              <picker mode="date" value="{{date}}" start="2015" end="{{date}}" bindchange="bindDateChange" fields="year">
                 <view class="picker">
                   年份:{{date}}
                 </view>
@@ -35,7 +35,7 @@
             <swiper class='swiper' bindchange='listchange' current='{{currentListIndex}}'>
               <!-- 积分榜 -->
 							<swiper-item>
-								<table class="matchRecords" dataList="{{listRank}}" columns="{{tableRankColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+								<table class="matchRecords" dataList="{{listRank}}" columns="{{tableRankColumns}}" getListLoading="{{getRankListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
 							</swiper-item>
 							<!-- 球员榜 -->
               <swiper-item>

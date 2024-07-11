@@ -23,7 +23,7 @@
     </view>
   </scroll-view>
 
-  <button class = "addButton" bindtap="addPlayer">添加球员</button>
+  <button class = "addButton" type = "default" bindtap="addPlayer">添加球员</button>
 </view>
 
 

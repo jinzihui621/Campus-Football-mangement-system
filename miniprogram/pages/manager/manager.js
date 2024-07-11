@@ -11,18 +11,18 @@ Page({
       tno:"",
     },
     member:[
-      {name:"金子辉",tno:10,score:10,red:5,yellow:3},
-      {name:"崔朗清",tno:9,score:10,red:5,yellow:3},
-      {name:"张三",tno:8,score:10,red:5,yellow:3},
-      {name:"李四",tno:7,score:10,red:5,yellow:3},
-      {name:"王五",tno:6,score:10,red:5,yellow:3},
-      {name:"王五",tno:6,score:10,red:5,yellow:3},
-      {name:"王五",tno:6,score:10,red:5,yellow:3},
-      {name:"王五",tno:6,score:10,red:5,yellow:3},
-      {name:"王五",tno:6,score:10,red:5,yellow:3},
-      {name:"王五",tno:6,score:10,red:5,yellow:3},
-      {name:"王五",tno:6,score:10,red:5,yellow:3},
-      {name:"王五",tno:6,score:10,red:5,yellow:3}
+      {name:"金子辉",sno:21041015,tno:10},
+      {name:"崔朗清",sno:21041015,tno:10},
+      {name:"张三",sno:21041015,tno:10},
+      {name:"李四",sno:21041015,tno:10},
+      {name:"王五",sno:21041015,tno:10},
+      {name:"王五",sno:21041015,tno:10},
+      {name:"王五",sno:21041015,tno:10},
+      {name:"王五",sno:21041015,tno:10},
+      {name:"王五",sno:21041015,tno:10},
+      {name:"王五",sno:21041015,tno:10},
+      {name:"王五",sno:21041015,tno:10},
+      {name:"王五",sno:21041015,tno:10}
     ],
   },
 
@@ -39,8 +39,16 @@ Page({
     })
   },
 
-  deletePlayer: function(e) {
+   getOpenId: function() {
+        return wx.cloud.callFunction({
+          name: 'getOpenid'
+        }).then(res => res.result.openid);
+      },
+
+    async deletePlayer(e) {
     // 从事件对象中提取绑定的数据
+    const leaderId = await this.getOpenId();
+    console.log(leaderId);
     const name = e.currentTarget.dataset.info1;
     const tno = e.currentTarget.dataset.info2;
     wx.showModal({
@@ -48,9 +56,12 @@ Page({
       content: '确认要删除此球员吗',
       success: (res) => { // 使用箭头函数
         if (res.confirm) {
-          this.setData({
-            "player.name":name,
-            "player.tno" :tno
+          wx.cloud.callFunction({
+            name: 'deletePlayer_DB',
+            data: {
+              player_num: tno,
+              _id: leaderId
+            }
           })
           wx.showToast({
             title: '删除成功',

@@ -87,7 +87,10 @@ Page({
   btnGoalAdd: function(e) {  
     const { playercode: playerCode, teamid: teamID } = e.currentTarget.dataset;  
     const players = this.data[teamID === this.data.teamAid ? 'playerA' : 'playerB'];  
-    const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
+    const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10)); 
+    console.log(index) 
+    //console.log(playercode)
+    console.log(playerCode)
     if (index !== -1) {  
       const newPlayers = [...players];
       this.btnGoalAdd_DB(playerCode,teamID,this.data.race);
@@ -431,49 +434,82 @@ Page({
       })
   },
   //红牌
-  btnRedAdd_DB: function(player_num,team_id) {
-    try{
-      //球员积分表指定球员增加红牌
-      db.collection('player_score_list').where({
-        player_num: player_num.toString(),
-        team_id: team_id
-      }).update({
-        data: {
-          red:db.command.inc(1)
-        },
-        success(res) {
-          console("判罚成功")
-        },
-        fail(err) {
-          console("判罚失败")
-        }
-      })
-    }catch (error) {
-      console.error('操作失败:', error);
-    }
-  },
-  //取消红牌
-  btnRedMinus_DB: function(player_num,team_id) {
-    try{
-      //球员积分表指定球员减少红牌
-      db.collection('player_score_list').where({
-        player_num: player_num.toString(),
-        team_id: team_id
-      }).update({
-        data: {
-          red:db.command.inc(-1)
-        },
-        success(res) {
-          console("判罚成功")
-        },
-        fail(err) {
-          console("判罚失败")
-        }
-      })
-    }catch (error) {
-      console.error('操作失败:', error);
-    }
-  },
+  //红牌
+  btnRedAdd_DB: async function(player_num, team_id, match_id) {
+      try{
+        const res = await db.collection('player_score_list').where({
+          player_num: player_num.toString(),
+          team_id: team_id,
+          match_id: match_id
+        }).get();
+         // 假设只会有一个表项
+        let player = res.data[0];
+        if(player.red === 0){
+          //球员积分表指定球员加分
+          await db.collection('player_score_list').where({
+            player_num: player_num.toString(),
+            team_id: team_id,
+            match_id: match_id
+          }).update({
+            data: {
+              red:db.command.inc(1)
+            },
+            success(res) {
+              console("判罚成功")
+            },
+            fail(err) {
+              console("判罚失败")
+            }
+          })
+      }
+      else{
+        wx.showToast({
+          title: '红牌数已为1，无法增加',
+          icon: 'none'
+        });
+      }
+      }catch (error) {
+        console.error('操作失败:', error);
+      }
+   },
+   //取消红牌
+  btnRedMinus_DB: async function(player_num, team_id, match_id) {
+      try{
+        const res = await db.collection('player_score_list').where({
+          player_num: player_num.toString(),
+          team_id: team_id,
+          match_id: match_id
+        }).get();
+         // 假设只会有一个表项
+        let player = res.data[0];
+        if(player.red === 1){
+          //球员积分表指定球员加分
+          await db.collection('player_score_list').where({
+            player_num: player_num.toString(),
+            team_id: team_id,
+            match_id: match_id
+          }).update({
+            data: {
+              red:db.command.inc(-1)
+            },
+            success(res) {
+              console("取消判罚成功")
+            },
+            fail(err) {
+              console("取消判罚失败")
+            }
+          })
+      }
+      else{
+        wx.showToast({
+          title: '红牌数已为0，无法减少',
+          icon: 'none'
+        });
+      }
+      }catch (error) {
+        console.error('操作失败:', error);
+      }
+   },
   //黄牌
   btnYellowAdd_DB: function(player_num,team_id) {
     try{
@@ -587,16 +623,16 @@ Page({
       const _ = db.command;
       const messageResult = await db.collection('judge').where({
         finished: false,
-        judgeid: openid
+        judgeid: "id6"
       }).get();
       console.log(messageResult)
 
       if (messageResult.data.length > 0) {
-        const messageId = messageResult.data[0].matchid;
+        const messageId = messageResult.data[0].match_id;
 
         // 根据messageId查询比赛信息
         const matchResult = await db.collection("matchInfo").where({
-          raceId: messageId
+          match_id: messageId
         }).get();
 
         if (matchResult.data.length > 0) {
@@ -610,17 +646,171 @@ Page({
             teamB: match.teamB,
             scoreA: match.scoreA,
             scoreB: match.scoreB,
-            teamAid:match.teamA_id,
-            teamBid:match.teamB_id
+            teamAid: match.teamA_id,
+            teamBid: match.teamB_id
           });
         } else {
           console.log('没有找到对应的比赛信息');
+        }
+        try {
+          const resA = await db.collection('player_score_list').where({
+            team_id: this.data.teamAid
+          }).get();
+    
+          if (resA.data.length > 0) {
+            const updatedPlayerA = resA.data.map(item => ({
+              teamID: item.team_id,
+              playerCode: Number(item.player_num),
+              score: item.score,
+              yellowCard: item.yellow,
+              redCard: item.red
+            }));
+            this.setData({
+              playerA: updatedPlayerA
+            });
+          } else {
+            console.log('没有找到符合条件的数据');
+          }
+          const resB = await db.collection('player_score_list').where({
+            team_id: this.data.teamBid
+          }).get();
+    
+          if (resB.data.length > 0) {
+            const updatedPlayerB = resB.data.map(item => ({
+              teamID: item.team_id,
+              playerCode: Number(item.player_num),
+              score: item.score,
+              yellowCard: item.yellow,
+              redCard: item.red
+            }));
+    
+            this.setData({
+              playerB: updatedPlayerB
+            });
+          } else {
+            console.log('没有找到符合条件的数据');
+          }
+        } catch (error) {
+          console.error('查询失败:', error);
         }
       } else {
         console.log('没有找到符合条件的信息');
       }
     } catch (error) {
       console.error('查询失败:', error);
+    }
+  },
+
+  startMatch_DB:function(){
+    db.collection('judge').where({
+      match_id: this.data.race
+    }).update({
+      data: {
+        started:true
+      },
+      success(res) {
+        console("成功")
+      },
+      fail(err) {
+        console("失败")
+      }
+    })
+  },
+
+  endMatch_DB:async function(){
+    const _ = db.command;
+    try {
+      await db.collection('judge').where({
+        match_id: this.data.race
+      }).update({
+        data: {
+          finished:true,
+          started:false
+        },
+        success(res) {
+          console("成功")
+        },
+        fail(err) {
+          console("失败")
+        }
+      })
+      // 获取 A 队和 B 队的当前数据
+      const [teamAData, teamBData] = await Promise.all([
+        db.collection('team').where({ team_id: this.data.teamAid }).get(),
+        db.collection('team').where({ team_id: this.data.teamBid }).get()
+      ]);
+
+      if (teamAData.data.length === 0 || teamBData.data.length === 0) {
+        console.error('未找到对应的队伍数据');
+        return;
+      }
+
+      let teamA_t = teamAData.data[0];
+      let teamB_t = teamBData.data[0];
+
+      // 更新数据
+      if (this.data.scoreA > this.data.scoreB) {
+        // A 胜，B 败
+        teamA_t.vic_num += 1;
+        teamB_t.lose_num += 1;
+        teamA_t.score += 3;
+      } else if (this.data.scoreA < this.data.scoreB) {
+        // A 败，B 胜
+        teamA_t.lose_num += 1;
+        teamB_t.vic_num += 1;
+        teamB_t.score += 3;
+      } else {
+        // 平局
+        teamA_t.draw_num += 1;
+        teamB_t.draw_num += 1;
+        teamA_t.score += 1;
+        teamB_t.score += 1;
+      }
+
+      // 更新进球和失球数据
+      teamA_t.goal_num += this.data.scoreA;
+      teamA_t.fumble_num += this.data.scoreB;
+      teamB_t.goal_num += this.data.scoreB;
+      teamB_t.fumble_num += this.data.scoreA;
+
+      teamA_t.match_num += 1;
+      teamB_t.match_num += 1;
+
+      // 更新数据库
+      await Promise.all([
+        db.collection('team').doc(teamA_t._id).update({
+          data: {
+           // _id: teamA_t._id,
+            vic_num: teamA_t.vic_num,
+            lose_num: teamA_t.lose_num,
+            draw_num: teamA_t.draw_num,
+            goal_num: teamA_t.goal_num,
+            fumble_num: teamA_t.fumble_num,
+            score: teamA_t.score,
+            team_id: teamA_t.team_id,
+            team_name: teamA_t.team_name,
+            match_num: teamA_t.match_num
+          }
+        }),
+        db.collection('team').doc(teamB_t._id).update({
+          data: {
+            //_id: teamB_t._id,
+            vic_num: teamB_t.vic_num,
+            lose_num: teamB_t.lose_num,
+            draw_num: teamB_t.draw_num,
+            goal_num: teamB_t.goal_num,
+            fumble_num: teamB_t.fumble_num,
+            score: teamB_t.score,
+            team_id: teamB_t.team_id,
+            team_name: teamB_t.team_name,
+            match_num: teamB_t.match_num
+          }
+        })
+      ]);
+
+      console.log('数据更新成功');
+    } catch (error) {
+      console.error('数据更新失败:', error);
     }
   },
 

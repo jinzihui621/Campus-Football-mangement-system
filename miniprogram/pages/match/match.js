@@ -16,7 +16,7 @@ Page({
     currentIndex: 0,
 		currentListIndex:0,
 		currentPlayerTab:'goals',
-    date:'2024',
+    date:"2024",
     turn:1, //当前显示的赛程轮次
     tableColumns: [
       {title: "日期",key: "date",width: "100rpx"}, 
@@ -146,25 +146,28 @@ Page({
     }catch(error){
       wx.showToast({
         title: '网络连接不良',
-        icon: 'fail',
-        duration: 2000
+        icon: 'none',
+        duration: 1000
       })
       return false
     }
     return true
   },
   //加载积分榜数据
-  loadRank_db: function(date,matchName){
-    const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`).getTime(); // UTC时间，2024年第一天开始  
-    const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`).getTime() - 1; // UTC时间，下一年第一天开始的前一刻
+  loadRank_db: async function(date,matchName){
+    const startOfYear = new Date(`${date}-01-01`); // UTC时间，2024年第一天开始  
+    const endOfYear = new Date(`${parseInt(date) + 1}-12-31`)-1; // UTC时间，下一年第一天开始的前一刻
+    console.log(startOfYear)
+    console.log(endOfYear)
     db.collection("matchInfo").where({
       matchTime:db.command.gte(startOfYear).and(db.command.lt(endOfYear)),
       event_name: matchName
     }).get({
       success: res=>{
+        console.log(res)
         db.collection("team_match_participate").where({match_id:res.data.match_id}).get({
           success:res=>{
-            db.collection("team").where({team_id:res.data.team_id}).orderBy("score","asc").get({
+            db.collection("team").where({team_id:res.data.team_id}).orderBy("score","desc").get({
               success:res=>{
                 let itemWithIndex = res.data.map((item, index) => ({  
                   rank: index+1,  
@@ -230,8 +233,8 @@ Page({
     }catch(error){
       wx.showToast({
         title: '网络连接不良',
-        icon: 'error',
-        duration: 2000
+        icon: 'none',
+        duration: 1000
       })
       return false
     }

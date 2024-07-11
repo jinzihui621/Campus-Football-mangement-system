@@ -1,6 +1,14 @@
 <view class="page-container">
   <!-- 轮播图部分 -->
-  <swiper class="swiper-container">
+  <swiper 
+  class="swiper-container" 
+  indicator-dots="true" 
+  indicator-color= "#00dd00"
+  indicator-active-color="#000"
+	autoplay="true" 
+  interval="3000" 
+  duration="500"
+	>
     <swiper-item><image src='/image/logo.png' mode="aspectFit" class="swiper-image" /></swiper-item>
     <swiper-item><image src='/image/tabBar/envelop.png' mode="aspectFit" class="swiper-image" /></swiper-item>
   </swiper>
@@ -13,13 +21,13 @@
       </view>
     </block>
     <block wx:else>
-      <view wx:for="{{matches}}" wx:key="id" class="matchMessage">
+      <view wx:for="{{matches}}" wx:key="id" class="matchMessage" bindtap="goToMatchDetail"  data-day="{{item.day}}" data-starttime="{{item.starttime}}" data-teamnameA="{{item.teamnameA}}" data-teamnameB="{{item.teamnameB}}" data-place="{{item.place}}">
         <!-- <view class="match">
           <text>{{item.date}} {{item.time}} {{item.location}}</text>
           <text>{{item.teamA}} {{item.scoreA}} : {{item.scoreB}}</text>
         </view> -->
 				<view class="raceInfo">
-          <view>{{item.day}} {{item.starttime}}～{{item.endtime}}</view>
+          <view>{{item.day}} {{item.starttime}}</view>
           <view class="scores">{{item.teamnameA}}   vs   {{item.teamnameB}}</view>
           <view >{{item.place}}</view>
         </view>

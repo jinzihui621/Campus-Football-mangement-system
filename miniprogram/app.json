@@ -22,7 +22,10 @@
     "pages/matchDetail/matchDetail",
     "pages/matchDetail1/matchDetail1",
     "pages/soccerSchedule/soccerSchedule",
-    "pages/editSchedule/editSchedule"
+    "pages/editSchedule/editSchedule",
+    "pages/delMatch/delMatch",
+    "pages/management/management",
+    "pages/test/test"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -38,7 +41,7 @@
         "selectedIconPath": "/image/tabBar/shouye-active.png"
       },
       {
-        "pagePath":"pages/eventOrganizerManagement/eventOrganizerManagement",
+        "pagePath":"pages/management/management",
         "text":"管理",
         "iconPath":"/image/tabBar/guanli.png",
         "selectedIconPath": "/image/tabBar/guanli-2.png"

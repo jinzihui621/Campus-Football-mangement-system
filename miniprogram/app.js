@@ -1,6 +1,10 @@
 // app.js
 App({
   onLaunch() {
+    wx.cloud.init({
+      env:'campus-football-7gssthyk0ebee95a',
+      traceUser:true,
+    })
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -20,12 +24,14 @@ App({
         nickname: '爱踢球的工大人'
       },
       userRole: '球员',
-      loginFlag: 1
+      loginFlag: 1,
+      currentPage: 'page4' // 默认页面
     }
   },
   globalData: {
 		userInfo: null,
 		userRole: null,
-		loginFlag: null
+    loginFlag: null,
+    currentPage: null // 默认页面
   }
 })

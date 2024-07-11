@@ -23,7 +23,7 @@ Page({
     });
   },
 
-  addSchedule: function() {
+  delSchedule: function() {
     // 保存用户信息到全局数据或数据库
 		app.globalData.matchInfo = this.data;
     wx.showToast({

@@ -1,0 +1,8 @@
+/* pages/index/index.wxss */
+button {
+  margin: 10px;
+}
+
+view {
+  margin-top: 20px;
+}

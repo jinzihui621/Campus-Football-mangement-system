@@ -23,5 +23,5 @@
     <text class="label">场地</text>
     <input placeholder="请输入场地" data-field="place" value="{{place}}" bindinput="onInputChange" />
   </view>
-  <button bindtap="addSchedule">确定添加</button>
+  <button bindtap="delSchedule">确定删除</button>
 </view>

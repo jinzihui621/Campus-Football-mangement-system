@@ -4,11 +4,6 @@ Page({
   data: {
     accounts: [
       {
-        imgSrc: '/image/choose_account/team_manager.png',
-        text: '球队管理账号',
-        role: '球队管理'
-      },
-      {
         imgSrc: '/image/choose_account/player.png',
         text: '比赛球员账号',
         role: '球员'
@@ -17,6 +12,11 @@ Page({
         imgSrc: '/image/choose_account/referee.png',
         text: '比赛裁判账号',
         role: '裁判'
+      },
+      {
+        imgSrc: '/image/choose_account/team_manager.png',
+        text: '球队管理账号',
+        role: '球队管理'
       },
       {
         imgSrc: '/image/choose_account/manager.png',
@@ -35,7 +35,7 @@ Page({
       app.globalData.userRole = role;
 
       wx.showToast({
-        title: '跳转成功',
+        title: '切换成功',
         icon: 'success',
         duration: 1000
       });

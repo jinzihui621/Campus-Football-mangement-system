@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!--pages/scoreAndCardsInput/scoreAndCardsInput.wxml-->
 <view class='show-container'>
     <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"
@@ -87,6 +88,96 @@
         </swiper-item>
       </swiper>
     </scroll-view>
+=======
+<!--pages/scoreAndCardsInput/scoreAndCardsInput.wxml-->
+<view class='show-container'>
+    <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"
+      scroll-top="{{scrollTop}}">
+      <!--Tab布局-->
+      <view class='title'>
+        <view class="{{0 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='0'>
+          <text>{{teamA}}</text>
+          <hr class="line-style"/>
+        </view>
+        <view class="{{1 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='1'>
+          <text>{{teamB}}</text>
+          <hr class="line-style"/>
+        </view>
+      </view>
+    <view class='scoreShow'>
+      <view class="circleA"><text class="teamName">{{teamA}}</text></view>
+      <view class="raceInfo">
+        <view>{{matchTime}}</view>
+        <view class="scores">{{scoreA}}:{{scoreB}}</view>
+        <view >{{match}}第{{turn}}轮比赛</view>
+      </view>
+      <view class="circleB"><text class="teamName">{{teamB}}</text></view>
+    </view>
+    <view class="tableBar">
+      <view>号码</view>
+      <view>进球数</view>
+      <view>黄牌</view>
+      <view>红牌</view>
+    </view>
+      <!--内容布局-->
+      <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+        <!--第一轮-->
+        <swiper-item class='swiper'>
+          <scroll-view class="input" scroll-y>
+            <view wx:for="{{playerA}}" wx:for-item="item">
+              <view class="player">
+                <view class="playerCode">{{item.playerCode}}</view>
+                <view class="goal">
+                  <button type="primary" size="mini" class="minus" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnGoalMinus">-</button>
+                  <view class="item-value">{{item.score}}</view>
+                  <button type="primary" size="mini" class="add" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnGoalAdd">+</button>
+                </view>
+                <view class="yellowCard">
+                  <button type="primary" size="mini" class="minus" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnYellowMinus">-</button>
+                  <view class="item-value">{{item.yellowCard}}</view>
+                  <button type="primary" size="mini" class="add" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnYellowAdd">+</button>
+                </view>
+                <view class="redCard">
+                  <button type="primary" size="mini" class="minus" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnRedMinus">-</button>
+                  <view>{{item.redCard}}</view>
+                  <button type="primary" size="mini" class="add" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnRedAdd">+</button>
+                </view>
+              </view>
+            </view>
+            <button type="primary" class="start" bind:tap="startMatch_DB">开始比赛</button>
+            <button type="warn" class="end" bind:tap="endMatch_DB">结束比赛</button>
+          </scroll-view>
+        </swiper-item>
+        <!--第二轮-->
+        <swiper-item class='swiper'>
+          <scroll-view class="input" scroll-y>
+            <view wx:for="{{playerB}}" wx:for-item="item">
+              <view class="player">
+                <view class="playerCode">{{item.playerCode}}</view>
+                <view class="goal">
+                  <button type="primary" size="mini" class="minus" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnGoalMinus">-</button>
+                  <view class="item-value">{{item.score}}</view>
+                  <button type="primary" size="mini" class="add" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnGoalAdd">+</button>
+                </view>
+                <view class="yellowCard">
+                  <button type="primary" size="mini" class="minus" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnYellowMinus">-</button>
+                  <view class="item-value">{{item.yellowCard}}</view>
+                  <button type="primary" size="mini" class="add" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnYellowAdd">+</button>
+                </view>
+                <view class="redCard">
+                  <button type="primary" size="mini" class="minus" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnRedMinus">-</button>
+                  <view>{{item.redCard}}</view>
+                  <button type="primary" size="mini" class="add" data-playercode="{{item.playerCode}}" data-teamid="{{item.teamID}}" bind:tap="btnRedAdd">+</button>
+                </view>
+              </view>
+            </view>
+            <button type="primary" class="start" bind:tap="startMatch_DB">开始比赛</button>
+            <button type="warn" class="end" bind:tap="endMatch_DB">结束比赛</button>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </scroll-view>
+>>>>>>> main
 =======
 <!--pages/scoreAndCardsInput/scoreAndCardsInput.wxml-->
 <view class='show-container'>

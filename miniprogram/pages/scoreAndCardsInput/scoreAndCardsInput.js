@@ -434,49 +434,82 @@ Page({
       })
   },
   //红牌
-  btnRedAdd_DB: function(player_num,team_id) {
-    try{
-      //球员积分表指定球员增加红牌
-      db.collection('player_score_list').where({
-        player_num: player_num.toString(),
-        team_id: team_id
-      }).update({
-        data: {
-          red:db.command.inc(1)
-        },
-        success(res) {
-          console("判罚成功")
-        },
-        fail(err) {
-          console("判罚失败")
-        }
-      })
-    }catch (error) {
-      console.error('操作失败:', error);
-    }
-  },
-  //取消红牌
-  btnRedMinus_DB: function(player_num,team_id) {
-    try{
-      //球员积分表指定球员减少红牌
-      db.collection('player_score_list').where({
-        player_num: player_num.toString(),
-        team_id: team_id
-      }).update({
-        data: {
-          red:db.command.inc(-1)
-        },
-        success(res) {
-          console("判罚成功")
-        },
-        fail(err) {
-          console("判罚失败")
-        }
-      })
-    }catch (error) {
-      console.error('操作失败:', error);
-    }
-  },
+  //红牌
+  btnRedAdd_DB: async function(player_num, team_id, match_id) {
+      try{
+        const res = await db.collection('player_score_list').where({
+          player_num: player_num.toString(),
+          team_id: team_id,
+          match_id: match_id
+        }).get();
+         // 假设只会有一个表项
+        let player = res.data[0];
+        if(player.red === 0){
+          //球员积分表指定球员加分
+          await db.collection('player_score_list').where({
+            player_num: player_num.toString(),
+            team_id: team_id,
+            match_id: match_id
+          }).update({
+            data: {
+              red:db.command.inc(1)
+            },
+            success(res) {
+              console("判罚成功")
+            },
+            fail(err) {
+              console("判罚失败")
+            }
+          })
+      }
+      else{
+        wx.showToast({
+          title: '红牌数已为1，无法增加',
+          icon: 'none'
+        });
+      }
+      }catch (error) {
+        console.error('操作失败:', error);
+      }
+   },
+   //取消红牌
+  btnRedMinus_DB: async function(player_num, team_id, match_id) {
+      try{
+        const res = await db.collection('player_score_list').where({
+          player_num: player_num.toString(),
+          team_id: team_id,
+          match_id: match_id
+        }).get();
+         // 假设只会有一个表项
+        let player = res.data[0];
+        if(player.red === 1){
+          //球员积分表指定球员加分
+          await db.collection('player_score_list').where({
+            player_num: player_num.toString(),
+            team_id: team_id,
+            match_id: match_id
+          }).update({
+            data: {
+              red:db.command.inc(-1)
+            },
+            success(res) {
+              console("取消判罚成功")
+            },
+            fail(err) {
+              console("取消判罚失败")
+            }
+          })
+      }
+      else{
+        wx.showToast({
+          title: '红牌数已为0，无法减少',
+          icon: 'none'
+        });
+      }
+      }catch (error) {
+        console.error('操作失败:', error);
+      }
+   },
   //黄牌
   btnYellowAdd_DB: function(player_num,team_id,match_id) {
     try{
@@ -622,49 +655,6 @@ Page({
           });
         } else {
           console.log('没有找到对应的比赛信息');
-        }
-        try {
-          const resA = await db.collection('player_score_list').where({
-            team_id: this.data.teamAid,
-            match_id: this.data.race
-          }).get();
-    
-          if (resA.data.length > 0) {
-            const updatedPlayerA = resA.data.map(item => ({
-              teamID: item.team_id,
-              playerCode: Number(item.player_num),
-              score: item.score,
-              yellowCard: item.yellow,
-              redCard: item.red
-            }));
-            this.setData({
-              playerA: updatedPlayerA
-            });
-          } else {
-            console.log('没有找到符合条件的数据');
-          }
-          const resB = await db.collection('player_score_list').where({
-            team_id: this.data.teamBid,
-            match_id: this.data.race
-          }).get();
-    
-          if (resB.data.length > 0) {
-            const updatedPlayerB = resB.data.map(item => ({
-              teamID: item.team_id,
-              playerCode: Number(item.player_num),
-              score: item.score,
-              yellowCard: item.yellow,
-              redCard: item.red
-            }));
-    
-            this.setData({
-              playerB: updatedPlayerB
-            });
-          } else {
-            console.log('没有找到符合条件的数据');
-          }
-        } catch (error) {
-          console.error('查询失败:', error);
         }
       } else {
         console.log('没有找到符合条件的信息');

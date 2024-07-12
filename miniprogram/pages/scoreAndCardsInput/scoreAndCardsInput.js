@@ -17,30 +17,30 @@ Page({
     teamAid:1,
     teamBid:2,
     playerA:[
-      {teamID:"id1",playerCode:1,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:2,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:3,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:4,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:5,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:6,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:7,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:8,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:9,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:10,score:0,yellowCard:0,redCard:0},
-      {teamID:1,playerCode:11,score:0,yellowCard:0,redCard:0}
+      // {teamID:"id1",playerCode:1,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:2,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:3,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:4,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:5,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:6,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:7,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:8,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:9,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:10,score:0,yellowCard:0,redCard:0},
+      // {teamID:1,playerCode:11,score:0,yellowCard:0,redCard:0}
     ],
     playerB:[
-      {teamID:"id2",playerCode:1,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:2,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:3,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:4,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:5,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:6,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:7,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:8,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:9,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:10,score:0,yellowCard:0,redCard:0},
-      {teamID:2,playerCode:11,score:0,yellowCard:0,redCard:0}
+      // {teamID:"id2",playerCode:1,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:2,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:3,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:4,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:5,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:6,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:7,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:8,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:9,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:10,score:0,yellowCard:0,redCard:0},
+      // {teamID:2,playerCode:11,score:0,yellowCard:0,redCard:0}
     ],
   },
  
@@ -109,7 +109,7 @@ Page({
     if (index !== -1) {  
       const newPlayers = [...players];
       if(players[index].yellowCard < 2){
-        this.btnYellowAdd_DB(playerCode,teamID)
+        this.btnYellowAdd_DB(playerCode,teamID,this.data.race)
         newPlayers[index].yellowCard++;
       }else{
         wx.showToast({
@@ -130,7 +130,7 @@ Page({
     const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
     if (index !== -1 && players[index].yellowCard > 0) { // 确保黄牌数量大于0  
       const newPlayers = [...players];
-      this.btnYellowMinus_DB(playerCode,teamID)
+      this.btnYellowMinus_DB(playerCode,teamID, this.data.race)
       newPlayers[index].yellowCard--;  
       this.setData({  
         [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  
@@ -511,12 +511,13 @@ Page({
       }
    },
   //黄牌
-  btnYellowAdd_DB: function(player_num,team_id) {
+  btnYellowAdd_DB: function(player_num,team_id,match_id) {
     try{
       //球员积分表指定球员增加黄牌
       db.collection('player_score_list').where({
         player_num: player_num.toString(),
-          team_id: team_id
+          team_id: team_id,
+          match_id:match_id
       }).get({
         success(res) {
           const doc = res.data[0]
@@ -529,7 +530,8 @@ Page({
           else{
             db.collection('player_score_list').where({
               player_num: player_num.toString(),
-              team_id: team_id
+              team_id: team_id,
+              match_id: match_id
             }).update({
               data: {
                 yellow:db.command.inc(1)
@@ -549,12 +551,13 @@ Page({
     }
   },
   //取消黄牌
-  btnYellowMinus_DB: function(player_num,team_id) {
+  btnYellowMinus_DB: function(player_num,team_id,match_id) {
     try{
       //球员积分表指定球员增加黄牌
       db.collection('player_score_list').where({
         player_num: player_num.toString(),
-          team_id: team_id
+          team_id: team_id,
+          match_id: match_id
       }).get({
         success(res) {
           const doc = res.data[0]
@@ -567,7 +570,8 @@ Page({
           else{
             db.collection('player_score_list').where({
               player_num: player_num.toString(),
-              team_id: team_id
+              team_id: team_id,
+              match_id: match_id
             }).update({
               data: {
                 yellow:db.command.inc(-1)
@@ -651,47 +655,6 @@ Page({
           });
         } else {
           console.log('没有找到对应的比赛信息');
-        }
-        try {
-          const resA = await db.collection('player_score_list').where({
-            team_id: this.data.teamAid
-          }).get();
-    
-          if (resA.data.length > 0) {
-            const updatedPlayerA = resA.data.map(item => ({
-              teamID: item.team_id,
-              playerCode: Number(item.player_num),
-              score: item.score,
-              yellowCard: item.yellow,
-              redCard: item.red
-            }));
-            this.setData({
-              playerA: updatedPlayerA
-            });
-          } else {
-            console.log('没有找到符合条件的数据');
-          }
-          const resB = await db.collection('player_score_list').where({
-            team_id: this.data.teamBid
-          }).get();
-    
-          if (resB.data.length > 0) {
-            const updatedPlayerB = resB.data.map(item => ({
-              teamID: item.team_id,
-              playerCode: Number(item.player_num),
-              score: item.score,
-              yellowCard: item.yellow,
-              redCard: item.red
-            }));
-    
-            this.setData({
-              playerB: updatedPlayerB
-            });
-          } else {
-            console.log('没有找到符合条件的数据');
-          }
-        } catch (error) {
-          console.error('查询失败:', error);
         }
       } else {
         console.log('没有找到符合条件的信息');

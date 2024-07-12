@@ -24,16 +24,15 @@ App({
         avatarUrl: '/image/page_me/default_avatar.png', // 默认头像
         nickname: '爱踢球的工大人'
       },
-      userRole: '赛事管理',
+      userRole: '球员',
       loginFlag: 1,
-      userPermissions: ['球员', '裁判'] // 假设用户拥有球员和裁判的权限
+      userPermissions: ['球员', '裁判', '球队管理', '赛事管理'] // 假设用户拥有球员和裁判的权限
     }
   },
   globalData: {
     userInfo: null,
-    userRole: null,  // 可取值："球员", "裁判", "赛事组织", "球队管理"
+    userRole: null,  // 可取值："球员", "裁判", "赛事管理", "球队管理"
     loginFlag: null,
-    currentPage: null,
     userPermissions: [] // 用户权限数组
   }
 });

@@ -10,26 +10,27 @@ Page({
       {matchID:2,matchName:'工甲'},
       {matchID:3,matchName:'工大杯'}
     ],
-    matchNumber:3,
+    matchNumber:3, //这个match是赛事的意思
     listType:['积分榜','球员榜','赛程'],
     listNumber:3,
     currentIndex: 0,
 		currentListIndex:0,
 		currentPlayerTab:'goals',
-    date:'2024',
+    date:"2024",
+    total_turns:50, //赛事的总轮数的十倍
     turn:1, //当前显示的赛程轮次
     tableColumns: [
       {title: "日期",key: "date",width: "100rpx"}, 
       {title: "队伍A",key: "teamA",}, 
-      {title: "A",key: "teamAScore",},
-      {title:"B",key:"teamBScore"},
+      {title: "比分A",key: "teamAScore",},
+      {title:"比分B",key:"teamBScore"},
       {title:"队伍B",key:"teamB"}
     ],
-    list:[
-      {date:"07-07 00:00",teamA:"type1",teamAScore:"-",teamBScore:'-',teamB:"name1"},
-      {date:"07-07 00:00",teamA:"type2",teamAScore:"-",teamBScore:'-',teamB:"name2"},
-      {date:"07-07 00:00",teamA:"type3",teamAScore:"3",teamBScore:'1',teamB:"name3"},
-      {date:"07-07 00:00",teamA:"type4",teamAScore:"2",teamBScore:'3',teamB:"name4"}
+    matchList:[
+      {date:"07-07 00:00",teamA:"team1",teamAScore:"-",teamBScore:'-',teamB:"name1"},
+      {date:"07-07 00:00",teamA:"team2",teamAScore:"-",teamBScore:'-',teamB:"name2"},
+      {date:"07-07 00:00",teamA:"team3",teamAScore:"3",teamBScore:'1',teamB:"name3"},
+      {date:"07-07 00:00",teamA:"team4",teamAScore:"2",teamBScore:'3',teamB:"name4"}
 		],
 		//积分榜
 		tableRankColumns: [
@@ -132,12 +133,9 @@ Page({
   listClick: function(e){
     this.setData({
       //拿到当前索引并动态改变
-      currentListIndex: e.currentTarget.dataset.idx
+      currentListIndex: e.currentTarget.dataset.idx,
+      matchList:this.data.matchList
     })
-  },
-  /*表格组件请求加载表格*/
-  getListLoading: function(e){
-    return true;
   },
   /*积分榜表格组件请求加载*/
   getRankListLoading: function(e){
@@ -146,82 +144,12 @@ Page({
     }catch(error){
       wx.showToast({
         title: '网络连接不良',
-        icon: 'fail',
-        duration: 2000
+        icon: 'none',
+        duration: 1000
       })
       return false
     }
     return true
-  },
-  //加载积分榜数据
-  loadRank_db: function(date,matchName){
-    const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`).getTime(); // UTC时间，2024年第一天开始  
-    const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`).getTime() - 1; // UTC时间，下一年第一天开始的前一刻
-    db.collection("matchInfo").where({
-      matchTime:db.command.gte(startOfYear).and(db.command.lt(endOfYear)),
-      event_name: matchName
-    }).get({
-      success: res=>{
-        db.collection("team_match_participate").where({match_id:res.data.match_id}).get({
-          success:res=>{
-            db.collection("team").where({team_id:res.data.team_id}).orderBy("score","asc").get({
-              success:res=>{
-                let itemWithIndex = res.data.map((item, index) => ({  
-                  rank: index+1,  
-                  team: item.team_name,  
-                  gamePlayed: item.match_num,  
-                  win: item.vic_num,  
-                  draw: item.draw_num,  
-                  lose: item.lose_num,  
-                  gs_ga: `${item.goal_num}/${item.fumble_num}`, // 注意这里使用模板字符串而不是单引号内的字符串  
-                  points: item.score  
-                }));  
-                this.setData({
-                  listRank:itemWithIndex
-                })
-              }
-            })
-          }
-        })
-      }
-    })
-  },
-  /*加载球员进球榜数据*/
-  loadGoal_db: function(date,matchName){
-    let array=[]
-    const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`).getTime(); // UTC时间，2024年第一天开始  
-    const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`).getTime() - 1; // UTC时间，下一年第一天开始的前一刻
-    db.collection("matchInfo").where({
-      matchTime:db.command.gte(startOfYear).and(db.command.lt(endOfYear)),
-      event_name: matchName
-    }).get({
-      success:res=>{
-        db.collection("player_score_list").where({match_id:res.data.match_id}).orderBy("score","asc").get({
-          success: res=>{
-            array=res.date.map((item,index)=>({
-              rank:index+1,
-              player:this.getPlayerName(item.team_id,item.playerCode),
-              team:this.getTeamName(team_id),
-              goals:item.score
-            }))
-          }
-        })
-      }
-    })
-    this.setData({
-      listGoal:array
-    })
-  },
-  /* 根据队的id和队内号码获取队员名字*/
-  getPlayerName: function(team_id,playerCode){
-    db.collection("team_player").where({
-      team_id:team_id,
-      player_num:playerCode
-    }).get().then(res=>{return res.data.name})
-  },
-  /*根据球队id获取球队名字 */
-  getTeamName:function(team_id){
-    db.collection("team").where({team_id:team_id}).get().then(res=>{return res.data.team_name})
   },
   /* 球员进球榜表格组件请求加载*/
   getGoalListLoading:function(e){
@@ -230,12 +158,381 @@ Page({
     }catch(error){
       wx.showToast({
         title: '网络连接不良',
-        icon: 'error',
-        duration: 2000
+        icon: 'none',
+        duration: 1000
       })
       return false
     }
     return true
+  },
+  /*球员黄牌榜表格组件请求加载*/
+  getYellowListLoading:function(e){
+    try{
+      this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    }catch(error){
+      wx.showToast({
+        title: '网络连接不良',
+        icon: 'none',
+        duration: 1000
+      })
+      return false
+    }
+    return true
+  },
+  /*球员红牌榜表格组件请求加载*/
+  getRedListLoading:function(e){
+    try{
+      this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    }catch(error){
+      wx.showToast({
+        title: '网络连接不良',
+        icon: 'none',
+        duration: 1000
+      })
+      return false
+    }
+    return true
+  },
+  /*赛程信息表格组件请求加载 */
+  getMatchListLoading: function(e){
+    try{
+      this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
+    }catch(error){
+      wx.showToast({
+        title: '网络连接不良',
+        icon: 'none',
+        duration: 1000
+      })
+      return false
+    }
+    if(matchList.length===0){
+      return false
+    }
+    return true
+  },
+  //加载积分榜数据
+  loadRank_db:async function(date, matchName) {  
+      try {  
+          const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`); // UTC时间，当年的第一天  
+          const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`); // UTC时间，下一年的第一天（不包含）  
+          const resMatchInfo = await db.collection("matchInfo").where({  
+              matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
+              event_name: matchName  
+          }).get();  
+          if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
+              console.log("没有找到匹配的比赛信息");  
+              return;  
+          } 
+          let matchIDs = resMatchInfo.data.map(item => item.match_id);  
+    
+          // 获取参与比赛的队伍ID  
+          const resTeamParticipation = await db.collection("team_match_participate").where({  
+              match_id: db.command.in(matchIDs)  
+          }).get();  
+    
+          if (!resTeamParticipation.data || resTeamParticipation.data.length === 0) {  
+              console.log("没有找到参与比赛的队伍信息");  
+              return;  
+          }  
+          let teamIDs = resTeamParticipation.data.map(item => item.team_id);  
+          const resTeams = await db.collection("team").where({  
+              team_id: db.command.in(teamIDs)  
+          }).orderBy("score", "desc").get();  
+    
+          if (!resTeams.data || resTeams.data.length === 0) {  
+              console.log("没有找到队伍信息");  
+              return;  
+          }  
+          let itemWithIndex = resTeams.data.map((item, index) => ({  
+              rank: index + 1,  
+              team: item.team_name,  
+              gamePlayed: item.match_num,  
+              win: item.vic_num,  
+              draw: item.draw_num,  
+              lose: item.lose_num,  
+              gs_ga: `${item.goal_num}/${item.fumble_num}`,
+              points: item.score  
+          }));   
+          this.setData({  
+              listRank: itemWithIndex  
+          });  
+      } catch (err) {  
+          console.error("加载队伍排名信息失败:", err);  
+      }  
+  } ,
+  //加载进球榜数据
+  loadGoal_db:async function(date, matchName) {  
+    try {  
+        const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`); // UTC时间，当年的第一天  
+        const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`); // UTC时间，下一年的第一天（不包含）  
+        const resMatchInfo = await db.collection("matchInfo").where({  
+            matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
+            event_name: matchName  
+        }).get();  
+        if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
+            console.log("没有找到匹配的比赛信息");  
+            return;  
+        } 
+        let matchIDs = resMatchInfo.data.map(item => item.match_id);
+        const resPlayerScores = await db.collection("player_score_list").where({  
+            match_id: db.command.in(matchIDs)  
+        }).orderBy("score", "desc").get();  
+
+        if (!resPlayerScores.data || resPlayerScores.data.length === 0) {  
+            console.log("没有找到匹配的球员得分信息");  
+            return;  
+        }  
+        let array = resPlayerScores.data.map(async(item, index) => {
+          let playerName=await this.getPlayerName(item.team_id, item.player_num)
+          let teamName=await this.getTeamName(item.team_id)
+            return {  
+                rank: index + 1,  
+                player: playerName,   
+                team: teamName,   
+                goals: item.score  
+            };  
+        });
+        Promise.all(array).then(results => {
+          console.log(results);  
+          this.setData({  
+              listGoal: results  
+          });  
+        }).catch(error => {  
+            console.error('Error fetching player and team names:', error);  
+        });  
+    } catch (err) {  
+        console.error("加载比赛和球员得分信息失败:", err);  
+    }  
+  },
+  //加载黄牌榜数据
+  loadYellow_db:async function(date,matchName){
+    try {  
+      const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`); // UTC时间，当年的第一天  
+      const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`); // UTC时间，下一年的第一天（不包含）  
+      const resMatchInfo = await db.collection("matchInfo").where({  
+          matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
+          event_name: matchName  
+      }).get();  
+      if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
+          console.log("没有找到匹配的比赛信息");  
+          return;  
+      } 
+      let matchIDs = resMatchInfo.data.map(item => item.match_id);
+      const resPlayerScores = await db.collection("player_score_list").where({  
+          match_id: db.command.in(matchIDs)  
+      }).orderBy("yellow", "desc").get();
+      if (!resPlayerScores.data || resPlayerScores.data.length === 0) {  
+          console.log("没有找到匹配的球员得分信息");  
+          return;  
+      }  
+      let array = resPlayerScores.data.map(async(item, index) => {
+        let playerName=await this.getPlayerName(item.team_id, item.player_num)
+        let teamName=await this.getTeamName(item.team_id)
+          return {  
+              rank: index + 1,  
+              player: playerName,   
+              team: teamName,   
+              yellowCards: item.yellow  
+          };  
+      });
+      Promise.all(array).then(results => {
+        console.log(results);  
+        this.setData({  
+          listYellowCard: results  
+        });  
+      }).catch(error => {  
+          console.error('Error fetching player and team names:', error);  
+      });  
+    } catch (err) {  
+        console.error("加载比赛和球员黄牌信息失败:", err);  
+    }  
+  },
+  //加载红牌榜数据
+  loadRed_db:async function(date,matchName){
+    try {  
+      const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`); // UTC时间，当年的第一天  
+      const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`); // UTC时间，下一年的第一天（不包含）  
+      const resMatchInfo = await db.collection("matchInfo").where({  
+          matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
+          event_name: matchName  
+      }).get();  
+      if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
+          console.log("没有找到匹配的比赛信息");
+
+          return;  
+      } 
+      let matchIDs = resMatchInfo.data.map(item => item.match_id);
+      const resPlayerScores = await db.collection("player_score_list").where({  
+          match_id: db.command.in(matchIDs)  
+      }).orderBy("red", "desc").get();  
+
+      if (!resPlayerScores.data || resPlayerScores.data.length === 0) {  
+          console.log("没有找到匹配的球员得分信息");  
+          return;  
+      }  
+      let array = resPlayerScores.data.map(async(item, index) => {
+        let playerName=await this.getPlayerName(item.team_id, item.player_num)
+        let teamName=await this.getTeamName(item.team_id)
+          return {  
+              rank: index + 1,  
+              player: playerName,   
+              team: teamName,   
+              redCards: item.red  
+          };  
+      });
+      Promise.all(array).then(results => {
+        console.log(results);  
+        this.setData({  
+          listRedCard: results  
+        });  
+      }).catch(error => {  
+          console.error('Error fetching player and team names:', error);  
+      });
+    } catch (err) {  
+        console.error("加载比赛和球员红牌信息失败:", err);  
+    }  
+  },
+  //加载赛程数据
+  loadMatch_db:async function(date,matchName,turn){
+    try{
+      const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`); // UTC时间，当年的第一天  
+      const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`); // UTC时间，下一年的第一天（不包含）  
+      const resMatchInfo = await db.collection("matchInfo").where({  
+          matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
+          event_name: matchName,
+          turn:turn 
+      }).get();
+      console.log(turn)
+      console.log(resMatchInfo)
+      if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
+          console.log("没有找到匹配的比赛信息");
+          this.setData({
+            matchList:[]
+          })
+          return;  
+      }
+      let matchIDs = resMatchInfo.data.map(item => item.match_id);
+      const teamMatch =await db.collection("team_match_participate").where({
+        match_id:db.command.in(matchIDs)
+      }).get()
+      let array = teamMatch.data.map(async item => {
+        let teamName=await this.getTeamName(item.team_id)
+          return {
+              match_id:item.match_id,
+              team: teamName,   
+              score: item.goal
+          };  
+      });
+      Promise.all(array).then(results => {
+        console.log(results);
+        let groupedItems = {};
+        results.forEach(item => {  
+            if (!groupedItems[item.match_id]) {  
+                groupedItems[item.match_id] = [];  
+            }  
+            groupedItems[item.match_id].push({ team: item.team, score: item.score });  
+        });
+        //字典转列表
+        let groupedItemsList = Object.keys(groupedItems).map(key => ({  
+          group: key,  
+          members: groupedItems[key]  
+        }));
+        let matchesList = []
+        groupedItemsList.forEach(async (item,index)=>{
+          const matchTime_temp=await this.getMatchTime(item.match_id)
+          const matchTimeWithFormat=await this.formatDate(matchTime_temp)
+          matchesList.push({
+            id:index+1,
+            date:matchTimeWithFormat,
+            teamA:item.members[0].team,
+            teamAScore:item.members[0].score,
+            teamB:item.members[1].team,
+            teamBScore:item.members[1].score
+          })
+        })
+        console.log(matchesList)
+        this.setData({  
+          matchList: matchesList,
+        });
+      }).catch(error => {  
+          console.error('Error fetching player and team names:', error);  
+      });
+    }catch (err) {  
+      console.error("加载赛程信息失败:", err);  
+    }
+  },
+ /*根据球队id和队员号码获取队员名字 */
+  getPlayerName: async function(team_id, playerCode) {  
+    try {  
+      const playerResult = await db.collection("team_player").where({  
+        team_id: team_id,  
+        player_num: playerCode.toString() 
+      }).get();  
+      if (playerResult.data.length === 0) {  
+        throw new Error('Player not found in team_player collection');  
+      }  
+      const playerID = playerResult.data[0].player_id;
+      const nameResult = await db.collection("player").where({  
+        _id: playerID  
+      }).get();  
+      if (nameResult.data.length === 0) {  
+        throw new Error('Player not found in player collection');  
+      }  
+      const playerName = nameResult.data[0].name;
+      return playerName;  
+    } catch (error) {  
+      console.error('Error getting player name:', error);  
+      throw error; 
+    }  
+  },
+  /*根据球队id获取球队名字 */
+  getTeamName: async function(team_id){
+    try {  
+      const nameRes = await db.collection("team").where({ team_id: team_id }).get();  
+      if (nameRes.data.length === 0) {  
+        throw new Error('Team not found in team collection');  
+      }  
+      const team = nameRes.data[0];  
+      if (!team) {  
+        throw new Error('Unexpected error: No team data found');  
+      }   
+      return team.team_name;
+    } catch (error) {  
+      throw error;  
+    }
+  },
+  /*根据match_id获取比赛时间*/
+  getMatchTime: async function(match_id){
+    try{
+      const matchRes=await db.collection("matchInfo").where({match_id:match_id}).get()
+      if (matchRes.data.length===0){
+        throw new Error('Match not found in match collection');
+      }
+      const match=matchRes.data[0];
+      if(!match){
+        throw new Error('Unexpected error: No match data found')
+      }
+      return match.matchTime;
+    }catch(error){
+      throw error
+    }
+  },
+  /* 接收一个Date型变量，返回月-日 时-分格式的字符串*/
+  formatDate:async function (datePromise) {  
+    try {  
+      let date = await datePromise; // 等待 Promise 解析  
+      if (!(date instanceof Date)) {  
+          throw new Error('Resolved value is not a Date object');  
+      }  
+      let month = String(date.getMonth() + 1).padStart(2, '0');  
+      let day = String(date.getDate()).padStart(2, '0');  
+      let hours = String(date.getHours()).padStart(2, '0');  
+      let minutes = String(date.getMinutes()).padStart(2, '0');  
+      return `${month}-${day} ${hours}:${minutes}`;  
+    } catch (error) {  
+        console.error('Error formatting date:', error);  
+        return null; // 或者其他错误处理  
+    }  
   },
   /*筛选日期 */
   bindDateChange: function (e) {
@@ -245,12 +542,15 @@ Page({
     })
   },
   /*切换比赛轮次*/
-  changeTurn:function(e){
+  changeTurn:async function(e){
     console.log(e)
+    await this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,e.detail.current)
+    console.log(this.data.matchList)
     this.setData({
-      turn:e.currentTarget.dataset.current
+      turn:e.detail.current
     })
-	},
+    console.log(this.data.matchList)
+  },
 	// 切换球员榜榜单
 	selectPlayerTab: function(e) {
     this.setData({
@@ -267,6 +567,12 @@ Page({
     })
     this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
     this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadRed_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
+    this.setData({
+      matchList:this.data.matchList
+    })
   },
 
   /**
@@ -301,7 +607,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadRed_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
+    console.log(this.data.matchList)
+    this.setData({
+      matchList:this.data.matchList
+    })
+    console.log(this.data.matchList)
   },
 
   /**

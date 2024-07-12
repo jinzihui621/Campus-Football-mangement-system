@@ -8,6 +8,23 @@
     "miniprogram": {
       "list": [
         {
+<<<<<<< HEAD
+          "name": "pages/me/me",
+          "pathName": "pages/me/me",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/homePage/homePage",
+          "pathName": "pages/homePage/homePage",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+=======
+>>>>>>> 01dc5cbd4e183511dcd541a8cbc3e9ba15fc64a3
           "name": "pages/player/player",
           "pathName": "pages/player/player",
           "query": "",

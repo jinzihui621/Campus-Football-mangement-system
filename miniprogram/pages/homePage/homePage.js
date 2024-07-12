@@ -141,26 +141,62 @@ Page({
 		this.scrollToCurrentMatch();
 	},
 
-  getMatches: function() {
-    var that = this;
-    // wx.request({
-    //   url: 'https://your-backend-api.com/getMatches', // 替换为你的后端接口地址
-    //   method: 'GET',
-    //   success: function(res) {
-    //     if (res.statusCode === 200) {
-    //       // 假设返回的数据在 res.data 中
-    //       that.setData({
-    //         matches: res.data
-    //       });
-    //       that.scrollToCurrentMatch();
-    //     } else {
-    //       console.error('获取数据失败', res);
-    //     }
-    //   },
-    //   fail: function(err) {
-    //     console.error('请求失败', err);
-    //   }
-    // });
+  getMatches: async function() {
+    const db = wx.cloud.database();
+    const _ = db.command;
+
+    try {
+      // 获取 matches 集合中的所有记录，并按 A 升序排序
+      const matchesRes = await db.collection('matchInfo').orderBy('matchTime', 'asc').get();
+      const matches = matchesRes.data;
+
+      if (matches.length === 0) {
+        console.log('未找到 matches 数据');
+        return;
+      }
+
+      // 提取所有的 B 值
+      const BValues = matches.map(match => match.match_id);
+
+      // 批量查询 details 集合中的记录
+      const detailsRes = await db.collection('judge').where({
+        match_id: _.in(BValues)
+      }).get();
+      const details = detailsRes.data;
+
+      // 构建 B 到 details 记录的映射
+      const detailsMap = {};
+      details.forEach(detail => {
+        detailsMap[detail.match_id] = detail;
+      });
+
+      // 合并数据
+      const matchinfo = matches.map(match => {
+        const detail = detailsMap[match.match_id];
+        const start = detail.started?1:0;
+        const end = detail.finished?1:0;
+        return {
+          id: match.match_id,
+          day: match.matchTime.toLocaleDateString(),
+          startTime: match.matchTime.toLocaleTimeString(),
+          place: match.place,
+          teamA: match.teamA,
+          teamB: match.teamB,
+          scoreA: match.scoreA,
+          scoreB: match.scoreB,
+          game_running_flag: start,
+          game_finished_flag: end
+        };
+      });
+
+      // 更新 matchinfo 数组
+      this.setData({
+        matches: matchinfo
+      });
+
+    } catch (error) {
+      console.error('数据获取或合并失败:', error);
+    }
   },
 
   scrollToCurrentMatch() {

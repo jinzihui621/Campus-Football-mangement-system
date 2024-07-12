@@ -1,4 +1,5 @@
 // pages/notificationEidt/notificationEidt.js
+const db = wx.cloud.database();
 Page({
 
   /**
@@ -20,7 +21,7 @@ Page({
     });
   },
 
-  sendMessage() {
+  sendMessage_DB() {
     const message = this.data.valueInput;
     // 输入内容验证
     if (!message || message.length === 0) {
@@ -33,25 +34,48 @@ Page({
     // 防止SQL注入的字符转义
     const escapeMessage = this.escapeSQLInjection(message);
     // 进行数据库操作发布信息
-    wx.cloud.callFunction({
-      name: 'sendMessage_DB', // 这里是云函数名称
-      data: {
-        message: escapeMessage
-      },
-      success: res => {
-        wx.showToast({
-          title: '发送成功',
-        });
-        this.navigateToParent();
-      },
-      fail: err => {
-        wx.showToast({
-          title: '发送失败',
-          icon: 'none'
-        });
-        console.error(err);
-      }
-    });
+    try{
+      var valueInput = escapeMessage; 
+      var  _id = "id1"; //队长id
+      db.collection('leader_manage_team').where({
+        teamleader_id: _id
+      }).get({
+        success(res) {
+          const doc = res.data[0]
+          console.log(res)
+          if(doc){
+            var newData ={
+              teamleader_id: _id,
+              notice: valueInput,
+              team_id : doc.team_id,
+              time : new Date()
+            }
+            console.log(newData)
+            db.collection('leader_manage_team').add({
+              data: newData,
+              success(res) {
+                wx.showToast({
+                  title: '发送成功',
+                  icon: "success",
+                })
+              },
+              fail(err) {
+                console.error('添加失败', err);
+              }
+            });
+          }else{
+            console.log('未找到该记录');
+          }
+        },
+        fail(err){
+          console.error('查询失败', err);
+        }
+      });
+    } catch (err) {
+      console.error('删除操作出错', err);
+      // 处理异常情况
+    }
+    this.navigateToParent();
   },
 
   escapeSQLInjection(str) {

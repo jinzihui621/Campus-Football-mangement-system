@@ -4,7 +4,7 @@
   </textarea>
     
   <view class = "buttonContainer">
-    <button class = "send" bindtap = "sendMessage" type = "primary" style="width: 240rpx;height: 85rpx;margin-right: 100rpx;">发送</button>
+    <button class = "send" bindtap = "sendMessage_DB" type = "primary" style="width: 240rpx;height: 85rpx;margin-right: 100rpx;">发送</button>
     <button class = "cancel" bindtap = "navigateToParent" type = "default" style="width: 240rpx;height: 85rpx;">取消</button>
   </view>
 </view>

@@ -140,7 +140,7 @@ page {
 .playerInfo{
   display: flex;
   align-items: center;
-  width: 70%;
+  width: 80%;
   justify-content: space-around;
   border-bottom: 2rpx solid lightgreen;
   padding: 20rpx;

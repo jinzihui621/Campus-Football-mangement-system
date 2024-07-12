@@ -8,14 +8,7 @@ Page({
     inputValue: "",
     // 判断搜索框是否为空，搜索框中有内容则显示删除按钮
     empty: true,
-    list: [
-      {name: "zs", score: 10},
-      {name: "ss", score: 10},
-      {name: "ds", score: 10},
-      {name: "hs", score: 10},
-      {name: "js", score: 10},
-      {name: "ks", score: 10}
-    ],
+    
     searchedPlayer: [
       {name: "gf", sno:"21041015",score: 10,red:4,yellow:3},
       {name: "gf", sno:"21041014",score: 10,red:4,yellow:3},

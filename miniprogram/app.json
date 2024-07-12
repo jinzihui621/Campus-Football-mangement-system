@@ -2,8 +2,9 @@
   "pages": [
     "pages/homePage/homePage",
     "pages/manager/manager",
-    "pages/completeInfo/completeInfo",
     "pages/player/player", 
+    
+    "pages/completeInfo/completeInfo",
 		"pages/board/board",
 		"pages/match/match",
 		"pages/notificationEdit/notificationEdit",
@@ -36,7 +37,7 @@
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/homePage/homePage",
+        "pagePath":"pages/manager/manager",
         "text":"首页",
         "iconPath":"/image/tabBar/shouye.png",
         "selectedIconPath": "/image/tabBar/shouye-active.png"

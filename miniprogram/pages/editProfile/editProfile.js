@@ -183,6 +183,7 @@ Page({
       await db.collection('player').doc(openid).update({
         data: dbadd
       });
+      console.log("xxxxx")
     }catch{
       const dbadd_n = {
         _id: openid,
@@ -200,6 +201,8 @@ Page({
         data: dbadd_r
       });
       console.log("11111")
+      console.log(dbadd_n)
+      console.log(dbadd_r)
     }
     wx.showToast({
       title: '保存成功',
@@ -207,7 +210,9 @@ Page({
       duration: 1000
     });
     setTimeout(() => {
-      wx.navigateBack();
+      wx.switchTab({
+				url: '/pages/me/me',
+			});
     }, 1000);
   }
-});
+})

@@ -140,12 +140,19 @@ Page({
     return true;
   },
 
-  saveProfile: function() {
+// 获取当前用户的 OpenID
+  getOpenId: function() {
+    return wx.cloud.callFunction({
+      name: 'getOpenid'
+    }).then(res => res.result.openid);
+  },
+
+  saveProfile: async function() {
     // 验证用户输入
     if (!this.validateInput()) {
       return;
     }
-
+    const openid = await this.getOpenId();
     // 保存用户信息到全局数据或数据库
     const sanitizedData = {
       avatarUrl: this.data.avatarUrl,
@@ -159,6 +166,41 @@ Page({
     };
 
     app.globalData.userInfo = sanitizedData;
+    const dbadd = {
+      department: sanitizedData.college,
+      major: sanitizedData.major,
+      name: sanitizedData.name,
+      nickname: sanitizedData.nickname,
+      number: sanitizedData.studentID,
+      p_signature:sanitizedData.signature,
+      phone_num: sanitizedData.contact
+    }
+    const db = wx.cloud.database()
+    try{
+      await db.collection('user').doc(openid).update({
+        data: dbadd
+      });
+      await db.collection('player').doc(openid).update({
+        data: dbadd
+      });
+    }catch{
+      const dbadd_n = {
+        _id: openid,
+        ...dbadd
+      };
+      await db.collection('user').add({
+        data: dbadd_n
+      });
+      const dbadd_r = {
+        _id: openid,
+        ...dbadd,
+        player_num: ""
+      };
+      await db.collection('player').add({
+        data: dbadd_r
+      });
+      console.log("11111")
+    }
     wx.showToast({
       title: '保存成功',
       icon: 'success',

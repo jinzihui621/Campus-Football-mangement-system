@@ -36,7 +36,7 @@
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/homePage/homePage",
+        "pagePath":"pages/manager/manager",
         "text":"首页",
         "iconPath":"/image/tabBar/shouye.png",
         "selectedIconPath": "/image/tabBar/shouye-active.png"

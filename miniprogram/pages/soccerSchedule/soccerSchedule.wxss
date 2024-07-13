@@ -68,6 +68,7 @@
   align-items: center;
   font-weight: bold;
   font-size: 8pt;
+
 }
 
 .scores{

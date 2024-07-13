@@ -26,7 +26,6 @@
     "pages/soccerSchedule/soccerSchedule",
     "pages/editSchedule/editSchedule",
     "pages/management/management",
-    "pages/test/test",
     "pages/delMatch/delMatch"
   ],
   "window": {
@@ -37,7 +36,7 @@
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/manager/manager",
+        "pagePath":"pages/homePage/homePage",
         "text":"首页",
         "iconPath":"/image/tabBar/shouye.png",
         "selectedIconPath": "/image/tabBar/shouye-active.png"

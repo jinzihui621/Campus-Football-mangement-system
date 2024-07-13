@@ -15,10 +15,10 @@ exports.main = async (event) => {
     const processedData = res.data.map(item => {
       return {
         name: item.name,
-        number: item.number
+        number: item.number,
+        _id:item._id
       };
     });
-
     // 返回处理后的数据
     return {
       success: true,

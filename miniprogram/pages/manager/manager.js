@@ -79,6 +79,12 @@ Page({
     });
   },
 
+  gotoUpdate(){
+    wx.navigateTo({
+      url: '/pages/updateJerseyNumber/updateJerseyNumber' // 目标页面的路径
+    });
+  },
+
   toDelete(e){
     this.setData({
       deleteFlag: !this.data.deleteFlag

@@ -627,7 +627,7 @@ Page({
       const _ = db.command;
       const messageResult = await db.collection('judge').where({
         finished: false,
-        judgeid: "id6"
+        judgeid: openid
       }).get();
       console.log(messageResult)
 
@@ -816,6 +816,7 @@ Page({
       ]);
 
       console.log('数据更新成功');
+      this.getInfo();
     } catch (error) {
       console.error('数据更新失败:', error);
     }

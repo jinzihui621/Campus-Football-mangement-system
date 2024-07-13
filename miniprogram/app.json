@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/homePage/homePage",
     "pages/manager/manager",
+    "pages/updateJerseyNumber/updateJerseyNumber",
+    "pages/homePage/homePage",
     "pages/player/player", 
-    
     "pages/completeInfo/completeInfo",
 		"pages/board/board",
 		"pages/match/match",
@@ -42,7 +42,7 @@
         "selectedIconPath": "/image/tabBar/shouye-active.png"
       },
       {
-        "pagePath":"pages/management/management",
+        "pagePath":"pages/player/player",
         "text":"管理",
         "iconPath":"/image/tabBar/guanli.png",
         "selectedIconPath": "/image/tabBar/guanli-2.png"

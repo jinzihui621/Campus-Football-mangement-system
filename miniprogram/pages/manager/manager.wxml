@@ -15,11 +15,11 @@
   <!-- 第二排按钮 -->
   <view class = "buttonContainer2">
     <view class = "imageButton">
-      <image  src="/image/edit.png" mode="aspectFit"/>
-      <text>信息完善</text>
+      <image  src="/image/edit.png" mode="aspectFit"  bindtap = "gotoUpdate"/>
+      <text>修改信息</text>
     </view>
     <view class = "imageButton">
-      <image class = "appealPattern" src="/image/appeal.png" />
+      <image class = "appealPattern" src="/image/appeal.png"/>
       <text>申诉通道</text>
     </view>
   </view>

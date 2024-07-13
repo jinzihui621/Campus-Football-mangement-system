@@ -137,7 +137,10 @@ Page({
       const team_id = teamPlayerRes.data[0].team_id;
       // 2. 根据 team_id 获取所有相关的比赛信息
       const matchRes = await db.collection('matchInfo').where({
-        teamA_id: team_id
+        $or: [
+          { teamA_id: team_id },
+          { teamB_id: team_id }
+        ]
       }).get();
       const matches = matchRes.data.map(match => ({
         teamA: match.teamA,

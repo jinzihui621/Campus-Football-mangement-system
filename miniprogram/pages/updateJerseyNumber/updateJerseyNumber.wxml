@@ -1,0 +1,13 @@
+<!-- pages/updateJerseyNumber/updateJerseyNumber.wxml -->
+<view class = "page">
+  <view class="container">
+  <picker mode="selector" range="{{formattedMembers}}"  bindchange="onPlayerChange">
+    <view class="picker">
+      {{selectedPlayer ? selectedPlayer.name + ' 学号: ' + selectedPlayer.number + ' 球员号: ' + selectedPlayer.player_num : '请点击选择球员'}}
+    </view>
+  </picker>
+  <input type="number" placeholder="输入新的队服号" bindinput="onJerseyNumberInput" />
+
+  <button type="primary" bindtap="updateJerseyNumber">修改队服号</button>
+</view>
+</view>

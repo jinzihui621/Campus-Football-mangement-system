@@ -26,7 +26,7 @@ App({
       },
       userRole: '赛事管理',
       loginFlag: 1,
-      userPermissions: ['球员', '裁判'] // 假设用户拥有球员和裁判的权限
+      userPermissions: ['球员', '裁判', '球队管理', '赛事管理'] // 假设用户拥有球员和裁判的权限
     }
   },
   globalData: {

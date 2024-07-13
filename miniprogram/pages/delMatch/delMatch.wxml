@@ -1,27 +1,51 @@
 <view class="container">
   <view class="input-group">
     <text class="label">日期</text>
-    <input placeholder="请输入日期" data-field="day" value="{{day}}" bindinput="onInputChange" />
+    <picker mode="date" value="{{day}}" start="2020-01-01" end="2030-12-31" bindchange="onInputChange" data-field="day">
+      <view class="picker">
+        {{day || '请选择日期'}}
+      </view>
+    </picker>
   </view>
   <view class="input-group">
     <text class="label">比赛轮次</text>
-    <input placeholder="请输入比赛处于第几轮" data-field="round" value="{{round}}" bindinput="onInputChange" />
+    <picker mode="selector" range="{{rounds}}" value="{{roundIndex}}" bindchange="onInputChange" data-field="roundIndex">
+      <view class="picker">
+        {{rounds[roundIndex] || '请选择比赛轮次'}}
+      </view>
+    </picker>
   </view>
   <view class="input-group">
     <text class="label">开始时间</text>
-    <input placeholder="请输入开始时间" data-field="starttime" value="{{starttime}}" bindinput="onInputChange" />
+    <picker mode="time" value="{{starttime}}" bindchange="onInputChange" data-field="starttime">
+      <view class="picker">
+        {{starttime || '请选择开始时间'}}
+      </view>
+    </picker>
   </view>
   <view class="input-group">
     <text class="label">主队名称</text>
-    <input placeholder="请输入主队名称" data-field="teamnameA" value="{{teamnameA}}" bindinput="onInputChange" />
+    <picker mode="selector" range="{{teams}}" value="{{teamnameAIndex}}" bindchange="onInputChange" data-field="teamnameAIndex">
+      <view class="picker">
+        {{teams[teamnameAIndex] || '请选择主队名称'}}
+      </view>
+    </picker>
   </view>
   <view class="input-group">
     <text class="label">客队名称</text>
-    <input placeholder="请输入客队名称" data-field="teamnameB" value="{{teamnameB}}" bindinput="onInputChange" />
+    <picker mode="selector" range="{{teams}}" value="{{teamnameBIndex}}" bindchange="onInputChange" data-field="teamnameBIndex">
+      <view class="picker">
+        {{teams[teamnameBIndex] || '请选择客队名称'}}
+      </view>
+    </picker>
   </view>
   <view class="input-group">
     <text class="label">场地</text>
-    <input placeholder="请输入场地" data-field="place" value="{{place}}" bindinput="onInputChange" />
+    <picker mode="selector" range="{{places}}" value="{{placeIndex}}" bindchange="onInputChange" data-field="placeIndex">
+      <view class="picker">
+        {{places[placeIndex] || '请选择场地'}}
+      </view>
+    </picker>
   </view>
   <button bindtap="delSchedule">确定删除</button>
 </view>

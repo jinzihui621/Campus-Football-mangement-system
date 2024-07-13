@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/delMatch/delMatch",
+          "pathName": "pages/delMatch/delMatch",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/player/player",
           "pathName": "pages/player/player",
           "query": "",

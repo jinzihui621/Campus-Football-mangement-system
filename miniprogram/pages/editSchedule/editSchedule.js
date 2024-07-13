@@ -6,12 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    day: " ",
-    round: " ",
+    day: "",
+    roundIndex: "",
+    rounds: ['第一轮', '第二轮', '第三轮','第四轮', '第五轮', '第六轮','第七轮'],
     starttime: " ",
-    teamnameA: " ",
-    teamnameB: " ",
-    place: " "
+    teamnameAIndex: "",
+    teamnameBIndex: "",
+    teams: ['信息A', '信息B', '信息C','城建A','都柏林','环生A','艺设A','机电A'],
+    placeIndex: "",
+    places: ['北工大北操场', '北工大南操场']
 
   },
 

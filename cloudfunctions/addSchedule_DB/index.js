@@ -43,16 +43,25 @@ exports.main = async (event) => {
         console.log("时间差",timeDifference);
         if (timeDifference <= 5400000) {
           console.log("flag",flag);
-          flag++;
+          flag=1;
           break; // 找到符合条件的记录后退出循环
+        }
+        if(res.data[i].turn == turn){
+          flag=-1;
+          break;
         }
       }
     }
     console.log("flag最后",flag);
-    if (flag>0) {
+    if (flag==1) {
       return {
         success: false,
         message: '时间地点冲突！'
+      };
+    } else if(flag==-1){
+      return {
+        success: false,
+        message: '该球队此轮次已有比赛！'
       };
     } else {
       // 没有冲突，继续获取下一个 match_id

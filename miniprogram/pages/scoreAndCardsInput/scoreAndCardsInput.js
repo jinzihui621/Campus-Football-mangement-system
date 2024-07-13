@@ -627,7 +627,7 @@ Page({
       const _ = db.command;
       const messageResult = await db.collection('judge').where({
         finished: false,
-        judgeid: openid
+        judgeid: "id2"
       }).get();
       console.log(messageResult)
 

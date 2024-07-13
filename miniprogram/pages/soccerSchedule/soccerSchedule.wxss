@@ -105,3 +105,8 @@
   font-size: 16px;
   background: #FF0000;
 }
+
+.operationPattern {
+  width: 30rpx;
+  height: 30rpx;
+}

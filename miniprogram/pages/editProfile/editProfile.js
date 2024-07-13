@@ -207,7 +207,9 @@ Page({
       duration: 1000
     });
     setTimeout(() => {
-      wx.navigateBack();
+      wx.switchTab({
+        url: '/pages/me/me'
+      });
     }, 1000);
   }
-});
+})

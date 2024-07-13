@@ -129,7 +129,7 @@ Page({
     const { id } = event.currentTarget.dataset;
     const match = this.data.matches.find(match => match.id === id);
     wx.navigateTo({
-      url: `/pages/matchDetail/matchDetail?day=${match.day}&starttime=${match.starttime}&teamA=${match.teamA}&teamB=${match.teamB}&place=${match.place}&scoreA=${match.scoreA}&scoreB=${match.scoreB}&game_running_flag=${match.game_running_flag}&game_finished_flag=${match.game_finished_flag}`
+      url: `/pages/matchDetail/matchDetail?id=${match.id}&day=${match.day}&starttime=${match.starttime}&teamA=${match.teamA}&teamB=${match.teamB}&place=${match.place}&scoreA=${match.scoreA}&scoreB=${match.scoreB}&turn=${match.turn}&game_running_flag=${match.game_running_flag}&game_finished_flag=${match.game_finished_flag}`
     });
   },
 
@@ -183,7 +183,8 @@ Page({
           teamA: match.teamA,
           teamB: match.teamB,
           scoreA: match.scoreA,
-          scoreB: match.scoreB,
+					scoreB: match.scoreB,
+					turn:match.turn,
           game_running_flag: start,
           game_finished_flag: end
         };

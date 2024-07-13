@@ -7,7 +7,7 @@
       <view class="date-time">{{day}} {{starttime}} {{place}}</view>
       <view class="score">
         <text wx:if="{{game_running_flag || game_finished_flag}}" class="team-a-score">{{scoreA}}</text>
-        <text wx:if="{{game_running_flag || game_finished_flag}}" class="colon">:</text>
+        <text wx:if="{{game_running_flag || game_finished_flag}}" class="colon">-</text>
         <text wx:if="{{game_running_flag || game_finished_flag}}" class="team-b-score">{{scoreB}}</text>
         <text wx:if="{{!game_running_flag && !game_finished_flag}}" class="vs">VS</text>
       </view>
@@ -18,29 +18,33 @@
     </view>
   </view>
 
-	<scroll-view class="timeline" scroll-y="true">
-		<view class="timeline-content">
-			<view class="teamA-events">
-				<block wx:for="{{events}}" wx:key="time">
-					<view class="event" wx:if="{{item.team === 'teamA'}}">
-						<view class="details-left">
-							<text>{{item.description}}</text>
-						</view>
-						<view class="time-left">{{item.time}}</view>
-					</view>
-				</block>
-			</view>
-			<view class="separator"></view>
-			<view class="teamB-events">
-				<block wx:for="{{events}}" wx:key="time">
-					<view class="event" wx:if="{{item.team === 'teamB'}}">
-						<view class="time-right">{{item.time}}</view>
-						<view class="details-right">
-							<text>{{item.description}}</text>
-						</view>
-					</view>
-				</block>
-			</view>
-		</view>
-	</scroll-view>
+  <scroll-view class="timeline" scroll-y="true" wx:if="{{game_running_flag || game_finished_flag}}">
+    <view class="timeline-content">
+      <view class="teamA-events">
+        <block wx:for="{{events}}" wx:key="time">
+          <view class="event" wx:if="{{item.team === 'teamA'}}">
+            <view class="details-left">
+              <text>{{item.description}}</text>
+            </view>
+            <view class="time-left">{{item.time}}</view>
+          </view>
+        </block>
+      </view>
+      <view class="separator"></view>
+      <view class="teamB-events">
+        <block wx:for="{{events}}" wx:key="time">
+          <view class="event" wx:if="{{item.team === 'teamB'}}">
+            <view class="time-right">{{item.time}}</view>
+            <view class="details-right">
+              <text>{{item.description}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{!game_running_flag && !game_finished_flag}}" class="not-started">
+    <text>比赛尚未开始</text>
+  </view>
 </view>

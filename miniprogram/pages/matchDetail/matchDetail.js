@@ -1,7 +1,4 @@
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     events: [
       { time: "22'", description: "金子辉进球", team: "teamA" },
@@ -11,12 +8,11 @@ Page({
       { time: "63'", description: "崔朗清进球", team: "teamB" },
       { time: "64'", description: "徐鑫进球", team: "teamA" },
       { time: "64'", description: "章鸿亮进球", team: "teamB" }
-    ]
+    ],
+    game_running_flag: 0,
+    game_finished_flag: 0
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
     const {
       day,

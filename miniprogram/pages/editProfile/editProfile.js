@@ -12,7 +12,31 @@ Page({
     major: ''
   },
 
-  onLoad: function() {
+  // 获取当前用户的 OpenID
+  getOpenId: function() {
+    return wx.cloud.callFunction({
+      name: 'getOpenid'
+    }).then(res => res.result.openid);
+  },
+
+  onLoad: async function() {
+      // 保存用户信息到全局数据或数据库
+      try{
+        const openid = await this.getOpenId(); 
+        const db = wx.cloud.database()
+        const SearchRes = await db.collection('user').doc(openid).get();
+        const sanitizedData = {
+          avatarUrl: app.globalData.userInfo.avatarUrl,
+          name: SearchRes.data.name,
+          nickname: SearchRes.data.nickname,
+          signature: SearchRes.data.p_signature,
+          studentID: SearchRes.data.number,
+          contact: SearchRes.data.phone_number,
+          college: SearchRes.data.department,
+          major: SearchRes.data.major
+        };
+        app.globalData.userInfo = sanitizedData;
+      }catch{}
     // 可以从全局数据或数据库加载用户信息
     const userInfo = app.globalData.userInfo || {};
     this.setData({
@@ -177,32 +201,44 @@ Page({
     }
     const db = wx.cloud.database()
     try{
-      await db.collection('user').doc(openid).update({
+      const idRes = await db.collection('user').where({
+        number: sanitizedData.studentID
+      }).get();
+      if(idRes.data.length > 0){
+        if(idRes.data[0]._id === openid){}
+        else{
+          wx.showToast({
+            title: '重复学号',
+            icon:"error",
+            duration: 1000
+          });
+          return;
+       }
+      }
+    }catch{}
+    try{
+      await db.collection('user').doc(openid).set({
         data: dbadd
       });
-      await db.collection('player').doc(openid).update({
-        data: dbadd
-      });
-      console.log("xxxxx")
-    }catch{
-      const dbadd_n = {
-        _id: openid,
-        ...dbadd
+      const playerRes = await db.collection('player').doc(openid).get();
+      const dbadd_r = {
+        ...dbadd,
+        player_num: playerRes.data.player_num
       };
-      await db.collection('user').add({
-        data: dbadd_n
+      await db.collection('player').doc(openid).set({
+        data: dbadd_r
+      });
+    }catch{
+      await db.collection('user').doc(openid).set({
+        data: dbadd
       });
       const dbadd_r = {
-        _id: openid,
         ...dbadd,
         player_num: ""
       };
-      await db.collection('player').add({
+      await db.collection('player').doc(openid).set({
         data: dbadd_r
       });
-      console.log("11111")
-      console.log(dbadd_n)
-      console.log(dbadd_r)
     }
     wx.showToast({
       title: '保存成功',
@@ -211,7 +247,7 @@ Page({
     });
     setTimeout(() => {
       wx.switchTab({
-				url: '/pages/me/me',
+				url: '/pages/homePage/homePage',
 			});
     }, 1000);
   }

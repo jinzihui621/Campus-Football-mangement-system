@@ -18,7 +18,7 @@
       <view class="raceInfo">
         <view>{{matchTime}}</view>
         <view class="scores">{{scoreA}}:{{scoreB}}</view>
-        <view >{{match}}第{{turn}}轮比赛</view>
+        <view >{{match}}{{turn}}比赛</view>
       </view>
       <view class="circleB"><text class="teamName">{{teamB}}</text></view>
     </view>

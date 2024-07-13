@@ -9,8 +9,8 @@
 }
 
 .logo {
-  width: 300rpx;
-  height: 300rpx;
+  width: 60%;
+  height: 60%;
   margin-bottom: 80rpx;
 }
 

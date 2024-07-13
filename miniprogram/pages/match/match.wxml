@@ -14,7 +14,7 @@
  
       <!--内容布局-->
       <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
-        <swiper-item class='swiper'>
+        <swiper-item>
          <!--选择年份 积分榜 球员榜 赛程-->
           <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"scroll-top="{{scrollTop}}">
             <!--tab栏-->
@@ -82,30 +82,34 @@
 							</swiper-item>
 							<!-- 赛程 -->
               <swiper-item>
-                <fui-pagination total="{{50}}" pageType="{{2}}" prevText="上一轮" nextText="下一轮" bind:change="changeTurn"></fui-pagination>
-                <view class="table-container">  
-                  <view class="table-header">  
-                    <view class="table-cell">时间</view>  
-                    <view class="table-cell">队伍A</view>  
-                    <view class="table-cell">比分A</view>  
-                    <view class="table-cell">比分B</view>  
-                    <view class="table-cell">队伍B</view>  
-                  </view>  
-                  <block wx:for="{{matchList}}" wx:key="index">  
-                    <view class="table-row">  
-                      <view class="table-cell">{{item.date}}</view>  
-                      <view class="table-cell">{{item.teamA}}</view>  
-                      <view class="table-cell">{{item.teamAScore}}</view>  
-                      <view class="table-cell">{{item.teamBScore}}</view>  
-                      <view class="table-cell">{{item.teamB}}</view>  
-                    </view>  
-                  </block>  
+                <fui-pagination total="{{70}}" pageType="{{2}}" prevText="上一轮" nextText="下一轮" bind:change="changeTurn"></fui-pagination>
+                <view class="table-header">  
+                  <view class="table-cell">时间</view>  
+                  <view class="table-cell">队伍A</view>  
+                  <view class="table-cell">比分A</view>  
+                  <view class="table-cell">比分B</view>  
+                  <view class="table-cell">队伍B</view>  
                 </view>
+                <swiper class="swiper" bindchange="turnChange" current='{{turn}}'>
+                  <swiper-item wx:for="{{matchList}}" wx:key="index" >
+                    <view class="table-container">    
+                      <block wx:for="{{item}}" wx:key="index">  
+                        <view class="table-row">  
+                          <view class="table-cell">{{item.date}}</view>  
+                          <view class="table-cell">{{item.teamA}}</view>  
+                          <view class="table-cell">{{item.teamAScore}}</view>  
+                          <view class="table-cell">{{item.teamBScore}}</view>  
+                          <view class="table-cell">{{item.teamB}}</view>  
+                        </view>  
+                      </block>
+                    </view>
+                  </swiper-item>
+                </swiper>
               </swiper-item>
             </swiper>
           </scroll-view>
         </swiper-item>
-        <swiper-item class='swiper'>
+        <swiper-item>
           <view wx:for="{{secondList}}" wx:for-item="item" class='record-item'>
             <view class='name'>
               <span>名称：{{item.name}}</span>
@@ -113,7 +117,7 @@
             </view>
           </view>
         </swiper-item>
-        <swiper-item class='swiper'>
+        <swiper-item>
           <view wx:for="{{thirdList}}" wx:for-item="item" class='record-item'>
            <view class='name'>
               <span>名称：{{item.name}}</span>

@@ -17,8 +17,7 @@ Page({
 		currentListIndex:0,
 		currentPlayerTab:'goals',
     date:"2024",
-    total_turns:50, //赛事的总轮数的十倍
-    turn:1, //当前显示的赛程轮次
+    turn:0, //当前显示的赛程轮次-1
     tableColumns: [
       {title: "日期",key: "date",width: "100rpx"}, 
       {title: "队伍A",key: "teamA",}, 
@@ -27,10 +26,15 @@ Page({
       {title:"队伍B",key:"teamB"}
     ],
     matchList:[
-      {date:"07-07 00:00",teamA:"team1",teamAScore:"-",teamBScore:'-',teamB:"name1"},
+      [{date:"07-07 00:00",teamA:"team1",teamAScore:"-",teamBScore:'-',teamB:"name1"},
       {date:"07-07 00:00",teamA:"team2",teamAScore:"-",teamBScore:'-',teamB:"name2"},
       {date:"07-07 00:00",teamA:"team3",teamAScore:"3",teamBScore:'1',teamB:"name3"},
-      {date:"07-07 00:00",teamA:"team4",teamAScore:"2",teamBScore:'3',teamB:"name4"}
+      {date:"07-07 00:00",teamA:"team4",teamAScore:"2",teamBScore:'3',teamB:"name4"}],
+      [{date:"07-07 00:00",teamA:"team1",teamAScore:"-",teamBScore:'-',teamB:"name1"},
+      {date:"07-07 00:00",teamA:"team2",teamAScore:"-",teamBScore:'-',teamB:"name2"},
+      {date:"07-07 00:00",teamA:"team3",teamAScore:"3",teamBScore:'1',teamB:"name3"},
+      {date:"07-07 00:00",teamA:"team4",teamAScore:"2",teamBScore:'3',teamB:"name4"}],
+      [{}],[{}],[{}],[{}],[{}]
 		],
 		//积分榜
 		tableRankColumns: [
@@ -121,6 +125,23 @@ Page({
         currentIndex: currentPageIndex
       })
     }
+    this.setData({
+      matchList:this.data.matchList
+    })
+  },
+  //处理滑动事件
+  eventHandler:function(e){
+    return ""
+  },
+  //轮次切换
+  turnChange:function(e){
+    if ("touch" === e.detail.source) {
+      let turn = this.data.turn
+      turn = (turn + 1) % 7
+      this.setData({
+        turn: turn
+      })
+    }
   },
   //用户点击tab时调用——切换赛事
   titleClick: function (e) {
@@ -134,7 +155,7 @@ Page({
     this.setData({
       //拿到当前索引并动态改变
       currentListIndex: e.currentTarget.dataset.idx,
-      matchList:this.data.matchList
+      //matchList:this.data.matchList
     })
   },
   /*积分榜表格组件请求加载*/
@@ -193,23 +214,23 @@ Page({
     }
     return true
   },
-  /*赛程信息表格组件请求加载 */
-  getMatchListLoading: function(e){
-    try{
-      this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
-    }catch(error){
-      wx.showToast({
-        title: '网络连接不良',
-        icon: 'none',
-        duration: 1000
-      })
-      return false
-    }
-    if(matchList.length===0){
-      return false
-    }
-    return true
-  },
+  // /*赛程信息表格组件请求加载 */
+  // getMatchListLoading: function(e){
+  //   try{
+  //     this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
+  //   }catch(error){
+  //     wx.showToast({
+  //       title: '网络连接不良',
+  //       icon: 'none',
+  //       duration: 1000
+  //     })
+  //     return false
+  //   }
+  //   if(matchList.length===0){
+  //     return false
+  //   }
+  //   return true
+  // },
   //加载积分榜数据
   loadRank_db:async function(date, matchName) {  
       try {  
@@ -400,15 +421,13 @@ Page({
       const resMatchInfo = await db.collection("matchInfo").where({  
           matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
           event_name: matchName,
-          turn:turn 
+          turn:"第"+turn+"轮" 
       }).get();
       console.log(turn)
       console.log(resMatchInfo)
       if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
           console.log("没有找到匹配的比赛信息");
-          this.setData({
-            matchList:[]
-          })
+          this.data.matchList[turn-1]=[]
           return;  
       }
       let matchIDs = resMatchInfo.data.map(item => item.match_id);
@@ -437,12 +456,11 @@ Page({
           group: key,  
           members: groupedItems[key]  
         }));
-        let matchesList = []
-        groupedItemsList.forEach(async (item,index)=>{
+        let matchesListItem = []
+        groupedItemsList.forEach(async item=>{
           const matchTime_temp=await this.getMatchTime(item.match_id)
           const matchTimeWithFormat=await this.formatDate(matchTime_temp)
-          matchesList.push({
-            id:index+1,
+          matchesListItem.push({
             date:matchTimeWithFormat,
             teamA:item.members[0].team,
             teamAScore:item.members[0].score,
@@ -450,9 +468,11 @@ Page({
             teamBScore:item.members[1].score
           })
         })
-        console.log(matchesList)
+        console.log(matchesListItem)
+        this.data.matchList[turn-1]=matchesListItem
+        console.log(this.data.matchList)
         this.setData({  
-          matchList: matchesList,
+          matchList: this.data.matchList,
         });
       }).catch(error => {  
           console.error('Error fetching player and team names:', error);  
@@ -544,11 +564,12 @@ Page({
   /*切换比赛轮次*/
   changeTurn:async function(e){
     console.log(e)
-    await this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,e.detail.current)
-    console.log(this.data.matchList)
+    // await this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,e.detail.current)
+    // console.log(this.data.matchList)
     this.setData({
-      turn:e.detail.current
+      turn:e.detail.current-1
     })
+    console.log(this.data.turn)
     console.log(this.data.matchList)
   },
 	// 切换球员榜榜单
@@ -562,6 +583,7 @@ Page({
    */
   onLoad(options) {
     let year=new Date().getFullYear()
+    this.data.matchList=[]
     this.setData({
       date:year
     })
@@ -569,10 +591,10 @@ Page({
     this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
     this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
     this.loadRed_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
-    this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
-    this.setData({
-      matchList:this.data.matchList
-    })
+    let i=0
+    for(i=1;i<=7;i++){
+      this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,i)
+    }
   },
 
   /**
@@ -586,7 +608,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    let year=new Date().getFullYear()
+    this.setData({
+      date:year
+    })
+    this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    this.loadRed_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    // this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
+    // this.setData({
+    //   matchList:this.data.matchList
+    // })
   },
 
   /**
@@ -607,16 +640,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
-    this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
-    this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
-    this.loadRed_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
-    this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
-    console.log(this.data.matchList)
-    this.setData({
-      matchList:this.data.matchList
-    })
-    console.log(this.data.matchList)
+    // this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    // this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    // this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    // this.loadRed_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
+    // this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,this.data.turn)
+    // console.log(this.data.matchList)
+    // this.setData({
+    //   matchList:this.data.matchList
+    // })
+    // console.log(this.data.matchList)
   },
 
   /**

@@ -617,8 +617,8 @@ Page({
    */
   onShow() {
   },
-  // 获取OpenID并查询messageId和比赛信息
-  getInfo: async function() {
+   // 获取OpenID并查询messageId和比赛信息
+   getInfo: async function() {
     try {
       // 获取当前用户的OpenID
       const openid = await this.getOpenId();
@@ -627,7 +627,7 @@ Page({
       const _ = db.command;
       const messageResult = await db.collection('judge').where({
         finished: false,
-        judgeid: "id6"
+        judgeid: openid
       }).get();
       console.log(messageResult)
 
@@ -656,6 +656,49 @@ Page({
         } else {
           console.log('没有找到对应的比赛信息');
         }
+        try {
+          const resA = await db.collection('player_score_list').where({
+            team_id: this.data.teamAid,
+            match_id:this.data.race
+          }).get();
+    
+          if (resA.data.length > 0) {
+            const updatedPlayerA = resA.data.map(item => ({
+              teamID: item.team_id,
+              playerCode: Number(item.player_num),
+              score: item.score,
+              yellowCard: item.yellow,
+              redCard: item.red
+            }));
+            this.setData({
+              playerA: updatedPlayerA
+            });
+          } else {
+            console.log('没有找到符合条件的数据');
+          }
+          const resB = await db.collection('player_score_list').where({
+            team_id: this.data.teamBid,
+            match_id:this.data.race
+          }).get();
+    
+          if (resB.data.length > 0) {
+            const updatedPlayerB = resB.data.map(item => ({
+              teamID: item.team_id,
+              playerCode: Number(item.player_num),
+              score: item.score,
+              yellowCard: item.yellow,
+              redCard: item.red
+            }));
+    
+            this.setData({
+              playerB: updatedPlayerB
+            });
+          } else {
+            console.log('没有找到符合条件的数据');
+          }
+        } catch (error) {
+          console.error('查询失败:', error);
+        }
       } else {
         console.log('没有找到符合条件的信息');
       }
@@ -663,6 +706,7 @@ Page({
       console.error('查询失败:', error);
     }
   },
+
 
   startMatch_DB:function(){
     db.collection('judge').where({
@@ -772,6 +816,7 @@ Page({
       ]);
 
       console.log('数据更新成功');
+      this.getInfo();
     } catch (error) {
       console.error('数据更新失败:', error);
     }

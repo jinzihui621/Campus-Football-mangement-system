@@ -1,48 +1,104 @@
 Page({
   data: {
-    message: {}
+    message: {},
+    id: null,
+    messages: []
   },
 
   onLoad: function(options) {
     const id = options.id;
-    // 从全局数据中或通过网络请求获取消息详情，这里我们简单模拟
-    const messages = [
-      {
-        id: 1,
-        title: '邀请加入计算机足球队',
-        content: '金子辉邀请你加入计算机足球队的大家庭，请确认加入！\n如非本人请忽略~',
-      },
-      {
-        id: 2,
-        title: '邀请执法比赛',
-        content: '工超组委会邀请你执法2024年7月7日12时xx队与xx队的比赛，请确认！\n如非本人请忽略~',
-      }
-    ];
-    const message = messages.find(msg => msg.id == id);
-    this.setData({ message });
-  },
-
-  confirmAction: function() {
-    // 确认操作逻辑
-    wx.showToast({
-      title: '已确认',
-			icon: 'success',
-			duration: 1000
+    const messages = JSON.parse(decodeURIComponent(options.messages));
+    this.setData({
+      id: id,
+      messages: messages,
+      message: messages.find(msg => msg.id == id)
     });
-    setTimeout(() => {
-			wx.navigateBack();
-		}, 1000);
   },
 
-  rejectAction: function() {
+  confirmAction: async function() {
+    const db = wx.cloud.database();
+    const { message, messages } = this.data;
+    try {
+      // 更新当前消息的 status 字段为“同意”
+      await db.collection('message').where({
+        recv_id: message.recv_id,
+        send_id: message.send_id
+      }).update({
+        data: {
+          status: "同意"
+        }
+      });
+          // 创建新记录对象
+    const newRecord = {
+      player_id: message.player_id,
+      player_num: "-1",
+      team_id: message.team_id
+    };
+      await db.collection('team_player').add({
+        data:newRecord
+      })
+      // 更新其余消息的 status 字段为“拒绝”
+      await db.collection('message').where({
+        send_id: db.command.in(messages.filter(msg => msg.send_id != message.send_id).map(msg => msg.send_id)),
+        recv_id: message.recv_id
+      }).update({
+        data: {
+          status: "拒绝"
+        }
+      });
+
+      wx.showToast({
+        title: '已确认',
+        icon: 'success',
+        duration: 1000
+      });
+
+      setTimeout(() => {
+        wx.navigateBack({delta : 2});
+      }, 1000);
+
+    } catch (error) {
+      console.error('更新失败:', error);
+      wx.showToast({
+        title: '操作失败，请重试',
+        icon: 'none',
+        duration: 1000
+      });
+    }
+  },
+
+  rejectAction: async function() {
     // 拒绝操作逻辑
-    wx.showToast({
-      title: '已拒绝',
-			icon: 'none',
-			duration: 1000
-    });
-    setTimeout(() => {
-			wx.navigateBack();
-		}, 1000);
+    const db = wx.cloud.database();
+    const { message, messages } = this.data;
+    try {
+      // 更新当前消息的 status 字段为“同意”
+      await db.collection('message').where({
+        recv_id: message.recv_id,
+        send_id: message.send_id
+      }).update({
+        data: {
+          status: "拒绝"
+        }
+      });
+
+      wx.showToast({
+        title: '已拒绝',
+        icon: 'success',
+        duration: 1000
+      });
+
+      setTimeout(() => {
+        wx.navigateBack({delta : 2});
+      }, 1000);
+
+    } catch (error) {
+      console.error('更新失败:', error);
+      wx.showToast({
+        title: '操作失败，请重试',
+        icon: 'none',
+        duration: 1000
+      });
+    }
   }
 });

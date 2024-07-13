@@ -1,16 +1,18 @@
 {
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "projectname": "%E6%A0%A1%E5%9B%AD%E8%B6%B3%E7%90%83%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F",
-  "setting": {
-    "compileHotReLoad": true
-  },
   "condition": {
     "miniprogram": {
       "list": [
         {
-<<<<<<< HEAD
           "name": "pages/me/me",
           "pathName": "pages/me/me",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/me/login",
+          "pathName": "pages/me/login",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -23,57 +25,6 @@
           "scene": null
         },
         {
-=======
->>>>>>> 01dc5cbd4e183511dcd541a8cbc3e9ba15fc64a3
-          "name": "pages/player/player",
-          "pathName": "pages/player/player",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/test/test",
-          "pathName": "pages/test/test",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/manager/manager",
-          "pathName": "pages/manager/manager",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/editSchedule/editSchedule",
-          "pathName": "pages/editSchedule/editSchedule",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/editProfile/editProfile",
-          "pathName": "pages/editProfile/editProfile",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/manager/manager",
-          "pathName": "pages/manager/manager",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/match/match",
-          "pathName": "pages/match/match",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "pages/scoreAndCardsInput/scoreAndCardsInput",
           "pathName": "pages/scoreAndCardsInput/scoreAndCardsInput",
           "query": "",
@@ -81,22 +32,8 @@
           "scene": null
         },
         {
-          "name": "pages/soccerSchedule/soccerSchedule",
-          "pathName": "pages/soccerSchedule/soccerSchedule",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/matchDetail1/matchDetail1",
-          "pathName": "pages/matchDetail1/matchDetail1",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "pages/matchDetail/matchDetail",
-          "pathName": "pages/matchDetail/matchDetail",
+          "name": "pages/manager/manager",
+          "pathName": "pages/manager/manager",
           "query": "",
           "launchMode": "default",
           "scene": null

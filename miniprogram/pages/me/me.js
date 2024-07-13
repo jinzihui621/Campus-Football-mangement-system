@@ -22,11 +22,31 @@ Page({
 
   },
 
+receive_DB:async function(){
+  const db = wx.cloud.database()
+  // 查询符合条件的messageId
+  const _ = db.command;
+  const messageId = app.globalData.userInfo.studentID;
+  console.log(messageId);
+  const msgResult = await db.collection('message').where({
+    recv_id: messageId,
+    status: "待定"
+  }).get();
+  if(msgResult.data.length > 0){
+    wx.showToast({
+      title: '有新消息',
+      icon:'none',
+      duration:1000
+    })
+  }
+},
+
 	onShow: function() {
 		this.setData({ 
 			userInfo: app.globalData.userInfo,
 			userRole: app.globalData.userRole
-		});
+    });
+    this.receive_DB();
 	},
 	
 	navigateToMessages: function() {

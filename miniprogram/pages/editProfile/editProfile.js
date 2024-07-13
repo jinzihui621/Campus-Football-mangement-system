@@ -56,6 +56,15 @@ Page({
     const contactPattern = /^[\d+]*$/; // 数字和加号
     const chinesePattern = /^[\u4e00-\u9fa5]*$/; // 中文汉字
 
+		if (!name) {
+      wx.showToast({
+        title: '姓名不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
     if (name && (name.length > 20 || !namePattern.test(name))) {
       wx.showToast({
         title: '姓名只能包含中文汉字、英文字母和中间点，且不超过20个字符',
@@ -110,6 +119,15 @@ Page({
       return false;
     }
 
+		if (!studentID) {
+      wx.showToast({
+        title: '学号不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
     if (studentID && !/^\d*$/.test(studentID)) {
       wx.showToast({
         title: '学号必须为数字',
@@ -122,12 +140,19 @@ Page({
     return true;
   },
 
-  saveProfile: function() {
+// 获取当前用户的 OpenID
+  getOpenId: function() {
+    return wx.cloud.callFunction({
+      name: 'getOpenid'
+    }).then(res => res.result.openid);
+  },
+
+  saveProfile: async function() {
     // 验证用户输入
     if (!this.validateInput()) {
       return;
     }
-
+    const openid = await this.getOpenId();
     // 保存用户信息到全局数据或数据库
     const sanitizedData = {
       avatarUrl: this.data.avatarUrl,
@@ -141,6 +166,41 @@ Page({
     };
 
     app.globalData.userInfo = sanitizedData;
+    const dbadd = {
+      department: sanitizedData.college,
+      major: sanitizedData.major,
+      name: sanitizedData.name,
+      nickname: sanitizedData.nickname,
+      number: sanitizedData.studentID,
+      p_signature:sanitizedData.signature,
+      phone_num: sanitizedData.contact
+    }
+    const db = wx.cloud.database()
+    try{
+      await db.collection('user').doc(openid).update({
+        data: dbadd
+      });
+      await db.collection('player').doc(openid).update({
+        data: dbadd
+      });
+    }catch{
+      const dbadd_n = {
+        _id: openid,
+        ...dbadd
+      };
+      await db.collection('user').add({
+        data: dbadd_n
+      });
+      const dbadd_r = {
+        _id: openid,
+        ...dbadd,
+        player_num: ""
+      };
+      await db.collection('player').add({
+        data: dbadd_r
+      });
+      console.log("11111")
+    }
     wx.showToast({
       title: '保存成功',
       icon: 'success',

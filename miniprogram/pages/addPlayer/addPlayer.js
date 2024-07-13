@@ -1,4 +1,6 @@
 // pages/addPlayer/addPlayer.js
+const app = getApp();
+
 Page({
 
   /**
@@ -8,14 +10,6 @@ Page({
     inputValue: "",
     // 判断搜索框是否为空，搜索框中有内容则显示删除按钮
     empty: true,
-    list: [
-      {name: "zs", score: 10},
-      {name: "ss", score: 10},
-      {name: "ds", score: 10},
-      {name: "hs", score: 10},
-      {name: "js", score: 10},
-      {name: "ks", score: 10}
-    ],
     searchedPlayer: [
       {name: "gf", sno:"21041015",score: 10,red:4,yellow:3},
       {name: "gf", sno:"21041014",score: 10,red:4,yellow:3},
@@ -120,6 +114,7 @@ Page({
     //foundPlayer这个变量为被添加的球员，定义在了data中
     //现在只需要判断一下foundPlayer是不是为空就可以了，不为空就进行数据库的添加操作
     //后端逻辑：如果foundPlayer已经在本队了则返回0，如果foundPlayer不在本队则返回1
+    this.addPlayer_DB("21212124", "id4");
     if(this.data.foundPlayer!=null){
       wx.showToast({
         title: '添加成功',
@@ -135,6 +130,55 @@ Page({
       });
     }
     
+  },
+// 获取当前用户的 OpenID
+getOpenId: function() {
+  return wx.cloud.callFunction({
+    name: 'getOpenid'
+  }).then(res => res.result.openid);
+},
+  addPlayer_DB:async function(recv_id, player_id){
+    const db = wx.cloud.database()
+    const openid = await this.getOpenId();
+    // 查询符合条件的messageId
+    const _ = db.command;
+    const messageResult = await db.collection('user').where({
+        openid: "11111"
+      }).get();
+    const messageId = app.globalData.userInfo.studentID;
+    console.log(messageId);
+    const leaderResult = await db.collection('teamleader').where({
+      number: messageId
+    }).get();
+    const leaderID = leaderResult.data[0]._id;
+    const teamResult = await db.collection('leader_manage_team').where({
+      teamleader_id: leaderID
+    }).get();
+    const teamID = teamResult.data[0].team_id;
+    const teamNameResult = await db.collection('team').where({
+      team_id: teamID
+    }).get();
+    const teamName = teamNameResult.data[0].team_name;
+    console.log(messageId);
+    console.log(recv_id);
+    console.log(teamName);
+    const currentTime = new Date();
+
+    // 创建新记录对象
+    const newRecord = {
+      send_id: messageId,
+      recv_id: recv_id,
+      player_id: player_id,
+      time: currentTime,
+      team: teamName,
+      team_id: teamID,
+      status: "待定"
+    };
+
+    await db.collection('message').add({
+      data:newRecord
+    });
+    console.log("success");
   },
 
   /**

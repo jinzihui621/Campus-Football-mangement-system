@@ -91,3 +91,27 @@
 	margin-right: 20rpx;
 	margin-left: 30rpx;
 }
+.table-container {  
+  display: flex;  
+  flex-direction: column;  
+  border: 1px solid #ccc;  
+  margin: 10px;  
+}  
+  
+.table-header, .table-row {  
+  display: flex;  
+  justify-content: space-around;  
+  align-items: center;  
+  border-bottom: 1px solid #ccc;  
+}  
+  
+.table-cell {  
+  flex: 1;  
+  padding: 8px;  
+  text-align: center;  
+}  
+  
+.table-header .table-cell {  
+  background-color: #f2f2f2;  
+  font-weight: bold;  
+}

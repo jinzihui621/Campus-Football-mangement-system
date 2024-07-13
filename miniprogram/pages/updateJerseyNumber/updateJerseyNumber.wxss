@@ -1,0 +1,36 @@
+/* pages/updateJerseyNumber/updateJerseyNumber.wxss */
+.page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.container {
+  padding: 20px;
+  width: 88%;
+  height: 30%;
+  margin-top: 45rpx;
+  background-color: lightgreen;
+  border: 2rpx solid lightgray;
+  border-radius: 10rpx;
+}
+
+.picker {
+  margin-bottom: 20px;
+  border-radius: 10rpx;
+  border: lightgray 2rpx solid;
+  padding: 15rpx;
+  background-color: white;
+}
+
+input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 50%;
+  height: 50rpx;
+  padding: 10px;
+  border-radius: 10rpx;
+  border: lightgray solid 2rpx;
+  background-color: white;
+}

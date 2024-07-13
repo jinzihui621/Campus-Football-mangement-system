@@ -15,11 +15,11 @@
   <!-- 第二排按钮 -->
   <view class = "buttonContainer2">
     <view class = "imageButton">
-      <image  src="/image/edit.png" mode="aspectFit"/>
-      <text>信息完善</text>
+      <image  src="/image/edit.png" mode="aspectFit"  bindtap = "gotoUpdate"/>
+      <text>修改信息</text>
     </view>
     <view class = "imageButton">
-      <image class = "appealPattern" src="/image/appeal.png" />
+      <image class = "appealPattern" src="/image/appeal.png"/>
       <text>申诉通道</text>
     </view>
   </view>
@@ -39,9 +39,9 @@
     <view class = "teamMemberContainer">
       <scroll-view class = "teamMember" type = "list" scroll-y enable-flex>
         <view class = "playerInfo" wx:for="{{member}}" wx:key="index">
-          <view>{{item.name}}</view><view>学号:{{item.sno}}</view>
-          <view>球员号:{{item.tno}}</view>
-          <image wx:if="{{deleteFlag}}"src="/image/minus.png" class = "operationPattern" bindtap = "deletePlayer" data-info1 = "{{item.name}}" data-info2 = "{{item.tno}}"/>
+          <view>{{item.name}}</view><view>学号:{{item.number}}</view>
+          <view>球员号:{{item.player_num}}</view>
+          <image wx:if="{{deleteFlag}}"src="/image/minus.png" class = "operationPattern" bindtap = "deletePlayer_DB" data-info1 = "{{item.name}}" data-info2 = "{{item.player_num}}"/>
         </view>
       </scroll-view>
     </view>

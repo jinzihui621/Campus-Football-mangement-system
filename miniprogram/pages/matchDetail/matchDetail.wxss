@@ -5,8 +5,8 @@
   align-items: center;
   justify-content: center;
   padding: 20rpx;
-  border: 2rpx solid #ddd;
-  background-color: #f8f9fa;
+  /* border: 2rpx solid #ddd; */
+  /* background-color: #f8f9fa; */
 }
 
 .info {
@@ -63,7 +63,7 @@
 
 .timeline {
   margin-top: 20rpx;
-  height: 800rpx;
+  height: 100%;
   overflow: scroll;
   border: 2rpx solid #ddd;
   background-color: #ffffff;

@@ -1,39 +1,45 @@
 <view class="container">
   <view class="info">
     <view class="team">
-      <view class="team-logo"></view>
-      <view class="team-name">{{teamnameA}}</view>
+      <view class="team-name">{{teamA}}</view>
     </view>
     <view class="match-details">
-      <view class="date-time">{{matchDay}} {{starttime}} {{place}}</view>
+      <view class="date-time">{{day}} {{starttime}} {{place}}</view>
       <view class="score">
-        <text class="team-a-score">{{teamscoreA}}</text>
-        <text class="colon">:</text>
-        <text class="team-b-score">{{teamscoreB}}</text>
+        <text wx:if="{{game_running_flag || game_finished_flag}}" class="team-a-score">{{scoreA}}</text>
+        <text wx:if="{{game_running_flag || game_finished_flag}}" class="colon">:</text>
+        <text wx:if="{{game_running_flag || game_finished_flag}}" class="team-b-score">{{scoreB}}</text>
+        <text wx:if="{{!game_running_flag && !game_finished_flag}}" class="vs">VS</text>
       </view>
-      <view class="round">工超第{{round}}轮</view>
+      <view class="round">工超{{turn}}</view>
     </view>
     <view class="team">
-      <view class="team-logo"></view>
-      <view class="team-name">{{teamnameB}}</view>
+      <view class="team-name">{{teamB}}</view>
     </view>
   </view>
 </view>
 <scroll-view class="timeline" scroll-y="true">
-    <block wx:for="{{events}}" wx:key="time">
-      <view class="event" wx:if="{{item.team === 'teamA'}}">
-        <view class="details-left">
-          <text>{{item.description}}</text>
+  <view class="timeline-content">
+    <view class="teamA-events">
+      <block wx:for="{{events}}" wx:key="time">
+        <view class="event" wx:if="{{item.team === 'teamA'}}">
+          <view class="details-left">
+            <text>{{item.description}}</text>
+          </view>
+          <view class="time-left">{{item.time}}</view>
         </view>
-        <view class="time-line"></view>
-        <view class="time-left">{{item.time}}</view>
-      </view>
-      <view class="event" wx:if="{{item.team === 'teamB'}}">
-        <view class="time-right">{{item.time}}</view>
-        <view class="time-line"></view>
-        <view class="details-right">
-          <text>{{item.description}}</text>
+      </block>
+    </view>
+    <view class="separator"></view>
+    <view class="teamB-events">
+      <block wx:for="{{events}}" wx:key="time">
+        <view class="event" wx:if="{{item.team === 'teamB'}}">
+          <view class="time-right">{{item.time}}</view>
+          <view class="details-right">
+            <text>{{item.description}}</text>
+          </view>
         </view>
-      </view>
-    </block>
+      </block>
+    </view>
+  </view>
 </scroll-view>

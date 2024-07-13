@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/homePage/homePage",
     "pages/manager/manager",
     "pages/updateJerseyNumber/updateJerseyNumber",
-    "pages/homePage/homePage",
     "pages/player/player", 
     "pages/completeInfo/completeInfo",
 		"pages/board/board",

@@ -4,8 +4,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  border: 2px solid #000000;
+  padding: 20rpx;
+  border: 2rpx solid #ddd;
+  background-color: #f8f9fa;
 }
 
 .info {
@@ -13,6 +14,10 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding: 20rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 0 5rpx 10rpx rgba(0, 0, 0, 0.1);
 }
 
 .team {
@@ -21,16 +26,13 @@
   align-items: center;
 }
 
-.team-logo {
-  width: 100rpx;
-  height: 100rpx;
-  background-color: #ccc;
-  border-radius: 50%;
-}
-
 .team-name {
-  margin-top: 10px;
-  font-size: 24px;
+	margin-top: 10rpx;
+	margin-left: 20rpx;
+	margin-right: 20rpx;
+	font-size: 48rpx;
+	font-weight: bold;
+  color: #333;
 }
 
 .match-details {
@@ -40,78 +42,92 @@
 }
 
 .date-time {
-  font-size: 14px;
-  margin-bottom: 0px;
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 10rpx;
 }
 
 .score {
   display: flex;
   align-items: center;
-}
-
-.team-a-score,
-.team-b-score {
-  font-size: 42px;
-  margin: 0 20px;
-}
-
-.colon {
-  font-size: 42px;
+	font-size: 40rpx;
+	font-weight: bold;
+  color: #333;
+  margin: 10rpx 0;
 }
 
 .round {
-  margin-top: 10px;
-  font-size: 24px;
+  font-size: 28rpx;
+  color: #888;
 }
 
-
 .timeline {
-  margin-top: 5rpx;
-  height: 800rpx; /* 设置一个高度，以便于scroll-view显示滚动条 */
+  margin-top: 20rpx;
+  height: 800rpx;
   overflow: scroll;
-  border: 2px solid #000000;
+  border: 2rpx solid #ddd;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 0 5rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content {
+  display: flex;
+  width: 100%;
+  padding: 20rpx;
+}
+
+.teamA-events,
+.teamB-events {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.separator {
+  width: 4rpx;
+  background-color: #ddd;
+  height: auto;
+  margin: 0 10rpx;
 }
 
 .event {
   display: flex;
   align-items: center;
-  width: 100%;
-  margin-bottom: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.time-right,
+.time-left {
+  font-size: 32rpx;
+  color: #00b43c;
+  font-weight: bold;
 }
 
 .time-right {
-  width: 380rpx;
-  font-size: 32rpx;
-  color: #00b43c;
-  font-weight: bold;
   text-align: right;
+  margin-left: 10rpx;
 }
 
-.time-left{
-  width: 370rpx;
-  font-size: 32rpx;
-  color: #00b43c;
-  font-weight: bold;
+.details-left,
+.details-right {
+  font-size: 36rpx;
 }
 
 .details-left {
-  margin-right: 20rpx;
-  font-size: 40rpx;
   text-align: right;
   flex-grow: 1;
-
+  margin-right: 10rpx;
 }
 
 .details-right {
-  margin-left: 20rpx;
-  font-size: 40rpx;
   text-align: left;
   flex-grow: 1;
+  margin-left: 10rpx;
 }
 
 .time-line {
-  width: 2rpx;
-  height: 60rpx;
+  width: 4rpx;
+  height: 80rpx;
   background-color: #00b43c;
 }
-

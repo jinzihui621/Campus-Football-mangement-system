@@ -91,7 +91,6 @@
 }
 
 .no-matches {
-  border-top: 10rpx solid black;
   height: 100%;
   display: flex;
   flex-direction: column;

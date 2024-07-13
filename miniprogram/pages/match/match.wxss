@@ -91,7 +91,8 @@
   display: flex;
   flex-direction: column;
 	margin-right: 20rpx;
-	margin-left: 30rpx;
+  margin-left: 30rpx;
+  pointer-events:auto;
 }
 .table-container {  
   display: flex;  

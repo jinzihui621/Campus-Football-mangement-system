@@ -82,7 +82,7 @@
 							</swiper-item>
 							<!-- 赛程 -->
               <swiper-item>
-                <fui-pagination total="{{70}}" pageType="{{2}}" prevText="上一轮" nextText="下一轮" bind:change="changeTurn"></fui-pagination>
+                <fui-pagination total="{{70}}" pageType="{{2}}" prevText="上一轮" nextText="下一轮" bind:change="changeTurn" class="title"></fui-pagination>
                 <view class="table-header">  
                   <view class="table-cell">时间</view>  
                   <view class="table-cell">队伍A</view>  

@@ -15,6 +15,7 @@ Page({
 
   onLoad(options) {
     const {
+			id,
       day,
       starttime,
       teamA,
@@ -27,6 +28,7 @@ Page({
       game_finished_flag
     } = options;
     this.setData({
+			id: id,
       day: day,
       starttime: starttime,
       teamA: teamA,

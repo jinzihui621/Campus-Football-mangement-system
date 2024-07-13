@@ -47,5 +47,5 @@
       </view>
     </picker>
   </view>
-  <button bindtap="addSchedule">确定添加</button>
+  <button bindtap="addSchedule_DB">确定添加</button>
 </view>

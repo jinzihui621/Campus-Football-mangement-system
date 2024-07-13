@@ -53,8 +53,8 @@
                 </view>
               </view>
             </view>
-            <button type="primary" class="start">开始比赛</button>
-            <button type="warn" class="end">结束比赛</button>
+            <button type="primary" class="start" bind:tap="startMatch_DB">开始比赛</button>
+            <button type="warn" class="end" bind:tap="endMatch_DB">结束比赛</button>
           </scroll-view>
         </swiper-item>
         <!--第二轮-->
@@ -80,8 +80,8 @@
                 </view>
               </view>
             </view>
-            <button type="primary" class="start">开始比赛</button>
-            <button type="warn" class="end">结束比赛</button>
+            <button type="primary" class="start" bind:tap="startMatch_DB">开始比赛</button>
+            <button type="warn" class="end" bind:tap="endMatch_DB">结束比赛</button>
           </scroll-view>
         </swiper-item>
       </swiper>

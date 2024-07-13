@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/manager/manager",
-    "pages/completeInfo/completeInfo",
-    "pages/player/player", 
     "pages/homePage/homePage",
+    "pages/manager/manager",
+    "pages/player/player", 
+    
+    "pages/completeInfo/completeInfo",
 		"pages/board/board",
 		"pages/match/match",
 		"pages/notificationEdit/notificationEdit",
@@ -25,7 +26,6 @@
     "pages/soccerSchedule/soccerSchedule",
     "pages/editSchedule/editSchedule",
     "pages/management/management",
-    "pages/test/test",
     "pages/delMatch/delMatch"
   ],
   "window": {

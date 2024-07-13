@@ -139,7 +139,6 @@ Page({
 	
 	onShow() {
     this.getMatches();
-		this.scrollToCurrentMatch();
 	},
 
   getMatches: async function() {
@@ -193,6 +192,8 @@ Page({
       // 更新 matchinfo 数组
       this.setData({
         matches: matchinfo
+      }, () => {
+        this.scrollToCurrentMatch();
       });
 
     } catch (error) {

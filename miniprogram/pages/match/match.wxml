@@ -72,18 +72,35 @@
 									</view>
 									<!-- 黄牌榜内容 -->
 									<view wx:if="{{currentPlayerTab === 'yellowCards'}}">
-										<table class="matchRecords" dataList="{{listYellowCard}}" columns="{{tableYellowCardColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+										<table class="matchRecords" dataList="{{listYellowCard}}" columns="{{tableYellowCardColumns}}" getListLoading="{{getYellowListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
 									</view>
 									<!-- 红牌榜内容 -->
 									<view wx:if="{{currentPlayerTab === 'redCards'}}">
-										<table class="matchRecords" dataList="{{listRedCard}}" columns="{{tableRedCardColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+										<table class="matchRecords" dataList="{{listRedCard}}" columns="{{tableRedCardColumns}}" getListLoading="{{getRedListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
 									</view>
 								</view>
 							</swiper-item>
 							<!-- 赛程 -->
               <swiper-item>
                 <fui-pagination total="{{50}}" pageType="{{2}}" prevText="上一轮" nextText="下一轮" bind:change="changeTurn"></fui-pagination>
-                <table class="matchRecords" dataList="{{list}}" columns="{{tableColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+                <view class="table-container">  
+                  <view class="table-header">  
+                    <view class="table-cell">时间</view>  
+                    <view class="table-cell">队伍A</view>  
+                    <view class="table-cell">比分A</view>  
+                    <view class="table-cell">比分B</view>  
+                    <view class="table-cell">队伍B</view>  
+                  </view>  
+                  <block wx:for="{{matchList}}" wx:key="index">  
+                    <view class="table-row">  
+                      <view class="table-cell">{{item.date}}</view>  
+                      <view class="table-cell">{{item.teamA}}</view>  
+                      <view class="table-cell">{{item.teamAScore}}</view>  
+                      <view class="table-cell">{{item.teamBScore}}</view>  
+                      <view class="table-cell">{{item.teamB}}</view>  
+                    </view>  
+                  </block>  
+                </view>
               </swiper-item>
             </swiper>
           </scroll-view>

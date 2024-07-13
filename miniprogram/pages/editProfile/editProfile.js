@@ -56,6 +56,15 @@ Page({
     const contactPattern = /^[\d+]*$/; // 数字和加号
     const chinesePattern = /^[\u4e00-\u9fa5]*$/; // 中文汉字
 
+		if (!name) {
+      wx.showToast({
+        title: '姓名不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
     if (name && (name.length > 20 || !namePattern.test(name))) {
       wx.showToast({
         title: '姓名只能包含中文汉字、英文字母和中间点，且不超过20个字符',
@@ -104,6 +113,15 @@ Page({
     if (major && !chinesePattern.test(major)) {
       wx.showToast({
         title: '所属专业只能包含中文汉字',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
+		if (!studentID) {
+      wx.showToast({
+        title: '学号不能为空',
         icon: 'none',
         duration: 2000
       });

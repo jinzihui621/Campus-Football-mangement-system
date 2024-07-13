@@ -32,8 +32,22 @@
           "scene": null
         },
         {
-          "name": "pages/manager/manager",
-          "pathName": "pages/manager/manager",
+          "name": "pages/soccerSchedule/soccerSchedule",
+          "pathName": "pages/soccerSchedule/soccerSchedule",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/matchDetail1/matchDetail1",
+          "pathName": "pages/matchDetail1/matchDetail1",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/matchDetail/matchDetail",
+          "pathName": "pages/matchDetail/matchDetail",
           "query": "",
           "launchMode": "default",
           "scene": null

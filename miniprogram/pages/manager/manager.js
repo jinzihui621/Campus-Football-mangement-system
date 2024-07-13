@@ -1,4 +1,5 @@
 // pages/list/list.js
+const db = wx.cloud.database();
 Page({
 
   /**
@@ -10,20 +11,66 @@ Page({
       name:"",
       tno:"",
     },
-    member:[
-      {name:"金子辉",sno:21041015,tno:10},
-      {name:"崔朗清",sno:21041015,tno:10},
-      {name:"张三",sno:21041015,tno:10},
-      {name:"李四",sno:21041015,tno:10},
-      {name:"王五",sno:21041015,tno:10},
-      {name:"王五",sno:21041015,tno:10},
-      {name:"王五",sno:21041015,tno:10},
-      {name:"王五",sno:21041015,tno:10},
-      {name:"王五",sno:21041015,tno:10},
-      {name:"王五",sno:21041015,tno:10},
-      {name:"王五",sno:21041015,tno:10},
-      {name:"王五",sno:21041015,tno:10}
-    ],
+    member:[],
+    leaderId: ''
+  },
+
+  async loadMember(e) {
+    const db = wx.cloud.database();
+    try {
+      // 获取 team_id
+      const leaderRes = await db.collection('leader_manage_team').where({
+        teamleader_id: "id1"
+      }).get();
+
+      if (leaderRes.data.length === 0) {
+        wx.showToast({
+          title: '未找到对应的团队',
+          icon: 'none'
+        });
+        return;
+      }
+
+      const team_id = leaderRes.data[0].team_id;
+
+      // 获取所有球员的 player_id
+      const teamPlayerRes = await db.collection('team_player').where({
+        team_id: team_id
+      }).get();
+
+      if (teamPlayerRes.data.length === 0) {
+        wx.showToast({
+          title: '未找到球员',
+          icon: 'none'
+        });
+        return;
+      }
+
+      const playerIds = teamPlayerRes.data.map(item => item.player_id);
+
+      // 获取每个球员的详细信息
+      const playerPromises = playerIds.map(async playerId => {
+        const playerRes = await db.collection('player').doc(playerId).get();
+        return {
+          name: playerRes.data.name,
+          number: playerRes.data.number,
+          player_num: playerRes.data.player_num
+        };
+      });
+
+      const players = await Promise.all(playerPromises);
+
+      console.log('Loaded players:', players);
+      this.setData({
+        member: players
+      });
+    } catch (err) {
+      console.error('加载球员数据失败', err);
+      wx.showToast({
+        title: '加载数据失败',
+        icon: 'none'
+      });
+    }
   },
 
   toPlus(){
@@ -43,43 +90,75 @@ Page({
         return wx.cloud.callFunction({
           name: 'getOpenid'
         }).then(res => res.result.openid);
-      },
-
-    async deletePlayer(e) {
-    // 从事件对象中提取绑定的数据
-    const leaderId = await this.getOpenId();
-    console.log(leaderId);
-    const name = e.currentTarget.dataset.info1;
-    const tno = e.currentTarget.dataset.info2;
-    wx.showModal({
-      title: '删除确认',
-      content: '确认要删除此球员吗',
-      success: (res) => { // 使用箭头函数
-        if (res.confirm) {
-          wx.cloud.callFunction({
-            name: 'deletePlayer_DB',
-            data: {
-              player_num: tno,
-              _id: leaderId
-            }
-          })
-          wx.showToast({
-            title: '删除成功',
-          })
-          // 用户点击了确定，执行删除操作
-          // 这里添加你的删除逻辑
-
-          console.log('用户点击了确认，执行删除操作');
-        } else if (res.cancel) {
-          // 用户点击了取消，可以在这里添加一些操作
-          console.log('用户点击了取消');
-        }
-      },
-    });
-    this.setData({
-      deleteFlag: false
-    });
   },
+
+//球队管理员删除球员
+async deletePlayer_DB(e){
+  // 显示确认框
+  wx.showModal({
+    title: '确认删除',
+    content: '你确定要删除这个球员吗？',
+    success: async (res) => {
+      if (res.confirm) {
+        const self = this;
+        try {
+          var player_num = e.currentTarget.dataset.info2; 
+          var _id = "id1";
+          db.collection('leader_manage_team').where({
+            _id: _id
+          }).get({
+            success(res) {
+              const doc = res.data[0]
+              if(doc){
+                db.collection('team_player').where({
+                  team_id: doc.team_id,
+                  player_num: player_num
+                }).remove({
+                  success(res) {
+                    wx.showToast({
+                      title: '删除成功',
+                      icon: 'none'
+                    });
+                    self.setData({
+                      member: self.data.member.filter(player => player.player_num !== player_num)
+                    });
+                  },
+                  fail(err) {
+                    wx.showToast({
+                      title: '球员号错误',
+                      icon: 'none'
+                    });
+                    console.error('删除失败', err);
+                  }
+                });
+              } else {
+                wx.showToast({
+                  title: '球队管理者ID错误',
+                  icon: 'none'
+                });
+                console.log('未找到该记录');
+              }
+            },
+            fail(err) {
+              wx.showToast({
+                title: '删除失败',
+                icon: 'none'
+              });
+              console.error('查询失败', err);
+              // 处理查询失败的情况
+            }
+          });
+        } catch (err) {
+          console.error('删除操作出错', err);
+          // 处理异常情况
+        }
+        console.log(111);
+      } else if (res.cancel) {
+        console.log('用户点击取消')
+      }
+    }
+  })
+},
 
   gotoIndex(){
     wx.navigateTo({
@@ -97,7 +176,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.getOpenId().then(openid => {
+      this.setData({ leaderId: openid });
+      this.loadMember(); // 在获取到 openid 后加载成员信息
+    });
   },
 
   /**

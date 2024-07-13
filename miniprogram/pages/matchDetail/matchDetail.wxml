@@ -21,22 +21,20 @@
   <scroll-view class="timeline" scroll-y="true" wx:if="{{game_running_flag || game_finished_flag}}">
     <view class="timeline-content">
       <view class="teamA-events">
-        <block wx:for="{{events}}" wx:key="time">
+        <block wx:for="{{events}}" wx:key="index">
           <view class="event" wx:if="{{item.team === 'teamA'}}">
             <view class="details-left">
-              <text>{{item.description}}</text>
+              <text>{{item.name}} : {{item.type}} * {{item.number}}</text>
             </view>
-            <view class="time-left">{{item.time}}</view>
           </view>
         </block>
       </view>
       <view class="separator"></view>
       <view class="teamB-events">
-        <block wx:for="{{events}}" wx:key="time">
+        <block wx:for="{{events}}" wx:key="index">
           <view class="event" wx:if="{{item.team === 'teamB'}}">
-            <view class="time-right">{{item.time}}</view>
             <view class="details-right">
-              <text>{{item.description}}</text>
+              <text>{{item.name}} : {{item.type}} * {{item.number}}</text>
             </view>
           </view>
         </block>

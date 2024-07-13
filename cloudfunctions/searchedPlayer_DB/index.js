@@ -16,6 +16,7 @@ exports.main = async (event) => {
       return {
         name: item.name,
         number: item.number,
+        _id:item._id,
         _id: item._id
       };
     });

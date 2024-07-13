@@ -20,10 +20,29 @@ Page({
 
   onInputChange: function(e) {
     const { field } = e.currentTarget.dataset;
+    const value = e.detail.value;
+  
+    // 更新字段值
     this.setData({
-      [field]: e.detail.value
+      [field]: value
     });
+  
+    // 检查 teamnameA 和 teamnameB 是否相同
+    if ((field === 'teamnameAIndex' && value === this.data.teamnameBIndex) || 
+        (field === 'teamnameBIndex' && value === this.data.teamnameAIndex)) {
+      wx.showToast({
+        title: '主队和客队不能相同！',
+        icon: 'none',
+        duration: 2000
+      });
+  
+      // 重置当前字段值
+      this.setData({
+        [field]: ''
+      });
+    }
   },
+  
 
   addSchedule_DB: async function() {
     const data = {

@@ -3,6 +3,7 @@ const matchInfoCollection = db.collection('matchInfo');
 
 Page({
   data: {
+    deleteFlag: false,
     currentIndex: 0,
     match: []
   },
@@ -68,15 +69,56 @@ Page({
     }
   },
 
+  delSchedule_DB: async function(e) {
+    const teamnameA = e.currentTarget.dataset.info1;
+    const teamnameB = e.currentTarget.dataset.info2;
+    const round = e.currentTarget.dataset.info3;
+  
+    try {
+      const res = await matchInfoCollection.where({
+        teamA: teamnameA,
+        teamB: teamnameB,
+        turn: round
+      }).get();
+  
+      if (res.data.length > 0) {
+        const id = res.data[0]._id;
+        await matchInfoCollection.doc(id).remove();
+        wx.showToast({
+          title: '删除比赛信息成功',
+          icon: 'success',
+          duration: 2000
+        });
+        this.loadMatchInfo(); // 重新加载比赛信息
+      } else {
+        wx.showToast({
+          title: '未找到匹配的记录',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    } catch (error) {
+      wx.showToast({
+        title: '删除比赛信息失败',
+        icon: 'none',
+        duration: 2000
+      });
+      console.error("删除比赛信息失败", error);
+    }
+  },
+  
+
   navigateToeditSchedule: function() {
     wx.navigateTo({
       url: '/pages/editSchedule/editSchedule'  // 这里替换成实际的路径
     });
   },
 
-  navigateTodelMatch: function() {
-    wx.navigateTo({
-      url: '/pages/delMatch/delMatch'  // 这里替换成实际的路径
-    });
+  toDelete(e){
+    this.setData({
+      deleteFlag: !this.data.deleteFlag
+
+    })
   },
+
 });

@@ -54,7 +54,7 @@ Page({
     scoreB:0,
     matchTime:'07-07 00:00',
     match:'xx杯',
-    race:'xx-xx',
+    race:'',
     turn:1,
     teamAid:1,
     teamBid:2,

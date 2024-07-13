@@ -3,7 +3,7 @@
     "fui-pagination": "/components/fui-pagination/fui-pagination",
     "table":"/components/table/table"
   },
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "navigationBarTitleText": "校园足球",
   "disableScroll": true
 }

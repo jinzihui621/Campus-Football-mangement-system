@@ -482,43 +482,48 @@ Page({
     }
   },
  /*根据球队id和队员号码获取队员名字 */
-  getPlayerName: async function(team_id, playerCode) {  
-    try {  
-      const playerResult = await db.collection("team_player").where({  
-        team_id: team_id,  
-        player_num: playerCode.toString() 
-      }).get();  
-      if (playerResult.data.length === 0) {  
-        throw new Error('Player not found in team_player collection');  
-      }  
-      const playerID = playerResult.data[0].player_id;
-      const nameResult = await db.collection("player").where({  
-        _id: playerID  
-      }).get();  
-      if (nameResult.data.length === 0) {  
-        throw new Error('Player not found in player collection');  
-      }  
-      const playerName = nameResult.data[0].name;
-      return playerName;  
-    } catch (error) {  
-      console.error('Error getting player name:', error);  
-      throw error; 
-    }  
-  },
+	getPlayerName: async function(team_id, playerCode) {  
+		try {  
+			const playerResult = await db.collection("team_player").where({  
+				team_id: team_id,  
+				player_num: playerCode.toString() 
+			}).get();  
+			if (playerResult.data.length === 0) {  
+				console.warn('Player not found in team_player collection');
+				return '未知球员';  // 返回默认值
+			}  
+			const playerID = playerResult.data[0].player_id;
+			const nameResult = await db.collection("player").where({  
+				_id: playerID  
+			}).get();  
+			if (nameResult.data.length === 0) {  
+				console.warn('Player not found in player collection');
+				return '未知球员';  // 返回默认值
+			}  
+			const playerName = nameResult.data[0].name;
+			return playerName;  
+		} catch (error) {  
+			console.error('Error getting player name:', error);  
+			return '未知球员';  // 返回默认值
+		}  
+	},
   /*根据球队id获取球队名字 */
   getTeamName: async function(team_id){
     try {  
       const nameRes = await db.collection("team").where({ team_id: team_id }).get();  
       if (nameRes.data.length === 0) {  
-        throw new Error('Team not found in team collection');  
+        console.warn('Team not found in team collection');  
+        return '未知球队';  // 返回默认值
       }  
       const team = nameRes.data[0];  
       if (!team) {  
-        throw new Error('Unexpected error: No team data found');  
+        console.warn('Unexpected error: No team data found');  
+        return '未知球队';  // 返回默认值
       }   
       return team.team_name;
     } catch (error) {  
-      throw error;  
+      console.error('Error getting team name:', error);  
+      return '未知球队';  // 返回默认值
     }
   },
   /*根据match_id获取比赛时间*/
@@ -526,15 +531,18 @@ Page({
     try{
       const matchRes=await db.collection("matchInfo").where({match_id:match_id}).get()
       if (matchRes.data.length===0){
-        throw new Error('Match not found in match collection');
+        console.warn('Match not found in match collection');
+        return new Date();  // 返回当前日期作为默认值
       }
       const match=matchRes.data[0];
       if(!match){
-        throw new Error('Unexpected error: No match data found')
+        console.warn('Unexpected error: No match data found');
+        return new Date();  // 返回当前日期作为默认值
       }
       return match.matchTime;
     }catch(error){
-      throw error
+      console.error('Error getting match time:', error);
+      return new Date();  // 返回当前日期作为默认值
     }
   },
   /* 接收一个Date型变量，返回月-日 时-分格式的字符串*/

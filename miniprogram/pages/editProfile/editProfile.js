@@ -190,6 +190,7 @@ Page({
     };
 
     app.globalData.userInfo = sanitizedData;
+    app.globalData.userRole = "球员"; 
     const dbadd = {
       department: sanitizedData.college,
       major: sanitizedData.major,

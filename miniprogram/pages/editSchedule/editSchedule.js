@@ -160,12 +160,37 @@ Page({
           teamB_id: data.teamB_id,
           turn: data.round
         };
-
+				const newData1 = {
+          goal: 0.0,
+          lose: 0.0,
+          match_id: newMatchId,
+          team_id: data.teamA_id
+        };
+        const newData2 = {
+          goal: 0.0,
+          lose: 0.0,
+          match_id: newMatchId,
+          team_id: data.teamB_id
+        };
+        const newData3 = {
+          match_id: newMatchId,
+          judge_id: "omPgO7b4Kt5MHERTY3MYME3ikZv0",
+          finished: false,
+          time:startTimeDate
+        };
         // 添加新比赛信息
         const addResult = await matchInfoCollection.add({
           data: newData
         });
-
+				const addResult2 = await db.collection('team_match_participate').add({
+          data: newData1
+        })
+        const addResult3 = await db.collection('team_match_participate').add({
+          data: newData2
+        })
+        const addResult4 = await db.collection('judge').add({
+          data: newData3
+        })
         if (addResult._id) {
           wx.showToast({
             title: '保存成功',

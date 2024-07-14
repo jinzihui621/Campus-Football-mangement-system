@@ -15,14 +15,14 @@ Page({
   onLoad: function(options) {
     const id = options.id;
     const messages = JSON.parse(decodeURIComponent(options.messages));
+    this.getOpenId().then(openid => {
+      this.setData({ openid: openid });
+    });
     this.setData({
       id: id,
       messages: messages,
       message: messages.find(msg => msg.id == id)
 		});
-		this.setData({
-			openid: this.getOpenId()
-		})
   },
 
   confirmAction: async function() {
@@ -41,7 +41,7 @@ Page({
           // 创建新记录对象
     const newRecord = {
       player_id: message.player_id,
-      player_num: this.openid,
+      player_num: this.data.openid,
       team_id: message.team_id
     };
       await db.collection('team_player').add({

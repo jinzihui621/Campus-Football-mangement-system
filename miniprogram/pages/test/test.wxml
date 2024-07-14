@@ -1,0 +1,105 @@
+
+<navigator url="/pages/createMatch/createMatch" open-type="navigate" class="centered-button">
+  <image src="/image/eventOrganizerManagement/jiahao.png" style="width: 60rpx; height: 60rpx; margin-right: 10rpx;" />
+  创建赛事
+</navigator>
+
+<view class="custom-border-box"> 
+  <scroll-view scroll-y="true" class="scroll-view"> 
+    <!-- 模拟较长的内容 --> 
+    <view class="scroll-item">
+      <text class="text-box"> 工超</text>
+      <view class="icon-row">
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
+          <text class="saishitext">球队</text>
+        </view>
+        <view class="icon-item" bindtap="navigateToSchedule">
+          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
+          <text class="saishitext">赛程</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
+          <text class="saishitext">管理员</text>
+        </view>
+      </view>
+      <view class="icon-row">
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
+          <text class="saishitext">裁判</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
+          <text class="saishitext">管理赛事</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
+          <text class="saishitext">导出数据</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="scroll-item">
+      <text class="text-box"> 工甲</text>
+      <view class="icon-row">
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
+          <text class="saishitext">球队</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
+          <text class="saishitext">赛程</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
+          <text class="saishitext">管理员</text>
+        </view>
+      </view>
+      <view class="icon-row">
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
+          <text class="saishitext">裁判</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
+          <text class="saishitext">管理赛事</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
+          <text class="saishitext">导出数据</text>
+        </view>
+      </view>
+    </view> 
+    <view class="scroll-item">
+      <text class="text-box"> 工大杯</text>
+      <view class="icon-row">
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
+          <text class="saishitext">球队</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
+          <text class="saishitext">赛程</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
+          <text class="saishitext">管理员</text>
+        </view>
+      </view>
+      <view class="icon-row">
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
+          <text class="saishitext">裁判</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
+          <text class="saishitext">管理赛事</text>
+        </view>
+        <view class="icon-item">
+          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
+          <text class="saishitext">导出数据</text>
+        </view>
+      </view>
+    </view> 
+  </scroll-view> 
+</view> 

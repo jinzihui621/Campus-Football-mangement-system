@@ -68,6 +68,7 @@ Page({
       console.error("加载比赛信息失败", error);
     }
   },
+  
 
   delSchedule_DB: async function(e) {
     const teamnameA = e.currentTarget.dataset.info1;

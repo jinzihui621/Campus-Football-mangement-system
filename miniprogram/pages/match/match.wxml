@@ -34,8 +34,8 @@
             <!--积分榜 球员榜 赛程内容-->
             <swiper class='swiper' bindchange='listchange' current='{{currentListIndex}}'>
               <!-- 积分榜 -->
-							<swiper-item>
-								<table class="matchRecords" dataList="{{listRank}}" columns="{{tableRankColumns}}" getListLoading="{{getRankListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+							<swiper-item class="swiper-item">
+								<table class="matchRecords" dataList="{{listRank}}" columns="{{tableRankColumns}}" getListLoading="{{getRankListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}" tableHeight="1000rpx"></table>
 							</swiper-item>
 							<!-- 球员榜 -->
               <swiper-item>
@@ -64,19 +64,19 @@
 									</view>
 									<!-- 进球榜内容 -->
 									<view wx:if="{{currentPlayerTab === 'goals'}}">
-										<table class="matchRecords" dataList="{{listGoal}}" columns="{{tableGoalColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+										<table class="matchRecords" dataList="{{listGoal}}" columns="{{tableGoalColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}" tableHeight="1000rpx"></table>
 									</view>
 									<!-- 助攻榜内容 -->
 									<view wx:if="{{currentPlayerTab === 'assists'}}">
-										<table class="matchRecords" dataList="{{listAssist}}" columns="{{tableAssistColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+										<table class="matchRecords" dataList="{{listAssist}}" columns="{{tableAssistColumns}}" getListLoading="{{getListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}" tableHeight="1000rpx"></table>
 									</view>
 									<!-- 黄牌榜内容 -->
 									<view wx:if="{{currentPlayerTab === 'yellowCards'}}">
-										<table class="matchRecords" dataList="{{listYellowCard}}" columns="{{tableYellowCardColumns}}" getListLoading="{{getYellowListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+										<table class="matchRecords" dataList="{{listYellowCard}}" columns="{{tableYellowCardColumns}}" getListLoading="{{getYellowListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}" tableHeight="1000rpx"></table>
 									</view>
 									<!-- 红牌榜内容 -->
 									<view wx:if="{{currentPlayerTab === 'redCards'}}">
-										<table class="matchRecords" dataList="{{listRedCard}}" columns="{{tableRedCardColumns}}" getListLoading="{{getRedListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}"></table>
+										<table class="matchRecords" dataList="{{listRedCard}}" columns="{{tableRedCardColumns}}" getListLoading="{{getRedListLoading}}" showTipImage="{{dataList.length===0&!getListLoading}}" tableHeight="1000rpx"></table>
 									</view>
 								</view>
 							</swiper-item>

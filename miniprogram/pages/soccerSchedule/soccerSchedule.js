@@ -40,9 +40,9 @@ Page({
       const match = res.data.map(record => {
         let matchTimeStr = '';
         if (record.matchTime instanceof Date) {
-          matchTimeStr = record.matchTime.toISOString();
+          matchTimeStr = new Date(record.matchTime.getTime() + 8 * 60 * 60 * 1000).toISOString();
         } else if (record.matchTime) {
-          matchTimeStr = new Date(record.matchTime).toISOString();
+          matchTimeStr = new Date(new Date(record.matchTime).getTime() + 8 * 60 * 60 * 1000).toISOString();
         }
 
         return {

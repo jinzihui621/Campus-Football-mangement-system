@@ -64,7 +64,7 @@ Page({
 
     // 将字符串转换为 Date 对象
     const localStartTime = new Date(fullStartTimeStr);
-    const startTimeDate = new Date(localStartTime.getTime());
+    const startTimeDate = new Date(localStartTime.getTime() - (8 * 60 * 60 * 1000));
 
     try {
       const startTimeMinus1Hour30Minutes = new Date(startTimeDate.getTime() - (1.5 * 60 * 60 * 1000));

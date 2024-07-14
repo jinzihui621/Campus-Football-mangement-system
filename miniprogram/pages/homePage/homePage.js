@@ -16,6 +16,12 @@ Page({
 
   onShow() {
     this.getMatches();
+	},
+	
+	onPullDownRefresh() {
+    this.getMatches(() => {
+      wx.stopPullDownRefresh();
+    });
   },
 
   getMatches: async function() {
@@ -28,7 +34,10 @@ Page({
       const matches = matchesRes.data;
 
       if (matches.length === 0) {
-        console.log('未找到 matches 数据');
+				console.log('未找到 matches 数据');
+				this.setData({
+					matches: []
+				})
         return;
       }
 

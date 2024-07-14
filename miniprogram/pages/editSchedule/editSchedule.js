@@ -16,7 +16,7 @@ Page({
     teamnameBIndex: "",
     teams: ['信息A', '信息B', '信息C','城建A','都柏林','环生A','艺设A','机电A'],
     placeIndex: "",
-    places: ['北工大北操场', '北工大南操场'],
+    places: ['北操场', '南操场'],
     eventStartTime: '',
     eventFinishTime: ''
   },
@@ -64,7 +64,7 @@ Page({
 
     // 将字符串转换为 Date 对象
     const localStartTime = new Date(fullStartTimeStr);
-    const startTimeDate = new Date(localStartTime.getTime());
+    const startTimeDate = new Date(localStartTime.getTime() - (8 * 60 * 60 * 1000));
 
     try {
       const startTimeMinus1Hour30Minutes = new Date(startTimeDate.getTime() - (1.5 * 60 * 60 * 1000));
@@ -175,6 +175,7 @@ Page({
         const newData3 = {
           match_id: newMatchId,
           judge_id: "omPgO7b4Kt5MHERTY3MYME3ikZv0",
+          started: false,
           finished: false,
           time:startTimeDate
         };

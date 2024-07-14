@@ -40,6 +40,8 @@ Page({
     });
     this.getOpenId().then(openid => {
       this.setData({ leaderId: openid });
+      this.loadNotices();
+      this.loadMatches();
       this.loadMember(); // 在获取到 openid 后加载成员信息
     });
     this.getInfo();
@@ -50,8 +52,9 @@ Page({
       userRole: app.globalData.userRole
     });
     this.loadNotices();
-    this.loadMatches();
+
     this.loadMember();
+    this.getInfo();
   },
   
   handleRegister(e){
@@ -92,10 +95,7 @@ Page({
       }).get();
 
       if (teamPlayerRes.data.length === 0) {
-        wx.showToast({
-          title: '未找到对应的队伍',
-          icon: 'none'
-        });
+        
         return;
       }
 
@@ -145,10 +145,7 @@ Page({
       }).get();
       console.log("team:",teamPlayerRes);
       if (teamPlayerRes.data.length === 0) {
-        wx.showToast({
-          title: '未找到该球员所属的队伍',
-          icon: 'none'
-        });
+        
         return;
       }
       const team_id = teamPlayerRes.data[0].team_id;
@@ -160,7 +157,7 @@ Page({
         ]
       }).get();
       console.log("matches",matchRes);
-      const matches = matchRes.data.map(match => ({
+      const matches = matchRes.data.map( match => ({
         teamA: match.teamA,
         teamB: match.teamB,
         matchTime: this.formatDate(match.matchTime),
@@ -261,10 +258,6 @@ Page({
       }).get();
 
       if (leaderRes.data.length === 0) {
-        wx.showToast({
-          title: '未找到对应的团队',
-          icon: 'none'
-        });
         return;
       }
 
@@ -987,7 +980,7 @@ Page({
       const _ = db.command;
       const messageResult = await db.collection('judge').where({
         finished: false,
-        judgeid: "id2"
+        judge_id: openid
       }).get();
       console.log(messageResult)
 

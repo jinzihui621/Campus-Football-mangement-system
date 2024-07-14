@@ -40,9 +40,9 @@ Page({
       const match = res.data.map(record => {
         let matchTimeStr = '';
         if (record.matchTime instanceof Date) {
-          matchTimeStr = record.matchTime.toISOString();
+          matchTimeStr = new Date(record.matchTime.getTime() + 8 * 60 * 60 * 1000).toISOString();
         } else if (record.matchTime) {
-          matchTimeStr = new Date(record.matchTime).toISOString();
+          matchTimeStr = new Date(new Date(record.matchTime).getTime() + 8 * 60 * 60 * 1000).toISOString();
         }
 
         return {
@@ -80,8 +80,12 @@ Page({
         teamB: teamnameB,
         turn: round
       }).get();
-  
-      if (res.data.length > 0) {
+      const res1 = await db.collection('judge').where({
+        match_id:res.data[0].match_id,
+        started:false,
+        finished:false
+      }).get();
+      if (res1.data.length > 0) {
         const id = res.data[0]._id;
         const match_id = res.data[0].match_id;
         await matchInfoCollection.doc(id).remove();

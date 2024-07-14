@@ -16,7 +16,8 @@ Page({
     currentIndex: 0,
 		currentListIndex:0,
 		currentPlayerTab:'goals',
-    date:"2024",
+		date:"2024",
+		currentYear: '',
     turn:0, //当前显示的赛程轮次-1
     tableColumns: [
       {title: "日期",key: "date",width: "100rpx"}, 
@@ -593,7 +594,8 @@ Page({
     let year=new Date().getFullYear()
     this.data.matchList=[]
     this.setData({
-      date:year
+			date:year,
+			currentYear: year
     })
     this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
     this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)

@@ -19,7 +19,7 @@
           <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"scroll-top="{{scrollTop}}">
             <!--tab栏-->
             <view class='title'>
-              <picker mode="date" value="{{date}}" start="2015" end="{{date}}" bindchange="bindDateChange" fields="year">
+              <picker mode="date" value="{{date}}" start="2015" end="{{currentYear}}" bindchange="bindDateChange" fields="year">
                 <view class="picker">
                   年份:{{date}}
                 </view>

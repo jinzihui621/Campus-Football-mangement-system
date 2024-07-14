@@ -68,7 +68,6 @@ Page({
       console.error("加载比赛信息失败", error);
     }
   },
-  
 
   delSchedule_DB: async function(e) {
     const teamnameA = e.currentTarget.dataset.info1;
@@ -84,7 +83,10 @@ Page({
   
       if (res.data.length > 0) {
         const id = res.data[0]._id;
+        const match_id = res.data[0].match_id;
         await matchInfoCollection.doc(id).remove();
+        await db.collection('team_match_participate').where({match_id : match_id}).remove();
+        await db.collection('judge').where({match_id : match_id}).remove();
         wx.showToast({
           title: '删除比赛信息成功',
           icon: 'success',

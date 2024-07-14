@@ -19,7 +19,7 @@
           <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}"scroll-top="{{scrollTop}}">
             <!--tab栏-->
             <view class='title'>
-              <picker mode="date" value="{{date}}" start="2015" end="{{date}}" bindchange="bindDateChange" fields="year">
+              <picker mode="date" value="{{date}}" start="2015" end="{{currentYear}}" bindchange="bindDateChange" fields="year">
                 <view class="picker">
                   年份:{{date}}
                 </view>
@@ -46,11 +46,11 @@
 											<text>进球榜</text>
 											<hr class="line-style"/>
 										</view>
-										<view class="{{currentPlayerTab === 'assists' ? 'title-sel-selected' : 'title-sel'}}" bindtap="selectPlayerTab" data-tab="assists">
+										<!-- <view class="{{currentPlayerTab === 'assists' ? 'title-sel-selected' : 'title-sel'}}" bindtap="selectPlayerTab" data-tab="assists">
 											<view style="height: 55rpx; background-color: transparent;"></view>
 											<text>助攻榜</text>
 											<hr class="line-style"/>
-										</view>
+										</view> -->
 										<view class="{{currentPlayerTab === 'yellowCards' ? 'title-sel-selected' : 'title-sel'}}" bindtap="selectPlayerTab" data-tab="yellowCards">
 											<view style="height: 55rpx; background-color: transparent;"></view>
 											<text>黄牌榜</text>
@@ -112,16 +112,14 @@
         <swiper-item>
           <view wx:for="{{secondList}}" wx:for-item="item" class='record-item'>
             <view class='name'>
-              <span>名称：{{item.name}}</span>
-              <span>面额：{{item.money}}</span>
+              <span>{{item.msg}}</span>
             </view>
           </view>
         </swiper-item>
         <swiper-item>
           <view wx:for="{{thirdList}}" wx:for-item="item" class='record-item'>
            <view class='name'>
-              <span>名称：{{item.name}}</span>
-              <span>面额：{{item.money}}</span>
+              <span>{{item.msg}}</span>
             </view>
           </view>
         </swiper-item>

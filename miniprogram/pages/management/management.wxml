@@ -1,5 +1,10 @@
-<!-- eventOrganizerManagement--------------------------------------------------->
 <view>
+  <view wx:if="{{userRole === ''}}">
+    <view class="no-matches">
+      <text>您现在处于游客模式，无法访问「管理」页面。想要查看该页面，请到「我的」进行登入</text>
+    </view>
+  </view>
+<!-- eventOrganizerManagement--------------------------------------------------->
   <view wx:if="{{userRole === '赛事管理'}}">
     <navigator url="/pages/createMatch/createMatch" open-type="navigate" class="centered-button">
       <image src="/image/eventOrganizerManagement/jiahao.png" style="width: 20px; height: 20px; margin-right: 5px;" />

@@ -1,127 +1,6 @@
 Page({
   data: {
-    matches: [
-      // {
-      //   id: 1,
-      //   day: "2024-07-06",
-      //   starttime: "12:00",
-      //   place: "北操",
-      //   teamA: "信息A",
-      //   teamB: "信息B",
-      //   scoreA: 3,
-      //   scoreB: 1,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 1
-      // },
-      // {
-      //   id: 2,
-      //   day: "2024-07-07",
-      //   starttime: "14:00",
-      //   place: "南操",
-      //   teamA: "机电",
-      //   teamB: "计算机",
-      //   scoreA: 2,
-      //   scoreB: 2,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 1
-      // },
-      // {
-      //   id: 3,
-      //   day: "2024-07-08",
-      //   starttime: "16:00",
-      //   place: "东操",
-      //   teamA: "建筑",
-      //   teamB: "土木",
-      //   scoreA: 1,
-      //   scoreB: 3,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 1
-      // },
-      // {
-      //   id: 4,
-      //   day: "2024-07-09",
-      //   starttime: "10:00",
-      //   place: "西操",
-      //   teamA: "化工",
-      //   teamB: "材料",
-      //   scoreA: 0,
-      //   scoreB: 0,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 1
-      // },
-      // {
-      //   id: 5,
-      //   day: "2024-07-10",
-      //   starttime: "09:00",
-      //   place: "北操",
-      //   teamA: "能源",
-      //   teamB: "环境",
-      //   scoreA: 1,
-      //   scoreB: 2,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 1
-      // },
-      // {
-      //   id: 6,
-      //   day: "2024-07-11",
-      //   starttime: "15:00",
-      //   place: "北操",
-      //   teamA: "机电",
-      //   teamB: "计算机",
-      //   scoreA: 0,
-      //   scoreB: 0,
-      //   game_running_flag: 1,
-      //   game_finished_flag: 0
-      // },
-      // {
-      //   id: 7,
-      //   day: "2024-07-12",
-      //   starttime: "10:00",
-      //   place: "南操",
-      //   teamA: "信息C",
-      //   teamB: "建筑C",
-      //   scoreA: 0,
-      //   scoreB: 0,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 0
-      // },
-      // {
-      //   id: 8,
-      //   day: "2024-07-13",
-      //   starttime: "14:00",
-      //   place: "东操",
-      //   teamA: "化工B",
-      //   teamB: "材料B",
-      //   scoreA: 0,
-      //   scoreB: 0,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 0
-      // },
-      // {
-      //   id: 9,
-      //   day: "2024-07-14",
-      //   starttime: "16:00",
-      //   place: "西操",
-      //   teamA: "能源B",
-      //   teamB: "环境B",
-      //   scoreA: 0,
-      //   scoreB: 0,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 0
-      // },
-      // {
-      //   id: 10,
-      //   day: "2024-07-15",
-      //   starttime: "18:00",
-      //   place: "北操",
-      //   teamA: "机械",
-      //   teamB: "电气",
-      //   scoreA: 0,
-      //   scoreB: 0,
-      //   game_running_flag: 0,
-      //   game_finished_flag: 0
-      // }
-    ],
+    matches: [],
     toView: ''
   },
 
@@ -133,20 +12,18 @@ Page({
     });
   },
 
-  onLoad(options) {
+  onLoad(options) {},
 
-  },
-	
-	onShow() {
+  onShow() {
     this.getMatches();
-	},
+  },
 
   getMatches: async function() {
     const db = wx.cloud.database();
     const _ = db.command;
 
     try {
-      // 获取 matches 集合中的所有记录，并按 A 升序排序
+      // 获取 matches 集合中的所有记录，并按 matchTime 升序排序
       const matchesRes = await db.collection('matchInfo').orderBy('matchTime', 'asc').get();
       const matches = matchesRes.data;
 
@@ -155,16 +32,16 @@ Page({
         return;
       }
 
-      // 提取所有的 B 值
-      const BValues = matches.map(match => match.match_id);
+      // 提取所有的 match_id 值
+      const matchIds = matches.map(match => match.match_id);
 
-      // 批量查询 details 集合中的记录
+      // 批量查询 judge 集合中的记录
       const detailsRes = await db.collection('judge').where({
-        match_id: _.in(BValues)
+        match_id: _.in(matchIds)
       }).get();
       const details = detailsRes.data;
 
-      // 构建 B 到 details 记录的映射
+      // 构建 match_id 到 details 记录的映射
       const detailsMap = {};
       details.forEach(detail => {
         detailsMap[detail.match_id] = detail;
@@ -173,18 +50,18 @@ Page({
       // 合并数据
       const matchinfo = matches.map(match => {
         const detail = detailsMap[match.match_id];
-        const start = detail.started?1:0;
-        const end = detail.finished?1:0;
+        const start = detail ? (detail.started ? 1 : 0) : 0;
+        const end = detail ? (detail.finished ? 1 : 0) : 0;
         return {
           id: match.match_id,
-          day: match.matchTime.toLocaleDateString( 'zh-cn', { year:'numeric', month: '2-digit', day: '2-digit'}).replace(/\//g, '-'),
-          starttime: match.matchTime.toLocaleTimeString('en-US', { hour12: false,hour: '2-digit', minute: '2-digit'}),
+          day: match.matchTime.toLocaleDateString('zh-cn', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-'),
+          starttime: match.matchTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }),
           place: match.place,
           teamA: match.teamA,
           teamB: match.teamB,
           scoreA: match.scoreA,
-					scoreB: match.scoreB,
-					turn:match.turn,
+          scoreB: match.scoreB,
+          turn: match.turn,
           game_running_flag: start,
           game_finished_flag: end
         };

@@ -16,7 +16,8 @@ Page({
     currentIndex: 0,
 		currentListIndex:0,
 		currentPlayerTab:'goals',
-    date:"2024",
+		date:"2024",
+		currentYear: '',
     turn:0, //当前显示的赛程轮次-1
     tableColumns: [
       {title: "日期",key: "date",width: "100rpx"}, 
@@ -47,12 +48,7 @@ Page({
       { title: "进/失", key: "gs_ga", width: "100rpx" },
       { title: "积分", key: "points", width: "80rpx" }
     ],
-    listRank: [
-      { rank: 1, team: "计算机", gamePlayed: 8, win: 8, draw: 0, lose: 0, gs_ga: "35/2", points: 24 },
-      { rank: 2, team: "城建", gamePlayed: 8, win: 7, draw: 1, lose: 0, gs_ga: "15/10", points: 22 },
-      { rank: 3, team: "电子", gamePlayed: 8, win: 6, draw: 1, lose: 1, gs_ga: "20/5", points: 19 },
-      { rank: 4, team: "化工", gamePlayed: 8, win: 5, draw: 2, lose: 1, gs_ga: "18/8", points: 17 }
-    ],
+    listRank: [],
 		//进球榜
 		tableGoalColumns: [
       { title: "名次", key: "rank", width: "100rpx" },
@@ -60,12 +56,7 @@ Page({
       { title: "球队", key: "team", width: "200rpx" },
       { title: "进球数", key: "goals", width: "100rpx" }
     ],
-    listGoal: [
-      { rank: "1", player: "Player1", team: "Team1", goals: "10" },
-      { rank: "2", player: "Player2", team: "Team2", goals: "8" },
-      { rank: "3", player: "Player3", team: "Team3", goals: "7" },
-      { rank: "4", player: "Player4", team: "Team4", goals: "6" }
-    ],
+    listGoal: [],
     // 助攻榜
     tableAssistColumns: [
       { title: "名次", key: "rank", width: "100rpx", width: "100rpx" },
@@ -73,12 +64,7 @@ Page({
       { title: "球队", key: "team", width: "200rpx" },
       { title: "助攻数", key: "assists", width: "100rpx" }
     ],
-    listAssist: [
-      { rank: "1", player: "Player1", team: "Team1", assists: "12" },
-      { rank: "2", player: "Player2", team: "Team2", assists: "9" },
-      { rank: "3", player: "Player3", team: "Team3", assists: "8" },
-      { rank: "4", player: "Player4", team: "Team4", assists: "7" }
-		],
+    listAssist: [],
     // 黄牌榜
     tableYellowCardColumns: [
       { title: "名次", key: "rank", width: "100rpx" },
@@ -86,12 +72,7 @@ Page({
       { title: "球队", key: "team", width: "200rpx" },
       { title: "黄牌数", key: "yellowCards", width: "100rpx" }
     ],
-    listYellowCard: [
-      { rank: "1", player: "Player1", team: "Team1", yellowCards: "5" },
-      { rank: "2", player: "Player2", team: "Team2", yellowCards: "4" },
-      { rank: "3", player: "Player3", team: "Team3", yellowCards: "3" },
-      { rank: "4", player: "Player4", team: "Team4", yellowCards: "2" }
-    ],
+    listYellowCard: [],
     // 红牌榜
     tableRedCardColumns: [
       { title: "名次", key: "rank", width: "100rpx" },
@@ -102,8 +83,8 @@ Page({
 		listRedCard: [],
 		
     "firstList": [{ name: 'w券1', money: '5.00' }, { name: 'w券2', money: '50.00'}],
-    "secondList": [{ name: 'y券1', money: '10.00' }, { name: 'y券2', money: '20.00' }],
-    "thirdList": [{ name: 'g券1', money: '30.00' }, { name: 'g券2', money: '40.00' }],
+    "secondList": [{msg: '暂无内容'}],
+    "thirdList": [{msg: '暂无内容'}],
   },
  
   //swiper切换时会调用——赛事切换
@@ -482,43 +463,48 @@ Page({
     }
   },
  /*根据球队id和队员号码获取队员名字 */
-  getPlayerName: async function(team_id, playerCode) {  
-    try {  
-      const playerResult = await db.collection("team_player").where({  
-        team_id: team_id,  
-        player_num: playerCode.toString() 
-      }).get();  
-      if (playerResult.data.length === 0) {  
-        throw new Error('Player not found in team_player collection');  
-      }  
-      const playerID = playerResult.data[0].player_id;
-      const nameResult = await db.collection("player").where({  
-        _id: playerID  
-      }).get();  
-      if (nameResult.data.length === 0) {  
-        throw new Error('Player not found in player collection');  
-      }  
-      const playerName = nameResult.data[0].name;
-      return playerName;  
-    } catch (error) {  
-      console.error('Error getting player name:', error);  
-      throw error; 
-    }  
-  },
+	getPlayerName: async function(team_id, playerCode) {  
+		try {  
+			const playerResult = await db.collection("team_player").where({  
+				team_id: team_id,  
+				player_num: playerCode.toString() 
+			}).get();  
+			if (playerResult.data.length === 0) {  
+				console.warn('Player not found in team_player collection');
+				return '未知球员';  // 返回默认值
+			}  
+			const playerID = playerResult.data[0].player_id;
+			const nameResult = await db.collection("player").where({  
+				_id: playerID  
+			}).get();  
+			if (nameResult.data.length === 0) {  
+				console.warn('Player not found in player collection');
+				return '未知球员';  // 返回默认值
+			}  
+			const playerName = nameResult.data[0].name;
+			return playerName;  
+		} catch (error) {  
+			console.error('Error getting player name:', error);  
+			return '未知球员';  // 返回默认值
+		}  
+	},
   /*根据球队id获取球队名字 */
   getTeamName: async function(team_id){
     try {  
       const nameRes = await db.collection("team").where({ team_id: team_id }).get();  
       if (nameRes.data.length === 0) {  
-        throw new Error('Team not found in team collection');  
+        console.warn('Team not found in team collection');  
+        return '未知球队';  // 返回默认值
       }  
       const team = nameRes.data[0];  
       if (!team) {  
-        throw new Error('Unexpected error: No team data found');  
+        console.warn('Unexpected error: No team data found');  
+        return '未知球队';  // 返回默认值
       }   
       return team.team_name;
     } catch (error) {  
-      throw error;  
+      console.error('Error getting team name:', error);  
+      return '未知球队';  // 返回默认值
     }
   },
   /*根据match_id获取比赛时间*/
@@ -526,15 +512,18 @@ Page({
     try{
       const matchRes=await db.collection("matchInfo").where({match_id:match_id}).get()
       if (matchRes.data.length===0){
-        throw new Error('Match not found in match collection');
+        console.warn('Match not found in match collection');
+        return new Date();  // 返回当前日期作为默认值
       }
       const match=matchRes.data[0];
       if(!match){
-        throw new Error('Unexpected error: No match data found')
+        console.warn('Unexpected error: No match data found');
+        return new Date();  // 返回当前日期作为默认值
       }
       return match.matchTime;
     }catch(error){
-      throw error
+      console.error('Error getting match time:', error);
+      return new Date();  // 返回当前日期作为默认值
     }
   },
   /* 接收一个Date型变量，返回月-日 时-分格式的字符串*/
@@ -582,11 +571,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+		wx.showLoading({
+			title: '加载中……',
+			mask: true
+		})
     let year=new Date().getFullYear()
     this.data.matchList=[]
     this.setData({
-      date:year
-    })
+			date:year,
+			currentYear: year
+		})
     this.loadRank_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
     this.loadGoal_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
     this.loadYellow_db(this.data.date,this.data.matches[this.data.currentIndex].matchName)
@@ -594,7 +588,11 @@ Page({
     let i=0
     for(i=1;i<=7;i++){
       this.loadMatch_db(this.data.date,this.data.matches[this.data.currentIndex].matchName,i)
-    }
+		}
+		
+		setTimeout(() => {
+			wx.hideLoading();
+		}, 4000)
   },
 
   /**

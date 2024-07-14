@@ -18,7 +18,7 @@ App({
         nickname: '爱踢球的工大人',
         studentID: '00000000'
       },
-      userRole: '球员',
+      userRole: '',
       loginFlag: 0,
       userPermissions: ['球员', '裁判', '球队管理',"赛事管理"] // 假设用户拥有球员和裁判的权限
     }

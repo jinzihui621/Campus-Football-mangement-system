@@ -31,7 +31,7 @@ Page({
           nickname: SearchRes.data.nickname,
           signature: SearchRes.data.p_signature,
           studentID: SearchRes.data.number,
-          contact: SearchRes.data.phone_number,
+          contact: SearchRes.data.phone_num,
           college: SearchRes.data.department,
           major: SearchRes.data.major
         };

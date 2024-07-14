@@ -220,6 +220,15 @@ Page({
     try{
       await db.collection('user').doc(openid).set({
         data: dbadd
+			});
+			await db.collection('referee').doc(openid).set({
+        data: dbadd
+			});
+			await db.collection('organizer').doc(openid).set({
+        data: dbadd
+			});
+			await db.collection('teamleader').doc(openid).set({
+        data: dbadd
       });
       const playerRes = await db.collection('player').doc(openid).get();
       const dbadd_r = {
@@ -231,6 +240,15 @@ Page({
       });
     }catch{
       await db.collection('user').doc(openid).set({
+        data: dbadd
+			});
+			await db.collection('referee').doc(openid).set({
+        data: dbadd
+			});
+			await db.collection('organizer').doc(openid).set({
+        data: dbadd
+			});
+			await db.collection('teamleader').doc(openid).set({
         data: dbadd
       });
       const dbadd_r = {

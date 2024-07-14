@@ -80,8 +80,12 @@ Page({
         teamB: teamnameB,
         turn: round
       }).get();
-  
-      if (res.data.length > 0) {
+      const res1 = await db.collection('judge').where({
+        match_id:res.data[0].match_id,
+        started:false,
+        finished:false
+      }).get();
+      if (res1.data.length > 0) {
         const id = res.data[0]._id;
         const match_id = res.data[0].match_id;
         await matchInfoCollection.doc(id).remove();

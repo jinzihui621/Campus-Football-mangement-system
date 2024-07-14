@@ -64,7 +64,7 @@ Page({
         player_id: this.data.selectedPlayer.player_id
       }).get();
       const team_id = teamPlayerRes.data[0].team_id;
-      const originalPlayerNum = this.data.selectedPlayer.player_num;
+      const originalPlayerNum = this.data.selectedPlayer.player_id;
   
       // 更新 player 表中的 player_num
       await db.collection('player').doc(this.data.selectedPlayer.player_id).update({
@@ -85,7 +85,7 @@ Page({
       // 更新 player_score_list 表中的 player_num
       await db.collection('player_score_list').where({
         team_id: team_id,
-        player_num: originalPlayerNum
+        _openid: originalPlayerNum
       }).update({
         data: {
           player_num: escapedJerseyNumber

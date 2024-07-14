@@ -83,8 +83,8 @@ Page({
 		listRedCard: [],
 		
     "firstList": [{ name: 'w券1', money: '5.00' }, { name: 'w券2', money: '50.00'}],
-    "secondList": [{ name: 'y券1', money: '10.00' }, { name: 'y券2', money: '20.00' }],
-    "thirdList": [{ name: 'g券1', money: '30.00' }, { name: 'g券2', money: '40.00' }],
+    "secondList": [{msg: '暂无内容'}],
+    "thirdList": [{msg: '暂无内容'}],
   },
  
   //swiper切换时会调用——赛事切换

@@ -112,16 +112,14 @@
         <swiper-item>
           <view wx:for="{{secondList}}" wx:for-item="item" class='record-item'>
             <view class='name'>
-              <span>名称：{{item.name}}</span>
-              <span>面额：{{item.money}}</span>
+              <span>{{item.msg}}</span>
             </view>
           </view>
         </swiper-item>
         <swiper-item>
           <view wx:for="{{thirdList}}" wx:for-item="item" class='record-item'>
            <view class='name'>
-              <span>名称：{{item.name}}</span>
-              <span>面额：{{item.money}}</span>
+              <span>{{item.msg}}</span>
             </view>
           </view>
         </swiper-item>

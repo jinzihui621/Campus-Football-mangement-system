@@ -421,7 +421,7 @@ Page({
         }));
         let matchesListItem = []
         groupedItemsList.forEach(async item=>{
-          const matchTime_temp=await this.getMatchTime(item.match_id)
+          const matchTime_temp=await this.getMatchTime(item.group)
           const matchTimeWithFormat=await this.formatDate(matchTime_temp)
           matchesListItem.push({
             date:matchTimeWithFormat,

@@ -168,8 +168,8 @@ Page({
         // const messageResult = await db.collection('user').where({
         //     _id: openid
         //   }).get();
-        //const messageId = app.globalData.userInfo.studentID;
         const messageId = app.globalData.userInfo.studentID;
+        //const messageId = "21212121";
         const leaderResult = await db.collection('teamleader').where({
           number: messageId
         }).get();

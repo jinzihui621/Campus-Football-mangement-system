@@ -1,5 +1,5 @@
 .container {
-  height: 528px;
+  height: 1200rpx;
   width:100%;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border: 2px solid #000000;
+  border: 2rpx solid #000000;
 }
 
 .title-sel {
@@ -58,7 +58,7 @@
   align-items: center; /* 子元素在交叉轴上居中（如果需要的话，但这里可能不是必需的） */  
   flex-direction: row; /* 明确设置Flex方向为行（默认） */  
   margin-top: 30rpx;
-  border: 2px solid #00dd00;
+  border: 2rpx solid #00dd00;
 }  
 
 .raceInfo{
@@ -85,7 +85,7 @@
 }
 
 .container1 {
-  height: 40px;
+  height: 100rpx;
   width:100%;
   display: flex;
   padding: 0; /* 确保没有内边距 */
@@ -93,16 +93,16 @@
 }
 
 .button1 {
-  margin: 10px;
+  margin: 20rpx;
   padding: 0px 0px;
-  font-size: 16px;
+  font-size: 42rpx;
   background: #0BD520;
 }
 
 .button2 {
-  margin: 10px;
+  margin: 20rpx;
   padding: 0px 0px;
-  font-size: 16px;
+  font-size: 42rpx;
   background: #FF0000;
 }
 

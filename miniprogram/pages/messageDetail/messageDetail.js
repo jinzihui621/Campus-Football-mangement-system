@@ -2,7 +2,14 @@ Page({
   data: {
     message: {},
     id: null,
-    messages: []
+		messages: [],
+		openid: ""
+  },
+
+	getOpenId: function() {
+        return wx.cloud.callFunction({
+          name: 'getOpenid'
+        }).then(res => res.result.openid);
   },
 
   onLoad: function(options) {
@@ -12,7 +19,10 @@ Page({
       id: id,
       messages: messages,
       message: messages.find(msg => msg.id == id)
-    });
+		});
+		this.setData({
+			openid: this.getOpenId()
+		})
   },
 
   confirmAction: async function() {
@@ -31,7 +41,7 @@ Page({
           // 创建新记录对象
     const newRecord = {
       player_id: message.player_id,
-      player_num: "-1",
+      player_num: this.openid,
       team_id: message.team_id
     };
       await db.collection('team_player').add({

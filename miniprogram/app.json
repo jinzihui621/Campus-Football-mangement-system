@@ -26,6 +26,7 @@
     "pages/soccerSchedule/soccerSchedule",
     "pages/editSchedule/editSchedule",
     "pages/management/management",
+    "pages/test/test",
     "pages/delMatch/delMatch"
   ],
   "window": {

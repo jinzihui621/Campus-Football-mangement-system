@@ -52,9 +52,7 @@ Page({
       userRole: app.globalData.userRole
     });
     this.loadNotices();
-
     this.loadMember();
-    this.getInfo();
   },
   
   handleRegister(e){
@@ -589,7 +587,8 @@ Page({
     console.log(match_id)
     db.collection('player_score_list').where({
       player_num: player_num.toString(),
-      team_id: team_id
+      team_id: team_id,
+      match_id: match_id
     }).update({
       data: {
         score:db.command.inc(1)
@@ -632,7 +631,8 @@ Page({
     })
     //matchInfo teamA加分
     db.collection('matchInfo').where({
-      teamA_id : team_id
+      teamA_id : team_id,
+      match_id: match_id
     }).update({
       data: {
         scoreA:db.command.inc(1)
@@ -647,7 +647,8 @@ Page({
     })
     //matchInfo teamB加分
     db.collection('matchInfo').where({
-      teamB_id : team_id
+      teamB_id : team_id,
+      match_id: match_id
     }).update({
       data: {
         scoreB:db.command.inc(1)
@@ -678,7 +679,8 @@ Page({
         else{
           db.collection('player_score_list').where({
             player_num: player_num.toString(),
-            team_id: team_id
+            team_id: team_id,
+            match_id: match_id
           }).update({
             data: {
               score:db.command.inc(-1)
@@ -695,7 +697,9 @@ Page({
       }})
     //进球球员球队
     db.collection('team_match_participate').where({
-      team_id: team_id}).get({
+      team_id: team_id,
+      match_id :match_id
+    }).get({
       success(res) {
         const doc = res.data[0]
         if (doc.score === 0){
@@ -750,7 +754,9 @@ Page({
       }})
     //matchInfo teamA减分
     db.collection('matchInfo').where({
-      teamA_id: team_id}).get({
+      teamA_id: team_id,
+      match_id: match_id
+    }).get({
       success(res) {
         const doc = res.data[0]
         if (doc.score === 0){
@@ -761,7 +767,8 @@ Page({
         }
         else{
           db.collection('matchInfo').where({
-            teamA_id : team_id
+            teamA_id : team_id,
+            match_id: match_id
           }).update({
             data: {
               scoreA:db.command.inc(-1)
@@ -778,7 +785,9 @@ Page({
       })
     //matchInfo teamB减分
     db.collection('matchInfo').where({
-      teamB_id: team_id}).get({
+      teamB_id: team_id,
+      match_id: match_id
+    }).get({
       success(res) {
         const doc = res.data[0]
         if (doc.score === 0){
@@ -789,10 +798,11 @@ Page({
         }
         else{
           db.collection('matchInfo').where({
-            teamB_id : team_id
+            teamB_id : team_id,
+            match_id :match_id
           }).update({
             data: {
-              scoreA:db.command.inc(-1)
+              scoreB:db.command.inc(-1)
             },
             success(res) {
               console.log("matchInfo_teamB减分成功")

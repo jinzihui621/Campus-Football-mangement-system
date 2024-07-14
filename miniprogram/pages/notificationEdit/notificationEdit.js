@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    valueInput:""
+    valueInput:"",
+    userId:""
   },
 
   handleInput(e){
@@ -26,7 +27,14 @@ Page({
     // 输入内容验证
     if (!message || message.length === 0) {
       wx.showToast({
-        title: '内容不能为空',
+        title: '公告内容不能为空',
+        icon: 'none'
+      });
+      return;
+    }
+    else if(message.length > 100){
+      wx.showToast({
+        title: '公告内容不能超过100字',
         icon: 'none'
       });
       return;
@@ -36,7 +44,7 @@ Page({
     // 进行数据库操作发布信息
     try{
       var valueInput = escapeMessage; 
-      var  _id = "id1"; //队长id
+      var  _id = this.data.userId; //队长id
       db.collection('leader_manage_team').where({
         teamleader_id: _id
       }).get({
@@ -103,11 +111,19 @@ Page({
     });
   },
 
+   getOpenId: function() {
+        return wx.cloud.callFunction({
+          name: 'getOpenid'
+        }).then(res => res.result.openid);
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.getOpenId().then(openid => {
+      this.setData({ userId: openid });
+    });
   },
 
   /**

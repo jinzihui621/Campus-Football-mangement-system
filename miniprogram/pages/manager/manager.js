@@ -16,13 +16,13 @@ Page({
   },
 
   async loadMember(e) {
+
     const db = wx.cloud.database();
     try {
       // 获取 team_id
       const leaderRes = await db.collection('leader_manage_team').where({
-        teamleader_id: "id1"
+        teamleader_id: this.data.leaderId
       }).get();
-
       if (leaderRes.data.length === 0) {
         wx.showToast({
           title: '未找到对应的团队',
@@ -30,14 +30,11 @@ Page({
         });
         return;
       }
-
       const team_id = leaderRes.data[0].team_id;
-
       // 获取所有球员的 player_id
       const teamPlayerRes = await db.collection('team_player').where({
         team_id: team_id
       }).get();
-
       if (teamPlayerRes.data.length === 0) {
         wx.showToast({
           title: '未找到球员',
@@ -45,9 +42,7 @@ Page({
         });
         return;
       }
-
       const playerIds = teamPlayerRes.data.map(item => item.player_id);
-
       // 获取每个球员的详细信息
       const playerPromises = playerIds.map(async playerId => {
         const playerRes = await db.collection('player').doc(playerId).get();
@@ -106,15 +101,18 @@ async deletePlayer_DB(e){
     title: '确认删除',
     content: '你确定要删除这个球员吗？',
     success: async (res) => {
+
       if (res.confirm) {
         const self = this;
         try {
           var player_num = e.currentTarget.dataset.info2; 
           var _id = "id1";
+          console.log("11111111")
           db.collection('leader_manage_team').where({
-            _id: _id
+            teamleader_id: this.data.leaderId
           }).get({
             success(res) {
+              console.log("res:",res)
               const doc = res.data[0]
               if(doc){
                 db.collection('team_player').where({
@@ -139,6 +137,7 @@ async deletePlayer_DB(e){
                   }
                 });
               } else {
+                console.log(res);
                 wx.showToast({
                   title: '球队管理者ID错误',
                   icon: 'none'

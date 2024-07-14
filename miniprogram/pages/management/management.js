@@ -51,6 +51,7 @@ Page({
     });
     this.loadNotices();
     this.loadMatches();
+    this.loadMember();
   },
   
   handleRegister(e){
@@ -84,11 +85,10 @@ Page({
 
   async loadNotices() {
     //！！！！！！这里的player_id后面需要替换成该用户的openid
-    const player_id = "id1";
     try {
       // 获取球员所属队伍的 team_id
       const teamPlayerRes = await db.collection('team_player').where({
-        player_id: player_id
+        player_id: this.data.leaderId
       }).get();
 
       if (teamPlayerRes.data.length === 0) {
@@ -137,12 +137,13 @@ Page({
   },
 
   async loadMatches() {
-    const player_id = "id1"; // 当前球员的 player_id
+    const player_id = this.data.leaderId; // 当前球员的 player_id
     try {
       // 1. 获取当前球员的 team_id
       const teamPlayerRes = await db.collection('team_player').where({
         player_id: player_id
       }).get();
+      console.log("team:",teamPlayerRes);
       if (teamPlayerRes.data.length === 0) {
         wx.showToast({
           title: '未找到该球员所属的队伍',
@@ -158,6 +159,7 @@ Page({
           { teamB_id: team_id }
         ]
       }).get();
+      console.log("matches",matchRes);
       const matches = matchRes.data.map(match => ({
         teamA: match.teamA,
         teamB: match.teamB,
@@ -192,7 +194,7 @@ Page({
   joinGame_DB:function(e){
     
     try{
-      var player_id = "id1";//学号 
+      var player_id = this.data.leaderId//学号 
       var match_id = e.currentTarget.dataset.match_id;//比赛ID
       db.collection('team_player').where({
         player_id: player_id
@@ -250,11 +252,12 @@ Page({
   },
 
   async loadMember(e) {
+
     const db = wx.cloud.database();
     try {
       // 获取 team_id
       const leaderRes = await db.collection('leader_manage_team').where({
-        teamleader_id: "id1"
+        teamleader_id: this.data.leaderId
       }).get();
 
       if (leaderRes.data.length === 0) {
@@ -271,25 +274,23 @@ Page({
       const teamPlayerRes = await db.collection('team_player').where({
         team_id: team_id
       }).get();
-
       if (teamPlayerRes.data.length === 0) {
+        console.log("未找到球员")
         wx.showToast({
           title: '未找到球员',
           icon: 'none'
         });
         return;
       }
-
       const playerIds = teamPlayerRes.data.map(item => item.player_id);
-
       // 获取每个球员的详细信息
       const playerPromises = playerIds.map(async playerId => {
-        const playerRes = await db.collection('player').doc(playerId).get();
+      const playerRes = await db.collection('player').doc(playerId).get();
         return {
           name: playerRes.data.name,
           number: playerRes.data.number,
           player_num: playerRes.data.player_num,
-          player_id:playerRes.data._id
+          player_id:playerRes.data._openid
         };
       });
 
@@ -352,9 +353,9 @@ Page({
           const self = this;
           try {
             var player_id = e.currentTarget.dataset.info1; 
-            var _id = "id1";
+            var _id = this.data.leaderId;
             db.collection('leader_manage_team').where({
-              _id: _id
+              teamleader_id: _id
             }).get({
               success(res) {
                 const doc = res.data[0]

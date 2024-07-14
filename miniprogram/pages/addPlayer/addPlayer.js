@@ -169,7 +169,7 @@ Page({
         //     _id: openid
         //   }).get();
         //const messageId = app.globalData.userInfo.studentID;
-        const messageId = "21212121";
+        const messageId = app.globalData.userInfo.studentID;
         const leaderResult = await db.collection('teamleader').where({
           number: messageId
         }).get();

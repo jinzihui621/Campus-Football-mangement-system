@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userId:"",
     member:null,
     formattedMembers: [],
     selectedMember: "",
@@ -123,8 +124,9 @@ Page({
     try {
       // 获取 team_id
       const leaderRes = await db.collection('leader_manage_team').where({
-        teamleader_id: "id1"
+        teamleader_id: this.data.userId
       }).get();
+      console.log(leaderRes)
       if (leaderRes.data.length === 0) {
         wx.showToast({
           title: '未找到对应的团队',
@@ -152,7 +154,7 @@ Page({
           name: playerRes.data.name,
           number: playerRes.data.number,
           player_num: playerRes.data.player_num,
-          player_id: playerRes.data._id
+          player_id: playerRes.data._openid
         };
       });
       const players = await Promise.all(playerPromises);
@@ -173,13 +175,21 @@ Page({
     }
   },
 
+   getOpenId: function() {
+        return wx.cloud.callFunction({
+          name: 'getOpenid'
+        }).then(res => res.result.openid);
+  },
+
    /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.loadMember();
+    this.getOpenId().then(openid => {
+      this.setData({ userId: openid });
+      this.loadMember(); // 在获取到 openid 后加载成员信息
+    });
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

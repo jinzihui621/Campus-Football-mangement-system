@@ -68,13 +68,15 @@ Page({
 
   async loadNotices() {
     //！！！！！！这里的player_id后面需要替换成该用户的openid
-    const player_id = "id1";
+    const player_id = wx.cloud.callFunction({
+            name: 'getOpenid'
+          })
     try {
       // 获取球员所属队伍的 team_id
       const teamPlayerRes = await db.collection('team_player').where({
         player_id: player_id
       }).get();
-
+      
       if (teamPlayerRes.data.length === 0) {
         wx.showToast({
           title: '未找到对应的队伍',

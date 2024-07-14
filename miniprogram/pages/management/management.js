@@ -288,7 +288,8 @@ Page({
         return {
           name: playerRes.data.name,
           number: playerRes.data.number,
-          player_num: playerRes.data.player_num
+          player_num: playerRes.data.player_num,
+          player_id:playerRes.data._id
         };
       });
 
@@ -350,7 +351,7 @@ Page({
         if (res.confirm) {
           const self = this;
           try {
-            var player_num = e.currentTarget.dataset.info2; 
+            var player_id = e.currentTarget.dataset.info1; 
             var _id = "id1";
             db.collection('leader_manage_team').where({
               _id: _id
@@ -360,7 +361,7 @@ Page({
                 if(doc){
                   db.collection('team_player').where({
                     team_id: doc.team_id,
-                    player_num: player_num
+                    player_id: player_id
                   }).remove({
                     success(res) {
                       wx.showToast({
@@ -368,7 +369,7 @@ Page({
                         icon: 'none'
                       });
                       self.setData({
-                        member: self.data.member.filter(player => player.player_num !== player_num)
+                        member: self.data.member.filter(player => player.player_id !== player_id)
                       });
                     },
                     fail(err) {

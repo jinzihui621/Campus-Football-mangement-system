@@ -89,44 +89,46 @@ Page({
   },
 
   scrollToCurrentMatch() {
-    const now = new Date();
-    const currentTime = now.getHours() * 60 + now.getMinutes();
-    const currentDay = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-
-    let closestMatchId = null;
-    let minDiff = Infinity;
-
-    // 优先滚动到正在进行的比赛
-    const runningMatch = this.data.matches.find(match => match.game_running_flag === 1);
-    if (runningMatch) {
-      this.setData({
-        toView: `match-${runningMatch.id}`
-      });
-      return;
-    }
-
-    // 如果没有正在进行的比赛，滚动到最近结束的比赛
-    this.data.matches.forEach(match => {
-      const [matchHour, matchMinute] = match.starttime.split(':').map(Number);
-      const matchTime = matchHour * 60 + matchMinute;
-
-      if (match.day === currentDay) {
-        if (matchTime <= currentTime && currentTime - matchTime < minDiff) {
-          closestMatchId = match.id;
-          minDiff = currentTime - matchTime;
-        }
-      } else if (match.day < currentDay) {
-        if (currentDay - match.day < minDiff) {
-          closestMatchId = match.id;
-          minDiff = currentDay - match.day;
-        }
-      }
-    });
-
-    if (closestMatchId !== null) {
-      this.setData({
-        toView: `match-${closestMatchId}`
-      });
-    }
-  }
+		const now = new Date();
+		const currentTime = now.getHours() * 60 + now.getMinutes();
+		const currentDay = new Date(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`);
+	
+		let closestMatchId = null;
+		let minDiff = Infinity;
+	
+		// 优先滚动到正在进行的比赛
+		const runningMatch = this.data.matches.find(match => match.game_running_flag === 1);
+		if (runningMatch) {
+			console.log("In running match...");
+			this.setData({
+				toView: `match-${runningMatch.id}`
+			});
+			return;
+		}
+	
+		// 如果没有正在进行的比赛，滚动到最近结束的比赛
+		this.data.matches.forEach(match => {
+			const [matchHour, matchMinute] = match.starttime.split(':').map(Number);
+			const matchTime = matchHour * 60 + matchMinute;
+			const matchDay = new Date(match.day);
+	
+			if (matchDay.getTime() === currentDay.getTime()) {
+				if (matchTime <= currentTime && currentTime - matchTime < minDiff) {
+					closestMatchId = match.id;
+					minDiff = currentTime - matchTime;
+				}
+			} else if (matchDay < currentDay) {
+				console.log(currentDay - matchDay);
+				if ((currentDay.getTime() - matchDay.getTime()) < minDiff) {
+					closestMatchId = match.id;
+					minDiff = currentDay.getTime() - matchDay.getTime();
+				}
+			}
+		});
+		if (closestMatchId !== null) {
+			this.setData({
+				toView: `match-${closestMatchId}`
+			});
+		}
+	}
 });

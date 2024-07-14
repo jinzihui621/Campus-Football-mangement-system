@@ -46,11 +46,11 @@
 											<text>进球榜</text>
 											<hr class="line-style"/>
 										</view>
-										<view class="{{currentPlayerTab === 'assists' ? 'title-sel-selected' : 'title-sel'}}" bindtap="selectPlayerTab" data-tab="assists">
+										<!-- <view class="{{currentPlayerTab === 'assists' ? 'title-sel-selected' : 'title-sel'}}" bindtap="selectPlayerTab" data-tab="assists">
 											<view style="height: 55rpx; background-color: transparent;"></view>
 											<text>助攻榜</text>
 											<hr class="line-style"/>
-										</view>
+										</view> -->
 										<view class="{{currentPlayerTab === 'yellowCards' ? 'title-sel-selected' : 'title-sel'}}" bindtap="selectPlayerTab" data-tab="yellowCards">
 											<view style="height: 55rpx; background-color: transparent;"></view>
 											<text>黄牌榜</text>

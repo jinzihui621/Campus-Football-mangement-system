@@ -175,7 +175,13 @@ Page({
     // 验证用户输入
     if (!this.validateInput()) {
       return;
-    }
+		}
+		// 登录
+		wx.login({
+			success: res => {
+				app.globalData.loginFlag = 1;
+			}
+		});
     const openid = await this.getOpenId();
     // 保存用户信息到全局数据或数据库
     const sanitizedData = {
@@ -189,8 +195,11 @@ Page({
       major: this.data.major
     };
 
-    app.globalData.userInfo = sanitizedData;
-    app.globalData.userRole = "球员"; 
+		app.globalData.userInfo = sanitizedData;
+		if(app.globalData.userRole===""){
+			app.globalData.userRole = "球员"; 
+		}
+		 
     const dbadd = {
       department: sanitizedData.college,
       major: sanitizedData.major,

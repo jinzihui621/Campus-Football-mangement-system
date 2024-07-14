@@ -23,7 +23,7 @@
     <block wx:else>
       <view wx:for="{{matches}}" wx:key="id" class="matchMessage" id="match-{{item.id}}" bindtap="goToMatchDetail" data-id="{{item.id}}">
         <view class="raceInfo">
-          <view class="date-time">{{item.day}} {{item.starttime}}</view>
+          <view class="date-time">{{item.day}} {{item.starttime}} {{item.turn}}</view>
           <view class="teams">
             <view class="team-name-container">
               <text class="team-name">{{item.teamA}}</text>

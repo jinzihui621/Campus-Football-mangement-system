@@ -6,16 +6,10 @@ Page({
   },
 
   navigateToLogin: function() {
-    // 登录
-    wx.login({
-      success: res => {
-        app.globalData.loginFlag = 1;
-        wx.navigateTo({
-          url: '/pages/editProfile/editProfile' 
-        });
-        console.log("succ");
-      }
-    });
+		wx.navigateTo({
+			url: '/pages/editProfile/editProfile' 
+		});
+		console.log("succ");
   },
 
   navigateToRegister: function() {

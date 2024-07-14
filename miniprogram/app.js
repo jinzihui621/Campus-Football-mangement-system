@@ -20,7 +20,7 @@ App({
       },
       userRole: '球员',
       loginFlag: 0,
-      userPermissions: ['球员', '裁判', '球队管理'] // 假设用户拥有球员和裁判的权限
+      userPermissions: ['球员', '裁判', '球队管理',"赛事管理"] // 假设用户拥有球员和裁判的权限
     }
   },
   globalData: {

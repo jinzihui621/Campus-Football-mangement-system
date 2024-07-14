@@ -247,7 +247,7 @@ Page({
     });
     setTimeout(() => {
       wx.switchTab({
-				url: '/pages/homePage/homePage',
+				url: '/pages/me/me',
 			});
     }, 1000);
   }

@@ -90,6 +90,7 @@
   margin:30rpx;
   border-radius: 10rpx;
   border: 2rpx lightgray solid;
+  background-color: #ffffff;
 }
 
 .headline1{
@@ -100,16 +101,18 @@
   padding: 15rpx;
   border-radius: 10rpx;
   border-bottom: 2rpx solid lightgray;
-  background-color: #068E15;
+  background-color: lightgreen;
 }
 
 .content{
   display: flex;
   flex-direction: column;
   padding: 15rpx;
-  width: 88%;
-  height: 244rpx;
+  width: 90%;
+  height: 60%;
+  margin-top:15rpx;
   padding:15rpx;
+  border-radius: 10rpx;
 }
 
 .messageInfo{
@@ -126,6 +129,7 @@
   height: 60rpx;
   border-radius: 10rpx;
   border: lightgray 2rpx solid;
+  background-color: #ffffff;
 }
 
 .schedulePattern{
@@ -140,20 +144,20 @@
   margin-top: 30rpx;
   border-radius: 10rpx;
   border: lightgray 2rpx solid;
-  background-color:#068E15;
+  background-color:#ffffff;
 }
 
 .headline2{
-  height: 50rpx;
+  height: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border-bottom: lightgray 2rpx solid;
-  padding: 15rpx;
 }
 
 .gameContainer{
-  height: 680rpx;
+  height: 90%;
   width: 100%;
 }
 
@@ -162,8 +166,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 580rpx;
-
+  background-color: lightgreen;
 }
 
 .timeAndPlace{
@@ -242,7 +245,7 @@
   width: 90%;
   border-radius: 10rpx;
   border: 2rpx solid lightgray;
-  background-color: rgb(50, 150, 50);
+  background-color: rgb(22, 224, 83);
 }
 .updateMember{
   display: flex;
@@ -334,7 +337,7 @@
 .playerInfo{
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 80%;
   justify-content: space-around;
   border-bottom: 2rpx solid lightgreen;
   padding: 20rpx;
@@ -551,4 +554,15 @@ button.end{
 .redCard button{
   background-color: #FF0000;
   color: #24272c;
+}
+
+.no-matches {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  margin: 150px 10px;
+  border: 2px solid #000000;
 }

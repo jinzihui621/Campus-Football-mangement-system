@@ -73,6 +73,7 @@ Page({
     }
   },
 
+
   toPlus(){
     wx.navigateTo({
       url: '/pages/addPlayer/addPlayer' // 目标页面的路径

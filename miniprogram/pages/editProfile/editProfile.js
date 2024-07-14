@@ -190,6 +190,7 @@ Page({
     };
 
     app.globalData.userInfo = sanitizedData;
+    app.globalData.userRole = "球员"; 
     const dbadd = {
       department: sanitizedData.college,
       major: sanitizedData.major,
@@ -247,7 +248,7 @@ Page({
     });
     setTimeout(() => {
       wx.switchTab({
-				url: '/pages/homePage/homePage',
+				url: '/pages/me/me',
 			});
     }, 1000);
   }

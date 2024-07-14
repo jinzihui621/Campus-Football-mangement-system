@@ -43,8 +43,9 @@ Page({
       this.loadNotices();
       this.loadMatches();
       this.loadMember(); // 在获取到 openid 后加载成员信息
+      this.getInfo();
     });
-    this.getInfo();
+    
   },
 
   onShow: function() {
@@ -53,6 +54,8 @@ Page({
     });
     this.loadNotices();
     this.loadMember();
+    this.loadMatches();
+    this.getInfo();
   },
   
   handleRegister(e){
@@ -520,7 +523,7 @@ Page({
     if (index !== -1) {  
       const newPlayers = [...players];
       if(players[index].redCard < 1){
-        this.btnRedAdd_DB(playerCode,teamID)
+        this.btnRedAdd_DB(playerCode,teamID,this.data.race)
         newPlayers[index].redCard++;  
       }
       else{
@@ -542,7 +545,7 @@ Page({
     const index = players.findIndex(player => player.playerCode === parseInt(playerCode, 10));  
     if (index !== -1 && players[index].redCard > 0) { // 确保黄牌数量大于0  
       const newPlayers = [...players];
-      this.btnRedMinus_DB(playerCode,teamID)
+      this.btnRedMinus_DB(playerCode,teamID, this.data.race)
       newPlayers[index].redCard--;  
       this.setData({  
         [teamID === this.data.teamAid ? 'playerA' : 'playerB']: newPlayers  

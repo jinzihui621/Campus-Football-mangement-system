@@ -1,105 +1,51 @@
-
-<navigator url="/pages/createMatch/createMatch" open-type="navigate" class="centered-button">
-  <image src="/image/eventOrganizerManagement/jiahao.png" style="width: 60rpx; height: 60rpx; margin-right: 10rpx;" />
-  创建赛事
-</navigator>
-
-<view class="custom-border-box"> 
-  <scroll-view scroll-y="true" class="scroll-view"> 
-    <!-- 模拟较长的内容 --> 
-    <view class="scroll-item">
-      <text class="text-box"> 工超</text>
-      <view class="icon-row">
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
-          <text class="saishitext">球队</text>
-        </view>
-        <view class="icon-item" bindtap="navigateToSchedule">
-          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
-          <text class="saishitext">赛程</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
-          <text class="saishitext">管理员</text>
-        </view>
+<view class="container">
+  <view class="input-group">
+    <text class="label">日期</text>
+    <picker mode="date" value="{{day}}" start="{{eventStartTime}}" end="{{eventFinishTime}}" bindchange="onInputChange" data-field="day">
+      <view class="picker">
+        {{day || '请选择日期'}}
       </view>
-      <view class="icon-row">
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
-          <text class="saishitext">裁判</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
-          <text class="saishitext">管理赛事</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
-          <text class="saishitext">导出数据</text>
-        </view>
+    </picker>
+  </view>
+  <view class="input-group">
+    <text class="label">比赛轮次</text>
+    <picker mode="selector" range="{{rounds}}" value="{{roundIndex}}" bindchange="onInputChange" data-field="roundIndex">
+      <view class="picker">
+        {{rounds[roundIndex] || '请选择比赛轮次'}}
       </view>
-    </view>
-
-    <view class="scroll-item">
-      <text class="text-box"> 工甲</text>
-      <view class="icon-row">
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
-          <text class="saishitext">球队</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
-          <text class="saishitext">赛程</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
-          <text class="saishitext">管理员</text>
-        </view>
+    </picker>
+  </view>
+  <view class="input-group">
+    <text class="label">开始时间</text>
+    <picker mode="time" value="{{starttime}}" bindchange="onInputChange" data-field="starttime">
+      <view class="picker">
+        {{starttime || '请选择开始时间'}}
       </view>
-      <view class="icon-row">
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
-          <text class="saishitext">裁判</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
-          <text class="saishitext">管理赛事</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
-          <text class="saishitext">导出数据</text>
-        </view>
+    </picker>
+  </view>
+  <view class="input-group">
+    <text class="label">主队名称</text>
+    <picker mode="selector" range="{{teams}}" value="{{teamnameAIndex}}" bindchange="onInputChange" data-field="teamnameAIndex">
+      <view class="picker">
+        {{teams[teamnameAIndex] || '请选择主队名称'}}
       </view>
-    </view> 
-    <view class="scroll-item">
-      <text class="text-box"> 工大杯</text>
-      <view class="icon-row">
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/qiudui.png" class="icon" />
-          <text class="saishitext">球队</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/saicheng.png" class="icon" />
-          <text class="saishitext">赛程</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/guanliyuan_guanliyuanliebiao-2.png" class="icon" />
-          <text class="saishitext">管理员</text>
-        </view>
+    </picker>
+  </view>
+  <view class="input-group">
+    <text class="label">客队名称</text>
+    <picker mode="selector" range="{{teams}}" value="{{teamnameBIndex}}" bindchange="onInputChange" data-field="teamnameBIndex">
+      <view class="picker">
+        {{teams[teamnameBIndex] || '请选择客队名称'}}
       </view>
-      <view class="icon-row">
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/caipan.png" class="icon" />
-          <text class="saishitext">裁判</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/saishiguanli.png" class="icon" />
-          <text class="saishitext">管理赛事</text>
-        </view>
-        <view class="icon-item">
-          <image src="/image/eventOrganizerManagement/shujudaochu.png" class="icon" />
-          <text class="saishitext">导出数据</text>
-        </view>
+    </picker>
+  </view>
+  <view class="input-group">
+    <text class="label">场地</text>
+    <picker mode="selector" range="{{places}}" value="{{placeIndex}}" bindchange="onInputChange" data-field="placeIndex">
+      <view class="picker">
+        {{places[placeIndex] || '请选择场地'}}
       </view>
-    </view> 
-  </scroll-view> 
-</view> 
+    </picker>
+  </view>
+  <button bindtap="addSchedule_DB">确定添加</button>
+</view>

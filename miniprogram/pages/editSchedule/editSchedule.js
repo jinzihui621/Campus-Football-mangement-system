@@ -1,6 +1,7 @@
 const app = getApp();
 const db = wx.cloud.database();
 const matchInfoCollection = db.collection('matchInfo');
+const eventCollection = db.collection('event');
 
 Page({
   /**
@@ -15,7 +16,9 @@ Page({
     teamnameBIndex: "",
     teams: ['信息A', '信息B', '信息C','城建A','都柏林','环生A','艺设A','机电A'],
     placeIndex: "",
-    places: ['北工大北操场', '北工大南操场']
+    places: ['北工大北操场', '北工大南操场'],
+    eventStartTime: '',
+    eventFinishTime: ''
   },
 
   onInputChange: function(e) {
@@ -42,7 +45,6 @@ Page({
       });
     }
   },
-  
 
   addSchedule_DB: async function() {
     const data = {
@@ -62,7 +64,7 @@ Page({
 
     // 将字符串转换为 Date 对象
     const localStartTime = new Date(fullStartTimeStr);
-    const startTimeDate = new Date(localStartTime.getTime() - (8 * 60 * 60 * 1000));
+    const startTimeDate = new Date(localStartTime.getTime());
 
     try {
       const startTimeMinus1Hour30Minutes = new Date(startTimeDate.getTime() - (1.5 * 60 * 60 * 1000));
@@ -72,17 +74,17 @@ Page({
       const res = await matchInfoCollection.where({
         place: data.place
       }).get();
-      console.log("res",res);
+      console.log("res", res);
       if (res.data && res.data.length > 0) {
         for (let i = 0; i < res.data.length; i++) {
           const record = res.data[i];
           const timeDifference = Math.abs(new Date(record.matchTime) - startTimeDate);
           if (timeDifference <= 5400000) {
-            console.log("flag",flag);
-            flag=1;
+            console.log("flag", flag);
+            flag = 1;
             break; // 找到符合条件的记录后退出循环
           }
-          
+
         }
       }
 
@@ -96,17 +98,17 @@ Page({
       };
       // 执行查询
       const res1 = await matchInfoCollection.where(query).get();
-      console.log("res1",res1);
+      console.log("res1", res1);
       if (res1.data && res1.data.length > 0) {
         for (let i = 0; i < res1.data.length; i++) {
-          if(res1.data[i].turn == data.round){
-            flag=-1;
+          if (res1.data[i].turn == data.round) {
+            flag = -1;
             break;
           }
         }
       }
-      console.log("flag最后",flag);
-      if (flag==1) {
+      console.log("flag最后", flag);
+      if (flag == 1) {
         wx.showToast({
           title: '时间地点冲突！',
           icon: 'none',
@@ -116,7 +118,7 @@ Page({
           success: false,
           message: '时间地点冲突！'
         };
-      } else if(flag==-1){
+      } else if (flag == -1) {
         wx.showToast({
           title: '球队此轮次已有比赛！',
           icon: 'none',
@@ -158,39 +160,12 @@ Page({
           teamB_id: data.teamB_id,
           turn: data.round
         };
-        const newData1 = {
-          goal: 0.0,
-          lose: 0.0,
-          match_id: newMatchId,
-          team_id: data.teamA_id
-        };
-        const newData2 = {
-          goal: 0.0,
-          lose: 0.0,
-          match_id: newMatchId,
-          team_id: data.teamB_id
-        };
-        const newData3 = {
-          match_id: newMatchId,
-          judge_id: "omPgO7b4Kt5MHERTY3MYME3ikZv0",
-          finished: false,
-          time:startTimeDate
-        };
+
         // 添加新比赛信息
         const addResult = await matchInfoCollection.add({
           data: newData
         });
-        const addResult2 = await db.collection('team_match_participate').add({
-          data: newData1
-        })
-        const addResult3 = await db.collection('team_match_participate').add({
-          data: newData2
-        })
-        const addResult4 = await db.collection('judge').add({
-          data: newData3
-        })
-        console.log(addResult2)
-        console.log(addResult3)
+
         if (addResult._id) {
           wx.showToast({
             title: '保存成功',
@@ -209,7 +184,7 @@ Page({
         }
       }
     } catch (error) {
-      console.log("error",error);
+      console.log("error", error);
       wx.showToast({
         title: '保存失败',
         icon: 'none',
@@ -218,7 +193,25 @@ Page({
     }
   },
 
-  onLoad: function() {
+  onLoad: async function () {
+    try {
+      const res = await eventCollection.where({
+        event_name: '工超'
+      }).get();
+      if (res.data && res.data.length > 0) {
+        const event = res.data[0];
+        console.log("Event Data: ", event);
+        this.setData({
+          eventStartTime: this.formatDate(event.starttime),
+          eventFinishTime: this.formatDate(event.finishtime)
+        });
+        console.log("Event Start Time: ", this.data.eventStartTime);
+        console.log("Event Finish Time: ", this.data.eventFinishTime);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     this.setData({
       day: '',
       roundIndex: '',
@@ -227,5 +220,13 @@ Page({
       teamnameBIndex: '',
       placeIndex: '',
     });
+  },
+
+  formatDate: function (date) {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+    const day = d.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 });

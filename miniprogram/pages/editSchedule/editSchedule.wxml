@@ -1,7 +1,7 @@
 <view class="container">
   <view class="input-group">
     <text class="label">日期</text>
-    <picker mode="date" value="{{day}}" start="2020-01-01" end="2030-12-31" bindchange="onInputChange" data-field="day">
+    <picker mode="date" value="{{day}}" start="{{eventStartTime}}" end="{{eventFinishTime}}" bindchange="onInputChange" data-field="day">
       <view class="picker">
         {{day || '请选择日期'}}
       </view>

@@ -265,33 +265,24 @@ Page({
   //加载进球榜数据
   loadGoal_db:async function(date, matchName) {  
     try {  
-        const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`); // UTC时间，当年的第一天  
-        const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`); // UTC时间，下一年的第一天（不包含）  
-        const resMatchInfo = await db.collection("matchInfo").where({  
-            matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
-            event_name: matchName  
-        }).get();  
-        if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
-            console.log("没有找到匹配的比赛信息");  
-            return;  
-        } 
-        let matchIDs = resMatchInfo.data.map(item => item.match_id);
-        const resPlayerScores = await db.collection("player_score_list").where({  
-            match_id: db.command.in(matchIDs)  
-        }).orderBy("score", "desc").get();  
-
-        if (!resPlayerScores.data || resPlayerScores.data.length === 0) {  
-            console.log("没有找到匹配的球员得分信息");  
-            return;  
-        }  
-        let array = resPlayerScores.data.map(async(item, index) => {
+      const $=db.command.aggregate
+      const resPlayerScores = await db.collection("player_score_list").aggregate()
+        .group({
+          _id: '$_openid',
+          team_id:{$first:'$team_id'},
+          player_num:{$first:'$player_num'},
+          totalScore: $.sum('$score')
+        })
+        .sort({totalScore:-1})
+        .end();  
+        let array = resPlayerScores.list.map(async(item, index) => {
           let playerName=await this.getPlayerName(item.team_id, item.player_num)
           let teamName=await this.getTeamName(item.team_id)
             return {  
                 rank: index + 1,  
                 player: playerName,   
                 team: teamName,   
-                goals: item.score  
+                goals: item.totalScore  
             };  
         });
         Promise.all(array).then(results => {
@@ -309,32 +300,29 @@ Page({
   //加载黄牌榜数据
   loadYellow_db:async function(date,matchName){
     try {  
-      const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`); // UTC时间，当年的第一天  
-      const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`); // UTC时间，下一年的第一天（不包含）  
-      const resMatchInfo = await db.collection("matchInfo").where({  
-          matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
-          event_name: matchName  
-      }).get();  
-      if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
-          console.log("没有找到匹配的比赛信息");  
+      const $=db.command.aggregate
+      const resPlayerScores = await db.collection("player_score_list").aggregate()
+        .group({
+          _id: '$_openid',
+          team_id:{$first:'$team_id'},
+          player_num:{$first:'$player_num'},
+          totalYellow: $.sum('$yellow')
+        })
+        .sort({totalYellow:-1})
+        .end();
+      if (!resPlayerScores.list || resPlayerScores.list.length === 0) {  
+          console.log("没有找到匹配的球员黄牌信息");  
           return;  
-      } 
-      let matchIDs = resMatchInfo.data.map(item => item.match_id);
-      const resPlayerScores = await db.collection("player_score_list").where({  
-          match_id: db.command.in(matchIDs)  
-      }).orderBy("yellow", "desc").get();
-      if (!resPlayerScores.data || resPlayerScores.data.length === 0) {  
-          console.log("没有找到匹配的球员得分信息");  
-          return;  
-      }  
-      let array = resPlayerScores.data.map(async(item, index) => {
+      }
+      let array = resPlayerScores.list.map(async(item, index) => {
+        console.log(item)
         let playerName=await this.getPlayerName(item.team_id, item.player_num)
         let teamName=await this.getTeamName(item.team_id)
           return {  
               rank: index + 1,  
               player: playerName,   
               team: teamName,   
-              yellowCards: item.yellow  
+              yellowCards: item.totalYellow  
           };  
       });
       Promise.all(array).then(results => {
@@ -352,34 +340,28 @@ Page({
   //加载红牌榜数据
   loadRed_db:async function(date,matchName){
     try {  
-      const startOfYear = new Date(`${date}-01-01T00:00:00.000Z`); // UTC时间，当年的第一天  
-      const endOfYear = new Date(`${parseInt(date) + 1}-01-01T00:00:00.000Z`); // UTC时间，下一年的第一天（不包含）  
-      const resMatchInfo = await db.collection("matchInfo").where({  
-          matchTime: db.command.gte(startOfYear).and(db.command.lt(endOfYear)),  
-          event_name: matchName  
-      }).get();  
-      if (!resMatchInfo.data || resMatchInfo.data.length === 0) {  
-          console.log("没有找到匹配的比赛信息");
-
-          return;  
-      } 
-      let matchIDs = resMatchInfo.data.map(item => item.match_id);
-      const resPlayerScores = await db.collection("player_score_list").where({  
-          match_id: db.command.in(matchIDs)  
-      }).orderBy("red", "desc").get();  
-
-      if (!resPlayerScores.data || resPlayerScores.data.length === 0) {  
-          console.log("没有找到匹配的球员得分信息");  
+      const $=db.command.aggregate
+      const resPlayerreds = await db.collection("player_score_list").aggregate()
+        .group({
+          _id: '$_openid',
+          team_id:{$first:'$team_id'},
+          player_num:{$first:'$player_num'},
+          totalRed: $.sum('$red')
+        })
+        .sort({totalRed:-1})
+        .end();
+      if (!resPlayerreds.list || resPlayerreds.list.length === 0) {  
+          console.log("没有找到匹配的球员红牌信息");  
           return;  
       }  
-      let array = resPlayerScores.data.map(async(item, index) => {
+      let array = resPlayerreds.list.map(async(item, index) => {
         let playerName=await this.getPlayerName(item.team_id, item.player_num)
         let teamName=await this.getTeamName(item.team_id)
           return {  
               rank: index + 1,  
               player: playerName,   
               team: teamName,   
-              redCards: item.red  
+              redCards: item.totalRed  
           };  
       });
       Promise.all(array).then(results => {

@@ -145,10 +145,7 @@ Page({
       }).get();
       console.log("team:",teamPlayerRes);
       if (teamPlayerRes.data.length === 0) {
-        wx.showToast({
-          title: '未找到该球员所属的队伍',
-          icon: 'none'
-        });
+        
         return;
       }
       const team_id = teamPlayerRes.data[0].team_id;
@@ -261,10 +258,6 @@ Page({
       }).get();
 
       if (leaderRes.data.length === 0) {
-        wx.showToast({
-          title: '未找到对应的团队',
-          icon: 'none'
-        });
         return;
       }
 

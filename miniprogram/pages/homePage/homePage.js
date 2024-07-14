@@ -55,6 +55,12 @@ Page({
       details.forEach(detail => {
         detailsMap[detail.match_id] = detail;
       });
+			
+			const formatTime = (date) => {
+				const hours = date.getHours().toString().padStart(2, '0');
+				const minutes = date.getMinutes().toString().padStart(2, '0');
+				return `${hours}:${minutes}`;
+			};
 
       // 合并数据
       const matchinfo = matches.map(match => {
@@ -64,7 +70,7 @@ Page({
         return {
           id: match.match_id,
           day: match.matchTime.toLocaleDateString('zh-cn', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-'),
-          starttime: match.matchTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' }),
+          starttime: formatTime(new Date(match.matchTime)),
           place: match.place,
           teamA: match.teamA,
           teamB: match.teamB,

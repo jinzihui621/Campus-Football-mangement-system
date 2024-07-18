@@ -8,6 +8,90 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/notificationEdit/notificationEdit",
+          "pathName": "pages/notificationEdit/notificationEdit",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/messageList/messageList",
+          "pathName": "pages/messageList/messageList",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/messageDetail/messageDetail",
+          "pathName": "pages/messageDetail/messageDetail",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/match/match",
+          "pathName": "pages/match/match",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/logs/logs",
+          "pathName": "pages/logs/logs",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/indexindex",
+          "pathName": "pages/indexindex",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/deletePlayer/deletePlayer",
+          "pathName": "pages/deletePlayer/deletePlayer",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/createMatch/createMatch",
+          "pathName": "pages/createMatch/createMatch",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/chooseAccount/chooseAccount",
+          "pathName": "pages/chooseAccount/chooseAccount",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/board/board",
+          "pathName": "pages/board/board",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/addPlayer/addPlayer",
+          "pathName": "pages/addPlayer/addPlayer",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/test/test",
           "pathName": "pages/test/test",
           "query": "",
